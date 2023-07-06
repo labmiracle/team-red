@@ -69,9 +69,6 @@ export default function Footer() {
                                     Rosario (ARG)
                                 </a>
                             </li>
-                            <li>
-                                <a href='#'>dress</a>
-                            </li>
                         </ul>
                     </div>
                     <div className={styles.footercol}>
