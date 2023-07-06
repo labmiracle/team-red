@@ -1,13 +1,3 @@
-import './App.css';
-<<<<<<< HEAD
-import Footer from './components/Footer/Footer';
-
-function App() {
-    return (
-        <>
-            GYMWEB coming soon...
-            <Footer />
-=======
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import NavBar from './components/Navbar/NavBar';
@@ -28,7 +18,6 @@ function App() {
                 </Routes>
                 <Footer />
             </BrowserRouter>
->>>>>>> dev
         </>
     );
 }
