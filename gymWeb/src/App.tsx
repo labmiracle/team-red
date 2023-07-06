@@ -1,14 +1,13 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
-import NavBar from './components/NavBar';
-import Login from './components/Login';
-import Contacto from './components/Contacto';
-import Register from './components/Register';
+import Home from './components/Home/Home';
+import NavBar from './components/Navbar/NavBar';
+import Login from './components/Login/Login';
+import Contacto from './components/Contacto/Contacto';
+import Register from './components/Register/Register';
 function App() {
     return (
         <>
-            <NavBar />
             <BrowserRouter>
                 <NavBar />
                 <Routes>
