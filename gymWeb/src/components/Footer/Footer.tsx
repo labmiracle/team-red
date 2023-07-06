@@ -17,52 +17,65 @@ export default function Footer() {
             <div className={styles.container}>
                 <div className={styles.row}>
                     <div className={styles.footercol}>
-                        <h4>Menu</h4>
-                        <ul>
+                        <h4 className={styles.h4}>Menu</h4>
+                        <ul className={styles.ul}>
                             <li>
-                                <a href='#'>Home</a>
+                                <a className={styles.a} href='#'>
+                                    Home
+                                </a>
                             </li>
                             <li>
-                                <a href='#'>About us</a>
+                                <a className={styles.a} href='#'>
+                                    About us
+                                </a>
                             </li>
                             <li>
-                                <a href='#'>Register</a>
+                                <a className={styles.a} href='#'>
+                                    Register
+                                </a>
                             </li>
                             <li>
-                                <a href='#'>Privacy Policy</a>
+                                <a className={styles.a} href='#'>
+                                    Privacy Policy
+                                </a>
                             </li>
                         </ul>
                     </div>
                     <div className={styles.footercol}>
-                        <h4>Get help</h4>
-                        <ul>
+                        <h4 className={styles.h4}>Get help</h4>
+                        <ul className={styles.ul}>
                             <li>
-                                <a href='#'>FAQ</a>
+                                <a className={styles.a} href='#'>
+                                    FAQ
+                                </a>
                             </li>
                             <li>
-                                <a href='https://autogestion.produccion.gob.ar/consumidores'>
+                                <a
+                                    className={styles.a}
+                                    href='https://autogestion.produccion.gob.ar/consumidores'
+                                >
                                     Consumer Protection
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div className={styles.footercol}>
-                        <h4>Contact us</h4>
-                        <ul>
+                        <h4 className={styles.h4}>Contact us</h4>
+                        <ul className={styles.ul}>
                             <li>
-                                <a>
+                                <a className={styles.a}>
                                     <FontAwesomeIcon icon={faEnvelope} /> {'  '}
                                     info@gym.com
                                 </a>
                             </li>
                             <li>
-                                <a>
+                                <a className={styles.a}>
                                     <FontAwesomeIcon icon={faPhone} /> {'  '}
                                     (341) 456-7890
                                 </a>
                             </li>
                             <li>
-                                <a>
+                                <a className={styles.a}>
                                     {' '}
                                     <FontAwesomeIcon icon={faHouse} />
                                     {'  '}
@@ -72,15 +85,24 @@ export default function Footer() {
                         </ul>
                     </div>
                     <div className={styles.footercol}>
-                        <h4>Follow us</h4>
+                        <h4 className={styles.h4}>Follow us</h4>
 
-                        <a href='https://www.facebook.com/'>
+                        <a
+                            className={styles.sociallinks}
+                            href='https://www.facebook.com/'
+                        >
                             <FontAwesomeIcon icon={faFacebook} />
                         </a>
-                        <a href='https://www.twitter.com/'>
+                        <a
+                            className={styles.sociallinks}
+                            href='https://www.twitter.com/'
+                        >
                             <FontAwesomeIcon icon={faTwitter} />
                         </a>
-                        <a href='https://www.instagram.com/'>
+                        <a
+                            className={styles.sociallinks}
+                            href='https://www.instagram.com/'
+                        >
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
                     </div>
