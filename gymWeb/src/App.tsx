@@ -5,6 +5,7 @@ import NavBar from './components/Navbar/NavBar';
 import Login from './components/Login/Login';
 import Contacto from './components/Contacto/Contacto';
 import Register from './components/Register/Register';
+import Footer from './components/Footer/Footer';
 function App() {
     return (
         <>
@@ -16,6 +17,7 @@ function App() {
                     <Route path='/contacto' element={<Contacto />} />
                     <Route path='/register' element={<Register />} />
                 </Routes>
+                <Footer />
             </BrowserRouter>
         </>
     );
