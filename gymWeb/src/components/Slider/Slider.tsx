@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Slider.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleLeft, faCircleRight } from '@fortawesome/free-solid-svg-icons';
 
 interface SliderProps {
     images: string[];
@@ -22,13 +24,24 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
 
     return (
         <div className={styles.slidercontainer}>
-            <button onClick={previousSlide}>Previous</button>
+            <button onClick={previousSlide}>
+                {' '}
+                <FontAwesomeIcon
+                    icon={faCircleLeft}
+                    style={{ color: '#5a5a5a' }}
+                />
+            </button>
             <img
                 className={styles.sliderimage}
                 src={images[currentIndex]}
                 alt='Slider'
             />
-            <button onClick={nextSlide}>Next</button>
+            <button onClick={nextSlide}>
+                <FontAwesomeIcon
+                    icon={faCircleRight}
+                    style={{ color: '#5a5a5a' }}
+                />
+            </button>
         </div>
     );
 };

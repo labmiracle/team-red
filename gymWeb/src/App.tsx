@@ -21,7 +21,6 @@ function App() {
         <>
             <BrowserRouter>
                 <NavBar />
-
                 <Slider images={images} />
                 <Routes>
                     <Route path='/' element={<Home />} />
