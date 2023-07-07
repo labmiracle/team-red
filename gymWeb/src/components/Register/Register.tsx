@@ -40,9 +40,10 @@ const Register: React.FC = () => {
 
   const handleDateOfBirthChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
+    const parsedValue = name === 'year' ? parseInt(value, 10) : value;
     setDateOfBirth((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: parsedValue,
     }));
   };
 
@@ -56,9 +57,8 @@ const Register: React.FC = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // agregar la lógica para enviar los datos del formulario al servidor
-    // podemos hacer una llamada a una API para registrar al usuario.
-    
+    // Agregar la lógica para enviar los datos del formulario al servidor
+    // Podemos hacer una llamada a una API para registrar al usuario.
 
     setFirstName('');
     setLastName('');
@@ -91,15 +91,14 @@ const Register: React.FC = () => {
     'Diciembre',
   ];
 
-  
   const years = Array.from({ length: 94 }, (_, index) => 2023 - index);
 
   const validateDateOfBirth = () => {
     const { day, month, year } = dateOfBirth;
     const selectedMonth = months.indexOf(month);
-    const selectedDate = new Date(year, selectedMonth, parseInt(day)).getDate();
+    const selectedDate = new Date(parseInt(year), selectedMonth, parseInt(day)).getDate();
 
-    setIsDateValid(selectedDate === parseInt(day));
+    setIsDateValid(selectedDate === parseInt(day, 10));
   };
 
   return (
