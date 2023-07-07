@@ -1,0 +1,10 @@
+.slidercontainer {
+
+    align-items: center;
+    justify-content: center;
+}
+
+.sliderimage {
+    width: 100%;
+    height: auto;
+}

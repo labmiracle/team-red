@@ -6,11 +6,23 @@ import Login from './components/Login/Login';
 import Contacto from './components/Contacto/Contacto';
 import Register from './components/Register/Register';
 import Footer from './components/Footer/Footer';
+import Slider from './components/Slider/Slider';
+
+const images = [
+    './src/images/slider_images/image1_slider.jpg',
+    './src/images/slider_images/image2_slider.jpg',
+    './src/images/slider_images/image3_slider.png',
+    './src/images/slider_images/image4_slider.jpg',
+    './src/images/slider_images/image7_slider.jpeg',
+];
+
 function App() {
     return (
         <>
             <BrowserRouter>
                 <NavBar />
+
+                <Slider images={images} />
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/login' element={<Login />} />
