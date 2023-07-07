@@ -105,6 +105,15 @@ export default function Footer() {
                         >
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
+
+                        <li className={styles.ul}>
+                            {' '}
+                            <img
+                                className={styles.footerimg}
+                                src='./src/images/PesasLogo.PNG'
+                                alt='Footer Image'
+                            />
+                        </li>
                     </div>
                 </div>
             </div>

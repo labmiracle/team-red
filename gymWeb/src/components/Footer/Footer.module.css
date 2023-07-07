@@ -1,37 +1,41 @@
-body {
+.body {
     line-height: 1.5;
     font-family: 'Poppins', sans-serif;
+    width: 100%;
 }
 
-
 .container {
-    max-width: 1200px;
-
+    width: 100%;
     margin: auto;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 .ul {
     list-style: none;
+    padding: 0%;
 }
 
 .row {
-    display: -webkit-inline-flex;
-
+    display: flex;
 }
 
 .footer {
     background-color: #121212;
     padding: 70px 0;
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
 }
 
 .footercol {
-    width: 1 1 25%;
+    width: 1 1 35%;
     text-align: left;
     padding: 0 15px;
 }
-
 
 .h4 {
     font-size: 18px;
@@ -39,10 +43,9 @@ body {
     margin-bottom: 35px;
     font-weight: 500;
     position: relative;
+    text-align: left;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
-
 
 .a {
 
@@ -66,11 +69,9 @@ body {
 .a:hover {
     background-position: 0 100%;
     color: #97FB57;
-    padding-left: 13px;
+    padding-left: 1px;
 
 }
-
-
 
 .sociallinks {
     display: inline-block;
@@ -86,6 +87,14 @@ body {
 }
 
 .sociallinks:hover {
-    color: #24262b;
+    color: #97FB57;
     background-color: #121212;
+}
+
+.footerimg {
+    margin-right: auto;
+    width: 70px;
+    height: auto;
+    padding: 20%;
+
 }
