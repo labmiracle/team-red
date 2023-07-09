@@ -9,10 +9,8 @@ import Slider from './components/Slider/Slider';
 
 const images = [
     './src/images/slider_images/image1_v2.jpg',
-    './src/images/slider_images/image2_slider.jpg',
-    './src/images/slider_images/image3_slider.png',
-    './src/images/slider_images/image4_slider.jpg',
-    './src/images/slider_images/image7_slider.jpeg',
+    './src/images/slider_images/image7_slider_v2.JPG',
+    './src/images/slider_images/image3_slider_v2.PNG',
 ];
 
 function App() {
