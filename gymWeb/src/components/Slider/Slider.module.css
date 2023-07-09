@@ -2,18 +2,18 @@
 
     align-items: center;
     justify-content: center;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: -webkit-sticky;
+    display: flexbox;
+
     bottom: -12px;
-    height: 10px;
-    width: 100%;
+    height: 30%;
+    width: auto;
     line-height: 10px;
     text-align: center;
 }
 
 .sliderimage {
-    width: 100%;
+    width: 30%;
     height: auto;
+
 }
