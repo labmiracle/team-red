@@ -1,6 +1,5 @@
 .slidercontainer {
-    position: relative;
-
+    position: absolute
 }
 
 .sliderimage {
@@ -20,42 +19,48 @@
     z-index: 1;
 }
 
-.sliderbutton {
+.slidertext {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 10px;
-    font-size: 24px;
+    top: 10%;
+    left: 60%;
+    background-color: #7d8f72;
+    opacity: 0.7;
+    padding: 3px;
+    font-size: 30px;
+    color: #97FB57;
+
+
+
+
 }
+
+
 
 .sliderbutton:hover {
-    background-color: linear-gradient(red, yellow);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), #97FB57);
     transition: all 0.7s ease;
-
+    border-color: black;
+    color: black
 }
 
-
 .leftarrow {
-    font-size: 25px;
+    font-size: 35px;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 3px;
     cursor: pointer;
     border-radius: 7px;
-    margin-left: 0.5%;
+    margin-left: 5%;
 
 }
 
 .rightarrow {
-    font-size: 25px;
+    font-size: 35px;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 3px;
     cursor: pointer;
     border-radius: 7px;
-    margin-right: 0.5%;
+    margin-right: 5%;
 
 }
 
