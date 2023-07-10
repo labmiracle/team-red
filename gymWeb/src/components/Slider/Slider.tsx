@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Slider.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -14,10 +15,10 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const messages = [
-        'Desafiá tus límites',
-        'Un gimnsio hecho a tu medida',
-        'Alcanzá tu máximo rendimiento',
-        'Clases personalizadas',
+        'DESAFIÁ TUS LÍMITES',
+        'UN GIMNASIO HECHO A TU MEDIDA',
+        'ALCANZÁ TU MÁXIMO RENDIMIENTO',
+        'CLASES PERSONALIZADAS',
     ];
     const [currentMessage, setCurrentMessage] = useState(messages[0]);
 
@@ -43,6 +44,11 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
             />
 
             <p className={styles.slidertext}>{currentMessage}</p>
+
+            <Link to='/Register'>
+                {' '}
+                <button className={styles.sliderbutton}>CONOCÉ MÁS</button>
+            </Link>
 
             <div className={styles.sliderarrows}>
                 <div className={styles.leftarrow} onClick={previousSlide}>
