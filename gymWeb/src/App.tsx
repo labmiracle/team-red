@@ -14,6 +14,22 @@ const images = [
     './src/images/slider_images/image4_slider.jpg',
 ];
 
+const items = [
+    {
+        imageUrl: './src/images/slider_images/image1_slider.jpg',
+        title: 'Fitness',
+    },
+    {
+        imageUrl: './src/images/slider_images/image2_slider.jpg',
+        title: 'Musculación',
+    },
+    {
+        imageUrl: './src/images/slider_images/image3_slider.jpg',
+        title: 'Funcional',
+    },
+    // Add more items as needed
+];
+
 function App() {
     return (
         <>
@@ -21,7 +37,7 @@ function App() {
                 <NavBar />
                 <Slider images={images} />
                 <Routes>
-                    <Route path='/' element={<Home />} />
+                    <Route path='/' element={<Home items={items} />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/contacto' element={<Contacto />} />
                     <Route path='/register' element={<Register />} />

@@ -1,8 +1,10 @@
 .container {
     width: 100%;
-    padding-left: 5%;
     position: absolute;
+    margin-bottom: 0;
     background-color: #121212;
+
+
 }
 
 .ul {
@@ -16,15 +18,16 @@
 
 .footer {
     background-color: #121212;
-    padding: 20px 0;
     width: fit-content;
     margin-top: 100%;
-    display: inline-flexbox;
+
 }
 
 .footercol {
+    background-color: #121212;
     width: 100%;
     padding: 15px;
+    margin-left: 5%;
 }
 
 .h4 {
@@ -32,7 +35,6 @@
     font-weight: 800;
     color: #909090;
     margin-bottom: 35px;
-
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }
@@ -58,7 +60,7 @@
 .a:hover {
     background-position: 0 100%;
     color: #97FB57;
-    padding-left: 4px;
+    padding-left: 3px;
 
 }
 

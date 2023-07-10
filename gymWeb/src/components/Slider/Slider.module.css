@@ -1,5 +1,7 @@
 .slidercontainer {
-    position: absolute
+    position: relative;
+    width: 100%;
+    offset-distance: center;
 }
 
 .sliderimage {
