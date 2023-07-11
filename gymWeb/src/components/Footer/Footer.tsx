@@ -26,23 +26,23 @@ export default function Footer() {
                             </li>
                             <li>
                                 <a className={styles.a} href='#'>
-                                    About us
+                                    Sobre nosotros
                                 </a>
                             </li>
                             <li>
                                 <a className={styles.a} href='#'>
-                                    Register
+                                    Registrate
                                 </a>
                             </li>
                             <li>
                                 <a className={styles.a} href='#'>
-                                    Privacy Policy
+                                    Política de privacidad
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div className={styles.footercol}>
-                        <h4 className={styles.h4}>Get help</h4>
+                        <h4 className={styles.h4}>Ayuda</h4>
                         <ul className={styles.ul}>
                             <li>
                                 <a className={styles.a} href='#'>
@@ -54,13 +54,13 @@ export default function Footer() {
                                     className={styles.a}
                                     href='https://autogestion.produccion.gob.ar/consumidores'
                                 >
-                                    Consumer Protection
+                                    Protección al consumidor
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div className={styles.footercol}>
-                        <h4 className={styles.h4}>Contact us</h4>
+                        <h4 className={styles.h4}>Contactanos</h4>
                         <ul className={styles.ul}>
                             <li>
                                 <a className={styles.a}>
@@ -85,7 +85,7 @@ export default function Footer() {
                         </ul>
                     </div>
                     <div className={styles.footercol}>
-                        <h4 className={styles.h4}>Follow us</h4>
+                        <h4 className={styles.h4}>Seguinos</h4>
 
                         <a
                             className={styles.sociallinks}
