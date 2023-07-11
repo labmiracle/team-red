@@ -3,8 +3,6 @@
     position: absolute;
     margin-bottom: 0;
     background-color: #121212;
-
-
 }
 
 .ul {
@@ -19,7 +17,7 @@
 .footer {
     background-color: #121212;
     width: fit-content;
-    margin-top: 100%;
+    margin-top: 10%;
 
 }
 

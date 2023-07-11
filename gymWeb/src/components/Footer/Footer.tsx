@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faFacebook,
@@ -21,13 +22,13 @@ export default function Footer() {
                         <h4 className={styles.h4}>Menu</h4>
                         <ul className={styles.ul}>
                             <li>
-                                <a className={styles.a} href='#'>
+                                <a className={styles.a}>
                                     <Link to='/'> Home</Link>
                                 </a>
                             </li>
                             <li>
-                                <a className={styles.a} href='#'>
-                                    Sobre nosotros
+                                <a className={styles.a}>
+                                    <Link to='/#about-us'>About Us</Link>
                                 </a>
                             </li>
                             <li>
