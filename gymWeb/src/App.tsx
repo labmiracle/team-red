@@ -8,11 +8,10 @@ import Footer from './components/Footer/Footer';
 import Slider from './components/Slider/Slider';
 
 const images = [
-    './src/images/slider_images/image1_v2.jpg',
+    './src/images/slider_images/image1_slider.jpg',
     './src/images/slider_images/image2_slider.jpg',
-    './src/images/slider_images/image3_slider.png',
+    './src/images/slider_images/image3_slider.jpg',
     './src/images/slider_images/image4_slider.jpg',
-    './src/images/slider_images/image7_slider.jpeg',
 ];
 
 function App() {
