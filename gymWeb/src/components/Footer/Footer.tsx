@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -21,7 +22,7 @@ export default function Footer() {
                         <ul className={styles.ul}>
                             <li>
                                 <a className={styles.a} href='#'>
-                                    Home
+                                    <Link to='/'> Home</Link>
                                 </a>
                             </li>
                             <li>
@@ -31,7 +32,7 @@ export default function Footer() {
                             </li>
                             <li>
                                 <a className={styles.a} href='#'>
-                                    Registrate
+                                    <Link to='/Register'> Registrate</Link>
                                 </a>
                             </li>
                             <li>

@@ -1,0 +1,7 @@
+.cardexpanded {
+    max-height: fit-content;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
