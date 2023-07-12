@@ -10,6 +10,7 @@ const Register: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dni, setDNI] = useState('');
+  const [email, setEmail] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState<DateOfBirth>({
     day: '',
     month: '',
@@ -17,6 +18,8 @@ const Register: React.FC = () => {
   });
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
+  const [dniError, setDNIError] = useState('');
+  const [isDateValid, setIsDateValid] = useState(true);
 
   const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFirstName(event.target.value);
@@ -30,7 +33,14 @@ const Register: React.FC = () => {
     const dniValue = event.target.value;
     if (dniValue.length <= 8) {
       setDNI(dniValue);
+      setDNIError('');
+    } else {
+      setDNIError('Por favor, ingrese 8 dígitos para su DNI sin puntos');
     }
+  };
+
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
   };
 
   const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -38,8 +48,6 @@ const Register: React.FC = () => {
     setDateOfBirth((prevState) => ({
       ...prevState,
       year: value,
-      month: '',
-      day: '',
     }));
   };
 
@@ -48,7 +56,6 @@ const Register: React.FC = () => {
     setDateOfBirth((prevState) => ({
       ...prevState,
       month: value,
-      day: '',
     }));
   };
 
@@ -76,6 +83,7 @@ const Register: React.FC = () => {
     setFirstName('');
     setLastName('');
     setDNI('');
+    setEmail('');
     setDateOfBirth({
       day: '',
       month: '',
@@ -83,11 +91,15 @@ const Register: React.FC = () => {
     });
     setAddress('');
     setCity('');
+    setDNIError('');
+    setIsDateValid(true);
   };
 
   const daysInMonth = (month: number, year: number) => {
     return new Date(year, month, 0).getDate();
   };
+
+  const years = Array.from({ length: 94 }, (_, index) => 2023 - index);
 
   const months = [
     'Enero',
@@ -104,14 +116,10 @@ const Register: React.FC = () => {
     'Diciembre',
   ];
 
-  const days = Array.from(
+  const days = dateOfBirth.month && dateOfBirth.year ? Array.from(
     { length: daysInMonth(months.indexOf(dateOfBirth.month) + 1, parseInt(dateOfBirth.year, 10)) },
     (_, index) => index + 1
-  );
-
- 
-
-  const years = Array.from({ length: 94 }, (_, index) => 2023 - index);
+  ) : [];
 
   return (
     <form onSubmit={handleSubmit}>
@@ -126,6 +134,7 @@ const Register: React.FC = () => {
       <div>
         <label htmlFor="dni">DNI:</label>
         <input type="text" id="dni" value={dni} onChange={handleDNIChange} required />
+        {dniError && <p>{dniError}</p>}
       </div>
       <div>
         <label htmlFor="dateOfBirthYear">Año de Nacimiento:</label>
@@ -169,6 +178,10 @@ const Register: React.FC = () => {
         </div>
       )}
       <div>
+        <label htmlFor="email">Correo Electrónico:</label>
+        <input type="email" id="email" value={email} onChange={handleEmailChange} required />
+      </div>
+      <div>
         <label htmlFor="address">Dirección:</label>
         <input type="text" id="address" value={address} onChange={handleAddressChange} required />
       </div>
@@ -176,7 +189,9 @@ const Register: React.FC = () => {
         <label htmlFor="city">Ciudad:</label>
         <input type="text" id="city" value={city} onChange={handleCityChange} required />
       </div>
-      <button type="submit">Registrarse</button>
+      <button type="submit" disabled={!isDateValid}>
+        Registrarse
+      </button>
     </form>
   );
 };
