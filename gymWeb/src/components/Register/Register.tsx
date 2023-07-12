@@ -17,8 +17,6 @@ const Register: React.FC = () => {
   });
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
-  const [dniError, setDNIError] = useState('');
-  const [isDateValid, setIsDateValid] = useState(true);
 
   const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFirstName(event.target.value);
@@ -32,18 +30,33 @@ const Register: React.FC = () => {
     const dniValue = event.target.value;
     if (dniValue.length <= 8) {
       setDNI(dniValue);
-      setDNIError('');
-    } else {
-      setDNIError('Por favor, ingrese 8 dígitos para su DNI sin puntos');
     }
+  };
+
+  const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+    setDateOfBirth((prevState) => ({
+      ...prevState,
+      year: value,
+      month: '',
+      day: '',
+    }));
+  };
+
+  const handleMonthChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = event.target;
+    setDateOfBirth((prevState) => ({
+      ...prevState,
+      month: value,
+      day: '',
+    }));
   };
 
   const handleDateOfBirthChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
-    const parsedValue = name === 'year' ? parseInt(value, 10) : value;
     setDateOfBirth((prevState) => ({
       ...prevState,
-      [name]: parsedValue,
+      [name]: value,
     }));
   };
 
@@ -70,11 +83,11 @@ const Register: React.FC = () => {
     });
     setAddress('');
     setCity('');
-    setDNIError('');
-    setIsDateValid(true);
   };
 
-  const days = Array.from({ length: 31 }, (_, index) => index + 1);
+  const daysInMonth = (month: number, year: number) => {
+    return new Date(year, month, 0).getDate();
+  };
 
   const months = [
     'Enero',
@@ -91,15 +104,14 @@ const Register: React.FC = () => {
     'Diciembre',
   ];
 
+  const days = Array.from(
+    { length: daysInMonth(months.indexOf(dateOfBirth.month) + 1, parseInt(dateOfBirth.year, 10)) },
+    (_, index) => index + 1
+  );
+
+ 
+
   const years = Array.from({ length: 94 }, (_, index) => 2023 - index);
-
-  const validateDateOfBirth = () => {
-    const { day, month, year } = dateOfBirth;
-    const selectedMonth = months.indexOf(month);
-    const selectedDate = new Date(parseInt(year), selectedMonth, parseInt(day)).getDate();
-
-    setIsDateValid(selectedDate === parseInt(day, 10));
-  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -114,48 +126,10 @@ const Register: React.FC = () => {
       <div>
         <label htmlFor="dni">DNI:</label>
         <input type="text" id="dni" value={dni} onChange={handleDNIChange} required />
-        {dniError && <p>{dniError}</p>}
       </div>
       <div>
-        <label htmlFor="dateOfBirthDay">Fecha de Nacimiento:</label>
-        <select
-          id="dateOfBirthDay"
-          name="day"
-          value={dateOfBirth.day}
-          onChange={handleDateOfBirthChange}
-          onBlur={validateDateOfBirth}
-          required
-        >
-          <option value="">Día</option>
-          {days.map((day) => (
-            <option key={day} value={day}>
-              {day}
-            </option>
-          ))}
-        </select>
-        <select
-          id="dateOfBirthMonth"
-          name="month"
-          value={dateOfBirth.month}
-          onChange={handleDateOfBirthChange}
-          onBlur={validateDateOfBirth}
-          required
-        >
-          <option value="">Mes</option>
-          {months.map((month, index) => (
-            <option key={index} value={month}>
-              {month}
-            </option>
-          ))}
-        </select>
-        <select
-          id="dateOfBirthYear"
-          name="year"
-          value={dateOfBirth.year}
-          onChange={handleDateOfBirthChange}
-          onBlur={validateDateOfBirth}
-          required
-        >
+        <label htmlFor="dateOfBirthYear">Año de Nacimiento:</label>
+        <select id="dateOfBirthYear" name="year" value={dateOfBirth.year} onChange={handleYearChange} required>
           <option value="">Año</option>
           {years.map((year) => (
             <option key={year} value={year}>
@@ -163,8 +137,37 @@ const Register: React.FC = () => {
             </option>
           ))}
         </select>
-        {!isDateValid && <p>Fecha de Nacimiento inválida.</p>}
       </div>
+      <div>
+        <label htmlFor="dateOfBirthMonth">Mes de Nacimiento:</label>
+        <select id="dateOfBirthMonth" name="month" value={dateOfBirth.month} onChange={handleMonthChange} required>
+          <option value="">Mes</option>
+          {months.map((month, index) => (
+            <option key={index} value={month}>
+              {month}
+            </option>
+          ))}
+        </select>
+      </div>
+      {dateOfBirth.month && dateOfBirth.year && (
+        <div>
+          <label htmlFor="dateOfBirthDay">Día de Nacimiento:</label>
+          <select
+            id="dateOfBirthDay"
+            name="day"
+            value={dateOfBirth.day}
+            onChange={handleDateOfBirthChange}
+            required
+          >
+            <option value="">Día</option>
+            {days.map((day) => (
+              <option key={day} value={day}>
+                {day}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       <div>
         <label htmlFor="address">Dirección:</label>
         <input type="text" id="address" value={address} onChange={handleAddressChange} required />
@@ -173,9 +176,7 @@ const Register: React.FC = () => {
         <label htmlFor="city">Ciudad:</label>
         <input type="text" id="city" value={city} onChange={handleCityChange} required />
       </div>
-      <button type="submit" disabled={!isDateValid}>
-        Registrarse
-      </button>
+      <button type="submit">Registrarse</button>
     </form>
   );
 };
