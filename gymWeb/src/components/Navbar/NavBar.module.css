@@ -63,18 +63,18 @@
     height: 90vh;
     position: relative;
     top: 40px;
-    left:-50%;
+    left:50;
     flex-direction: column;
-    transition:0.7s all ease-in;
     justify-content: space-evenly;
     align-items:center;
+    
   }
 
   .item{
     width: 50%;
     height: 21%;
     position: relative;
-    left: -100%;
+    left: -150%;
     font-size: 1.6rem;
     justify-content: center;
     align-items: center;
