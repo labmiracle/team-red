@@ -34,13 +34,13 @@ export default function Footer() {
                                 </a>
                             </li>
                             <li>
+
                                 <a onClick={handleClick} className={styles.a}>
-                                    Sobre nosotros
-                                </a>
-                            </li>
-                            <li>
-                                <a className={styles.a} href='#'>
+
+
+
                                     <Link to='/Register'> Registrate</Link>
+
                                 </a>
                             </li>
                             <li>

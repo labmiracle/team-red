@@ -1,0 +1,28 @@
+.navBar {
+    background-color:black;
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    padding-left: 50px;
+    padding-right: 70px;
+  }
+  .containerItems{
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: space-between;
+    
+  }
+  .item {
+    cursor: pointer;
+    margin-left: 90px;
+    font-size: 1.3rem;
+  }
+  
+  .logo {
+    
+  }
+  /* 682 width es el limite o punto de inflexion para el menu  */
+

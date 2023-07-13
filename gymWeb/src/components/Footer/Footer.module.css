@@ -1,7 +1,9 @@
 .container {
     width: 100%;
+ 
     position: absolute;
     margin-bottom: 0;
+
     background-color: #121212;
 }
 
@@ -17,6 +19,7 @@
 .footer {
     background-color: #121212;
     width: fit-content;
+
     margin-top: 10%;
 
 }
@@ -33,6 +36,7 @@
     font-weight: 800;
     color: #909090;
     margin-bottom: 35px;
+
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }
@@ -58,7 +62,9 @@
 .a:hover {
     background-position: 0 100%;
     color: #97FB57;
+
     padding-left: 3px;
+
 
 }
 
