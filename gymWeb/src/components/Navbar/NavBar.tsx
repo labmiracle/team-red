@@ -7,13 +7,37 @@ import styles from './NavBar.module.css';
 
 export default function NavBar() {
     const [menuOpen, setMenuOpen] = useState(false);
-    const [containerLeft, setContainerLeft] = useState('-100%');
+    const [itemLeft, setItemLeft] = useState('-200%');
+    const [isMobile, setIsMobile] = useState(false);
+    const [containerPosition, setContainerPosition] = useState<
+        'absolute' | 'relative' | 'static'
+    >('static');
+    useEffect(() => {
+        const handleResize = () => {
+            const isMobileView = window.matchMedia(
+                '(max-width: 1000px)'
+            ).matches;
+            setIsMobile(isMobileView);
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        if (isMobile) {
+            setContainerPosition('absolute');
+        } else {
+            setContainerPosition('static');
+        }
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     const handleToggleMenu = () => {
         setMenuOpen(!menuOpen);
         if (menuOpen) {
-            setContainerLeft('0');
+            setContainerPosition('relative');
+            setItemLeft('0');
         } else {
-            setContainerLeft('-50%');
+            setContainerPosition('absolute');
+            setItemLeft('-100%');
         }
     };
 
@@ -33,12 +57,12 @@ export default function NavBar() {
             </button>
             <div
                 className={styles.containerItems}
-                style={{ left: containerLeft }}
+                style={{ position: containerPosition }}
             >
-                <div className={styles.item}>
+                <div className={styles.item} style={{ left: itemLeft }}>
                     <Link to='/'>Home</Link>
                 </div>
-                <div className={styles.item} style={{ left: containerLeft }}>
+                <div className={styles.item} style={{ left: itemLeft }}>
                     <ScrollLink
                         to='sobreNosotros'
                         smooth={true}
@@ -48,10 +72,10 @@ export default function NavBar() {
                         Sobre Nosotros
                     </ScrollLink>
                 </div>
-                <div className={styles.item} style={{ left: containerLeft }}>
+                <div className={styles.item} style={{ left: itemLeft }}>
                     <Link to='/contacto'>Contacto</Link>
                 </div>
-                <div className={styles.item} style={{ left: containerLeft }}>
+                <div className={styles.item} style={{ left: itemLeft }}>
                     <Link to='/login'>Login</Link>
                 </div>
             </div>
