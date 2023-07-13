@@ -14,6 +14,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Footer() {
+    const handleClick = () => {
+        window.scrollTo({
+            top: 1300,
+            behavior: 'smooth',
+        });
+    };
+
     return (
         <footer className={styles.footer}>
             <div className={styles.container}>
@@ -27,8 +34,8 @@ export default function Footer() {
                                 </a>
                             </li>
                             <li>
-                                <a className={styles.a}>
-                                    <Link to='/#about-us'>About Us</Link>
+                                <a onClick={handleClick} className={styles.a}>
+                                    Sobre nosotros
                                 </a>
                             </li>
                             <li>

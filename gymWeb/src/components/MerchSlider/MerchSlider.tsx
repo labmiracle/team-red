@@ -20,7 +20,7 @@ const MerchSlider: React.FC<SliderProps> = ({ images }) => {
     }, [images.length]);
 
     return (
-        <div id='sobreNosotros' className={styles.slidercontainer}>
+        <section id='sobreNosotros' className={styles.slidercontainer}>
             <img
                 className={styles.sliderimage}
                 src={images[currentIndex]}
@@ -28,12 +28,13 @@ const MerchSlider: React.FC<SliderProps> = ({ images }) => {
             />
             <h2 className={styles.h2}>Sobre nosotros</h2>
             <p className={styles.text}>
-                Nosotros somos Federico Lopumo , Tamara Grunseid, Gatón Falena y
+                Nosotros somos Federico Lopumo, Tamara Grunseid, Gatón Falena y
                 Antonela Comisso a.k.a. Team Red de la segunda edición de
-                MiracleLab 2023. En este trabajo final hemos desarrollado una
-                página web pensada para un gimnasio simulado llamado GYMWEB.{' '}
+                MiracleLab 2023. En este trabajo final hemos desarrollado el
+                front y el backend de una página web pensada para un gimnasio
+                simulado llamado GYMWEB.{' '}
             </p>
-        </div>
+        </section>
     );
 };
 
