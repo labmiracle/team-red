@@ -27,7 +27,7 @@ const MerchSlider: React.FC<SliderProps> = ({ images }) => {
                 alt='MerchSlider'
             />
             <h2 className={styles.h2}>Sobre nosotros</h2>
-            <p className={styles.text}>
+            <p id='sobreNostros' className={styles.text}>
                 Nosotros somos Federico Lopumo, Tamara Grunseid, Gatón Falena y
                 Antonela Comisso a.k.a. Team Red de la segunda edición de
                 MiracleLab 2023. En este trabajo final hemos desarrollado el
