@@ -1,0 +1,25 @@
+.gridcontainer {
+    display: flex;
+    position: static;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    overflow: hidden;
+}
+
+.griditem {
+    background-color: #ffffff;
+    display: grid;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 3%;
+    margin-top: 7%;
+}
+
+.griditemimg {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    padding: 5px;
+}

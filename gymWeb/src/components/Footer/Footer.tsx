@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faFacebook,
@@ -12,6 +14,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Footer() {
+    const handleClick = () => {
+        window.scrollTo({
+            top: 1300,
+            behavior: 'smooth',
+        });
+    };
+
     return (
         <footer className={styles.footer}>
             <div className={styles.container}>
@@ -20,18 +29,18 @@ export default function Footer() {
                         <h4 className={styles.h4}>Menu</h4>
                         <ul className={styles.ul}>
                             <li>
-                                <a className={styles.a} href='#'>
-                                    Home
+                                <a className={styles.a}>
+                                    <Link to='/'> Home</Link>
                                 </a>
                             </li>
                             <li>
-                                <a className={styles.a} href='#'>
-                                    Sobre nosotros
-                                </a>
-                            </li>
-                            <li>
-                                <a className={styles.a} href='#'>
-                                    Registrate
+
+                                <a onClick={handleClick} className={styles.a}>
+
+
+
+                                    <Link to='/Register'> Registrate</Link>
+
                                 </a>
                             </li>
                             <li>
