@@ -1,0 +1,19 @@
+.slidercontainer {
+
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -12px;
+    height: 10px;
+    width: 100%;
+    line-height: 10px;
+    text-align: center;
+}
+
+.sliderimage {
+    width: 100%;
+    height: auto;
+}
