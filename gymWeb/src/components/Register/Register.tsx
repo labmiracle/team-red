@@ -20,6 +20,7 @@ const Register: React.FC = () => {
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [dniError, setDNIError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [isDateValid, setIsDateValid] = useState(true);
 
   const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +50,18 @@ const Register: React.FC = () => {
   };
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
+    const emailValue = event.target.value;
+    setEmail(emailValue);
+
+    if (emailValue.length > 0) {
+      if (/\S+@\S+\.\S+/.test(emailValue)) {
+        setEmailError('');
+      } else {
+        setEmailError('Ingrese una dirección de correo electrónico válida');
+      }
+    } else {
+      setEmailError('');
+    }
   };
 
   const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -101,6 +113,7 @@ const Register: React.FC = () => {
     setAddress('');
     setCity('');
     setDNIError('');
+    setEmailError('');
     setIsDateValid(true);
   };
 
@@ -186,7 +199,8 @@ const Register: React.FC = () => {
       </div>
       <div>
         <label htmlFor="email">Correo Electrónico:</label>
-        <input type="email" id="email" value={email} onChange={handleEmailChange} required />
+        <input type="email" id="email" value={email} onChange={handleEmailChange} onBlur={handleEmailChange} required />
+        {emailError && <p>{emailError}</p>}
       </div>
       <div>
         <label htmlFor="address">Dirección:</label>
