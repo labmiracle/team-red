@@ -1,4 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import styles from './Register.module.css';
 
 interface DateOfBirth {
   day: string;
@@ -31,11 +32,19 @@ const Register: React.FC = () => {
 
   const handleDNIChange = (event: ChangeEvent<HTMLInputElement>) => {
     const dniValue = event.target.value;
+  
     if (dniValue.length <= 8) {
       setDNI(dniValue);
-      setDNIError('');
-    } else {
-      setDNIError('Por favor, ingrese 8 dígitos para su DNI sin puntos');
+  
+      if (dniValue.length === 8) {
+        if (/^\d{8}$/.test(dniValue)) {
+          setDNIError('');
+        } else {
+          setDNIError('Ingrese los 8 números de su D.N.I. sin puntos');
+        }
+      } else {
+        setDNIError('');
+      }
     }
   };
 
@@ -122,7 +131,7 @@ const Register: React.FC = () => {
   ) : [];
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.registerContainer} onSubmit={handleSubmit}>
       <div>
         <label htmlFor="firstName">Nombre:</label>
         <input type="text" id="firstName" value={firstName} onChange={handleFirstNameChange} required />
@@ -132,7 +141,7 @@ const Register: React.FC = () => {
         <input type="text" id="lastName" value={lastName} onChange={handleLastNameChange} required />
       </div>
       <div>
-        <label htmlFor="dni">DNI:</label>
+        <label htmlFor="dni">D.N.I.:</label>
         <input type="text" id="dni" value={dni} onChange={handleDNIChange} required />
         {dniError && <p>{dniError}</p>}
       </div>
@@ -158,25 +167,23 @@ const Register: React.FC = () => {
           ))}
         </select>
       </div>
-      {dateOfBirth.month && dateOfBirth.year && (
-        <div>
-          <label htmlFor="dateOfBirthDay">Día de Nacimiento:</label>
-          <select
-            id="dateOfBirthDay"
-            name="day"
-            value={dateOfBirth.day}
-            onChange={handleDateOfBirthChange}
-            required
-          >
-            <option value="">Día</option>
-            {days.map((day) => (
-              <option key={day} value={day}>
-                {day}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
+      <div>
+        <label htmlFor="dateOfBirthDay">Día de Nacimiento:</label>
+        <select
+          id="dateOfBirthDay"
+          name="day"
+          value={dateOfBirth.day}
+          onChange={handleDateOfBirthChange}
+          required={!!dateOfBirth.month && !!dateOfBirth.year}
+        >
+          <option value="">Día</option>
+          {days.map((day) => (
+            <option key={day} value={day}>
+              {day}
+            </option>
+          ))}
+        </select>
+      </div>
       <div>
         <label htmlFor="email">Correo Electrónico:</label>
         <input type="email" id="email" value={email} onChange={handleEmailChange} required />
