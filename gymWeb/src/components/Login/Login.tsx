@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from './Login.module.css';
 
 const Login: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
@@ -7,9 +8,9 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles.loginContainer}>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.loginForm} onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Usuario:</label>
           <input
@@ -31,7 +32,7 @@ const Login: React.FC = () => {
         <button type="submit">Login</button>
       </form>
       <p>
-        Si no estás registrado y quieres hacerlo haz,
+        Si no estás registrado y quieres hacerlo, haz
         <Link to="/Register"> click aquí</Link>.
       </p>
     </div>
