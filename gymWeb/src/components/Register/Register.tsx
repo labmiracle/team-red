@@ -1,4 +1,6 @@
+
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+
 import styles from './Register.module.css';
 
 interface DateOfBirth {
@@ -34,8 +36,10 @@ const Register: React.FC = () => {
   const handleDNIChange = (event: ChangeEvent<HTMLInputElement>) => {
     const dniValue = event.target.value;
 
+
     if (dniValue.length <= 8) {
       setDNI(dniValue);
+
 
       if (dniValue.length === 8) {
         if (/^\d{8}$/.test(dniValue)) {
