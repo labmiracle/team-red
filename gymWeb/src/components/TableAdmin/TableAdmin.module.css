@@ -1,0 +1,33 @@
+.usertable {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+.usertable th,
+.usertable td {
+    border: 1px solid #24e31a;
+    padding: 8px;
+}
+
+.usertable th {
+    background-color: #100e0e;
+}
+
+
+
+.usertable tr:hover {
+    background-color: rgb(93, 103, 102);
+    color: black
+}
+
+.button {
+    background-color: antiquewhite;
+}
+
+.button:hover {
+    background-color: #24e31a;
+
+}

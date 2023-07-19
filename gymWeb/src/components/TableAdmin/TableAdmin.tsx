@@ -1,5 +1,5 @@
 import React from 'react';
-import './TableAdmin.module.css';
+import styles from './TableAdmin.module.css';
 
 interface User {
     id: number;
@@ -16,7 +16,7 @@ interface TableProps {
 
 const TableAdmin: React.FC<TableProps> = ({ users }) => {
     return (
-        <table className='user-table'>
+        <table className={styles.usertable}>
             <thead>
                 <tr>
                     <th>Name</th>
@@ -30,10 +30,16 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
             <tbody>
                 {users.map(user => (
                     <tr key={user.id}>
-                        <td>{user.id}</td>
                         <td>{user.name}</td>
+                        <td>{user.lastname}</td>
+                        <td>{user.dni}</td>
                         <td>{user.email}</td>
+                        <td>{user.status}</td>
                         {/* Add more table cells based on the user object properties */}
+                        <td>
+                            <button className={styles.button}>eliminar</button>{' '}
+                            <button className={styles.button}>editar</button>
+                        </td>
                     </tr>
                 ))}
             </tbody>
