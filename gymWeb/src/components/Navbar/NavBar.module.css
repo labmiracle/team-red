@@ -26,11 +26,12 @@
 }
 
 .logo {
-  width: 200px;
+  width: auto;
   height: 100px;
-  
+
 }
-.logo:hover{
+
+.logo:hover {
   cursor: pointer;
   opacity: 0.7;
 }
@@ -40,22 +41,24 @@
   position: absolute;
   top: 15px;
   right: 20px;
- 
+
 }
 
 .closeMenu {
   position: absolute;
   top: 15px;
   right: 20px;
-  
- 
+
+
 }
-.responsive{
+
+.responsive {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
 }
+
 @media (max-width: 920px) {
   .menuIcon {
     display: block
@@ -67,14 +70,14 @@
     height: 90vh;
     position: relative;
     top: 40px;
-    left:50;
+    left: 50;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items:center;
-    
+    align-items: center;
+
   }
 
-  .item{
+  .item {
     width: 50%;
     height: 21%;
     position: relative;
@@ -83,7 +86,7 @@
     justify-content: center;
     align-items: center;
   }
-  
+
 
   .showMenu {
     display: flex;
