@@ -44,7 +44,13 @@ export default function NavBar() {
     return (
         <nav className={styles.navBar}>
             <div>
-                <img src={logoImage} alt='GymWebLogo' className={styles.logo} />
+                <Link to='/'>
+                    <img
+                        src={logoImage}
+                        alt='GymWebLogo'
+                        className={styles.logo}
+                    />
+                </Link>
             </div>
 
             <button
