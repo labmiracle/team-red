@@ -19,7 +19,7 @@ export default function NavBar() {
 
     return (
         <nav className={styles.navBar}>
-            <div>
+            <div className={styles.containerLogo}>
                 <Link to='/'>
                     <img
                         src={logoImage}
