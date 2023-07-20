@@ -1,5 +1,7 @@
 .gridcontainer {
     display: flex;
+    align-items: center;
+    justify-content: space-around;
     position: static;
     grid-template-columns: repeat(3, 1fr);
     width: 100%;

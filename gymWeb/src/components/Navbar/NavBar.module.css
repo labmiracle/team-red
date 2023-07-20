@@ -7,10 +7,12 @@
   padding: 15px;
   padding-left: 50px;
   padding-right: 70px;
+  
 }
 
 .containerItems {
   display: flex;
+  position: absolute;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
@@ -18,6 +20,7 @@
 
 .item {
   cursor: pointer;
+  
   margin-left: 100px;
   font-size: 1.3rem;
   white-space: nowrap;
@@ -26,7 +29,7 @@
 }
 
 .logo {
-  width: 200px;
+  width: auto;
   height: 100px;
   
 }
@@ -53,19 +56,19 @@
 .responsive{
   display: flex;
   flex-wrap: nowrap;
-  align-items: center;
+  align-items:flex-start;
   justify-content: space-between;
 }
 @media (max-width: 920px) {
   .menuIcon {
-    display: block
+    display: block;
   }
 
   .containerItems {
     display: flex;
     width: 100%;
     height: 90vh;
-    position: relative;
+    position: static;
     top: 40px;
     left:50;
     flex-direction: column;
