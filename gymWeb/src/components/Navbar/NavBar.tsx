@@ -8,41 +8,12 @@ import styles from './NavBar.module.css';
 export default function NavBar() {
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
-    const [isMobile, setIsMobile] = useState(false);
-    const [containerPosition, setContainerPosition] = useState<
-        'absolute' | 'relative' | 'static'
-    >('absolute');
-    useEffect(() => {
-        const handleResize = () => {
-            const isMobileView =
-                window.matchMedia('(max-width: 920px)').matches;
-            if (isMobileView) {
-                setIsMobile(true);
-            } else {
-                setIsMobile(false);
-            }
-            if (!isMobile) {
-                setContainerPosition('relative');
-            }
-            if (isMobile) {
-                setContainerPosition('absolute');
-            }
-        };
-        handleResize();
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
     const handleToggleMenu = () => {
         setMenuOpen(!menuOpen);
         if (menuOpen) {
-            setContainerPosition('relative');
             setItemLeft('0');
         } else {
-            setContainerPosition('absolute');
-            setItemLeft('-100%');
+            setItemLeft('-200%');
         }
     };
 
@@ -66,28 +37,27 @@ export default function NavBar() {
             >
                 {menuOpen ? <FaBars /> : <FaTimes />}
             </button>
-            <div
-                className={styles.containerItems}
-                style={{ position: containerPosition }}
-            >
-                <div className={styles.item} style={{ left: itemLeft }}>
-                    <Link to='/'>Home</Link>
-                </div>
-                <div className={styles.item} style={{ left: itemLeft }}>
-                    <ScrollLink
-                        to='sobreNosotros'
-                        smooth={true}
-                        duration={500}
-                        className={styles.link}
-                    >
-                        Sobre Nosotros
-                    </ScrollLink>
-                </div>
-                <div className={styles.item} style={{ left: itemLeft }}>
-                    <Link to='/contacto'>Contacto</Link>
-                </div>
-                <div className={styles.item} style={{ left: itemLeft }}>
-                    <Link to='/login'>Login</Link>
+            <div className={` ${menuOpen ? styles.responsive : ''}`}>
+                <div className={styles.containerItems}>
+                    <div className={styles.item} style={{ left: itemLeft }}>
+                        <Link to='/'>Home</Link>
+                    </div>
+                    <div className={styles.item} style={{ left: itemLeft }}>
+                        <ScrollLink
+                            to='sobreNosotros'
+                            smooth={true}
+                            duration={500}
+                            className={styles.link}
+                        >
+                            Sobre Nosotros
+                        </ScrollLink>
+                    </div>
+                    <div className={styles.item} style={{ left: itemLeft }}>
+                        <Link to='/contacto'>Contacto</Link>
+                    </div>
+                    <div className={styles.item} style={{ left: itemLeft }}>
+                        <Link to='/login'>Login</Link>
+                    </div>
                 </div>
             </div>
         </nav>
