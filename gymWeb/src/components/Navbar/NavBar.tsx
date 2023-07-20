@@ -6,26 +6,31 @@ import logoImage from '../../images/Logo.jpg';
 import styles from './NavBar.module.css';
 
 export default function NavBar() {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [itemLeft, setItemLeft] = useState('-200%');
+    const [menuOpen, setMenuOpen] = useState(true);
+    const [itemLeft, setItemLeft] = useState('-300%');
     const [isMobile, setIsMobile] = useState(false);
     const [containerPosition, setContainerPosition] = useState<
         'absolute' | 'relative' | 'static'
-    >('static');
+    >('absolute');
     useEffect(() => {
         const handleResize = () => {
-            const isMobileView = window.matchMedia(
-                '(max-width: 1000px)'
-            ).matches;
-            setIsMobile(isMobileView);
+            const isMobileView =
+                window.matchMedia('(max-width: 920px)').matches;
+            if (isMobileView) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+            if (!isMobile) {
+                setContainerPosition('relative');
+            }
+            if (isMobile) {
+                setContainerPosition('absolute');
+            }
         };
         handleResize();
         window.addEventListener('resize', handleResize);
-        if (isMobile) {
-            setContainerPosition('absolute');
-        } else {
-            setContainerPosition('static');
-        }
+
         return () => {
             window.removeEventListener('resize', handleResize);
         };
@@ -59,7 +64,7 @@ export default function NavBar() {
                 }`}
                 onClick={handleToggleMenu}
             >
-                {menuOpen ? <FaTimes /> : <FaBars />}
+                {menuOpen ? <FaBars /> : <FaTimes />}
             </button>
             <div
                 className={styles.containerItems}
