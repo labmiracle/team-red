@@ -1,10 +1,10 @@
 .container {
     width: 100%;
- 
+
     position: absolute;
     margin-bottom: 0;
 
-    background-color: #121212;
+    background-color: black;
 }
 
 .ul {
@@ -17,7 +17,7 @@
 }
 
 .footer {
-    background-color: #121212;
+    background-color: black;
     width: fit-content;
 
     margin-top: 10%;
@@ -25,7 +25,7 @@
 }
 
 .footercol {
-    background-color: #121212;
+    background-color: black;
     width: 100%;
     padding: 15px;
     margin-left: 5%;

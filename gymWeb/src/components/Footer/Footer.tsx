@@ -34,17 +34,12 @@ export default function Footer() {
                                 </a>
                             </li>
                             <li>
-
                                 <a onClick={handleClick} className={styles.a}>
-
-
-
-                                    <Link to='/Register'> Registrate</Link>
-
+                                    <Link to='/register'> Registrate</Link>
                                 </a>
                             </li>
                             <li>
-                                <a className={styles.a} href='#'>
+                                <a className={styles.a}>
                                     Política de privacidad
                                 </a>
                             </li>
@@ -54,9 +49,7 @@ export default function Footer() {
                         <h4 className={styles.h4}>Ayuda</h4>
                         <ul className={styles.ul}>
                             <li>
-                                <a className={styles.a} href='#'>
-                                    FAQ
-                                </a>
+                                <a className={styles.a}>FAQ</a>
                             </li>
                             <li>
                                 <a
@@ -74,7 +67,7 @@ export default function Footer() {
                             <li>
                                 <a className={styles.a}>
                                     <FontAwesomeIcon icon={faEnvelope} /> {'  '}
-                                    info@gym.com
+                                    info@gymweb.com
                                 </a>
                             </li>
                             <li>

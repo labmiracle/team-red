@@ -30,8 +30,10 @@
 .logo {
   width: auto;
   height: 100px;
+
 }
-.logo:hover{
+
+.logo:hover {
   cursor: pointer;
   opacity: 0.7;
 }
@@ -41,16 +43,17 @@
   position: absolute;
   top: 15px;
   right: 20px;
- 
+
 }
 
 .closeMenu {
   position: absolute;
   top: 15px;
   right: 20px;
-  
- 
+
+
 }
+
 
 @media (max-width: 920px) {
   .menuIcon {
@@ -68,15 +71,17 @@
     display: flex;
     width: 100%;
     height: 90vh;
+
     top: 20px;
     left:-200px;
     flex-direction: column;
   }
   .responsive {
     position: absolute;
+
   }
 
-  .item{
+  .item {
     width: 50%;
     height: 21%;
     position: relative;
@@ -85,7 +90,7 @@
     justify-content: center;
     align-items: center;
   }
-  
+
 
   .showMenu {
     display: flex;
