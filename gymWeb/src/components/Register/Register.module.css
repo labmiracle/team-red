@@ -71,6 +71,17 @@
   width: 100%;
 }
 
+/* New style for the phone number field */
+.registerContainer #phoneNumber {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
 @media (max-width: 480px) {
   .registerContainer {
     width: 90%;
