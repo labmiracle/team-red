@@ -22,7 +22,7 @@ a {
 }
 
 a:hover {
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.395);
 }
 
 body {
@@ -62,9 +62,7 @@ button:focus-visible {
     background-color: #121212;
   }
 
-  a:hover {
-    color: #747bff;
-  }
+
 
   button {
     background-color: #f9f9f9;

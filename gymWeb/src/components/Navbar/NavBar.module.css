@@ -1,16 +1,18 @@
 .navBar {
   background-color: black;
   display: flex;
-  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   padding: 15px;
   padding-left: 50px;
   padding-right: 70px;
+
+  
 }
 
 .containerItems {
   display: flex;
+  position: relative;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
@@ -26,11 +28,12 @@
 }
 
 .logo {
-  width: 200px;
+  width: auto;
   height: 100px;
-  
+
 }
-.logo:hover{
+
+.logo:hover {
   cursor: pointer;
   opacity: 0.7;
 }
@@ -40,41 +43,45 @@
   position: absolute;
   top: 15px;
   right: 20px;
- 
+
 }
 
 .closeMenu {
   position: absolute;
   top: 15px;
   right: 20px;
-  
- 
+
+
 }
-.responsive{
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-between;
-}
+
+
 @media (max-width: 920px) {
   .menuIcon {
-    display: block
+    display: block;
   }
-
+  .logo:hover{
+    cursor: pointer;
+    opacity: 0.7;
+  }
+  .navBar{
+    justify-content:first baseline;
+    align-items: normal;
+  }
   .containerItems {
     display: flex;
     width: 100%;
     height: 90vh;
-    position: relative;
-    top: 40px;
-    left:50;
+
+    top: 20px;
+    left:-200px;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items:center;
-    
+  }
+  .responsive {
+    position: absolute;
+
   }
 
-  .item{
+  .item {
     width: 50%;
     height: 21%;
     position: relative;
@@ -83,7 +90,7 @@
     justify-content: center;
     align-items: center;
   }
-  
+
 
   .showMenu {
     display: flex;

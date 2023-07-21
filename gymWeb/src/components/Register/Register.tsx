@@ -115,7 +115,9 @@ const Register: React.FC = () => {
       month: '',
       year: '',
     });
+
     setPhoneNumber('');
+
     setAddress('');
     setCity('');
     setDNIError('');
@@ -212,11 +214,13 @@ const Register: React.FC = () => {
         </select>
       </div>
 
+
       <div className={styles.formGroup}>
         <label htmlFor="phoneNumber">Número de Teléfono:</label>
         <input type="text" id="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} required />
       </div>
       <div className={styles.formGroup}>
+
         <label htmlFor="email">Correo Electrónico:</label>
         <input type="email" id="email" value={email} onChange={handleEmailChange} onBlur={handleEmailChange} required />
         {emailError && <p>{emailError}</p>}

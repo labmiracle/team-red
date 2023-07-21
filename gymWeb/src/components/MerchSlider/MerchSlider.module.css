@@ -33,3 +33,13 @@
     text-align: justify;
     color: aliceblue;
 }
+@media (max-width: 920px) {
+    .slidercontainer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .h2{
+        padding: 0;
+    }
+}
