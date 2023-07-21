@@ -23,18 +23,20 @@
 
 .dobContainer select {
   flex: 1;
-  min-width: 80px;
 }
 
 .registerContainer input,
 .registerContainer select {
   width: 100%;
+  max-width: 200px; /* Establecemos un ancho máximo para evitar desbordamientos */
   padding: 8px 10px;
   font-size: 14px;
   border-radius: 3px;
   border: 1px solid #ddd;
   box-sizing: border-box;
   white-space: nowrap; /* Para que los labels y los input/labels ocupen un solo renglón */
+  overflow: hidden; /* Ocultamos cualquier contenido que desborde el contenedor */
+  text-overflow: ellipsis; /* Mostramos puntos suspensivos si el contenido es demasiado largo */
 }
 
 .registerContainer button[type='submit'] {
@@ -60,8 +62,6 @@
   cursor: not-allowed;
 }
 
-/* Estilos para mensajes de error y media queries si es necesario */
-
 .formGroup {
   display: flex;
   align-items: center;
@@ -69,8 +69,15 @@
 }
 
 .formGroup label {
-  text-align: right;
+  text-align: left; /* Alineación del texto a la izquierda */
   flex: 1;
   min-width: 100px;
   margin-right: 10px;
+}
+
+/* Alineación de la etiqueta "Fecha de Nacimiento" a la izquierda */
+.dobContainer label {
+  text-align: left;
+  flex: 1;
+  min-width: 100px;
 }
