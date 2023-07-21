@@ -1,6 +1,6 @@
 .registerContainer {
   width: 90%;
-  max-width: 500px; 
+  max-width: 400px;
   margin: 5% auto;
   padding: 20px;
   background-color: #ffffff;
@@ -71,33 +71,8 @@
   width: 100%;
 }
 
-
-.registerContainer #phoneNumber {
-  width: 100%;
-  padding: 8px 10px;
-  font-size: 14px;
-  border-radius: 3px;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-}
-
-
-.registerContainer .dobContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.registerContainer .dobContainer select {
-  flex: 1;
-  margin-right: 5px;
-}
-
-
-.registerContainer .dobContainer label {
-  flex: 1;
-  margin-right: 5px;
-  text-align: left;
+@media (max-width: 480px) {
+  .registerContainer {
+    width: 90%;
+  }
 }
