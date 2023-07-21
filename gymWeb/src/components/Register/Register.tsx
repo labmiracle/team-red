@@ -35,10 +35,8 @@ const Register: React.FC = () => {
   const handleDNIChange = (event: ChangeEvent<HTMLInputElement>) => {
     const dniValue = event.target.value;
 
-
     if (dniValue.length <= 8) {
       setDNI(dniValue);
-
 
       if (dniValue.length === 8) {
         if (/^\d{8}$/.test(dniValue)) {
@@ -117,7 +115,7 @@ const Register: React.FC = () => {
       month: '',
       year: '',
     });
-    setPhoneNumber(''); 
+    setPhoneNumber('');
     setAddress('');
     setCity('');
     setDNIError('');
@@ -166,9 +164,17 @@ const Register: React.FC = () => {
         <input type="text" id="dni" value={dni} onChange={handleDNIChange} required />
         {dniError && <p>{dniError}</p>}
       </div>
-      <div>
-        <label htmlFor="dateOfBirthYear">Año de Nacimiento:</label>
-        <select id="dateOfBirthYear" name="year" value={dateOfBirth.year} onChange={handleYearChange} required>
+
+      {/* Nueva sección para la Fecha de Nacimiento */}
+      <div className={styles.dobContainer}>
+        <label htmlFor="dateOfBirthYear">Fecha de Nacimiento:</label>
+        <select
+          id="dateOfBirthYear"
+          name="year"
+          value={dateOfBirth.year}
+          onChange={handleYearChange}
+          required
+        >
           <option value="">Año</option>
           {years.map((year) => (
             <option key={year} value={year}>
@@ -176,10 +182,13 @@ const Register: React.FC = () => {
             </option>
           ))}
         </select>
-      </div>
-      <div>
-        <label htmlFor="dateOfBirthMonth">Mes de Nacimiento:</label>
-        <select id="dateOfBirthMonth" name="month" value={dateOfBirth.month} onChange={handleMonthChange} required>
+        <select
+          id="dateOfBirthMonth"
+          name="month"
+          value={dateOfBirth.month}
+          onChange={handleMonthChange}
+          required
+        >
           <option value="">Mes</option>
           {months.map((month, index) => (
             <option key={index} value={month}>
@@ -187,15 +196,12 @@ const Register: React.FC = () => {
             </option>
           ))}
         </select>
-      </div>
-      <div>
-        <label htmlFor="dateOfBirthDay">Día de Nacimiento:</label>
         <select
           id="dateOfBirthDay"
           name="day"
           value={dateOfBirth.day}
           onChange={handleDateOfBirthChange}
-          required={!!dateOfBirth.month && !!dateOfBirth.year}
+          required
         >
           <option value="">Día</option>
           {days.map((day) => (
@@ -205,8 +211,10 @@ const Register: React.FC = () => {
           ))}
         </select>
       </div>
+      {/* Fin de la sección de Fecha de Nacimiento */}
+
       <div>
-        <label htmlFor="phoneNumber">Teléfono:</label>
+        <label htmlFor="phoneNumber">Número de Teléfono:</label>
         <input type="text" id="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} required />
       </div>
       <div>

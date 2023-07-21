@@ -1,6 +1,6 @@
 .registerContainer {
   width: 90%;
-  max-width: 400px;
+  max-width: 500px; 
   margin: 5% auto;
   padding: 20px;
   background-color: #ffffff;
@@ -43,7 +43,7 @@
 
 .registerContainer button[type='submit'] {
   width: 100%;
-  max-width: 400px; /* Ajusta el ancho máximo del botón según tus necesidades */
+  max-width: 400px; 
   padding: 10px;
   font-size: 16px;
   font-weight: 600;
@@ -71,7 +71,7 @@
   width: 100%;
 }
 
-/* New style for the phone number field */
+
 .registerContainer #phoneNumber {
   width: 100%;
   padding: 8px 10px;
@@ -82,8 +82,22 @@
   margin-bottom: 10px;
 }
 
-@media (max-width: 480px) {
-  .registerContainer {
-    width: 90%;
-  }
+
+.registerContainer .dobContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.registerContainer .dobContainer select {
+  flex: 1;
+  margin-right: 5px;
+}
+
+
+.registerContainer .dobContainer label {
+  flex: 1;
+  margin-right: 5px;
+  text-align: left;
 }
