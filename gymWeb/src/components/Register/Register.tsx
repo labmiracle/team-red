@@ -151,21 +151,21 @@ const Register: React.FC = () => {
 
   return (
     <form className={styles.registerContainer} onSubmit={handleSubmit}>
-      <div>
+      <h2>Formulario de Registro</h2>
+      <div className={styles.formGroup}>
         <label htmlFor="firstName">Nombre:</label>
         <input type="text" id="firstName" value={firstName} onChange={handleFirstNameChange} required />
       </div>
-      <div>
+      <div className={styles.formGroup}>
         <label htmlFor="lastName">Apellido:</label>
         <input type="text" id="lastName" value={lastName} onChange={handleLastNameChange} required />
       </div>
-      <div>
+      <div className={styles.formGroup}>
         <label htmlFor="dni">D.N.I.:</label>
         <input type="text" id="dni" value={dni} onChange={handleDNIChange} required />
         {dniError && <p>{dniError}</p>}
       </div>
 
-      {/* Nueva sección para la Fecha de Nacimiento */}
       <div className={styles.dobContainer}>
         <label htmlFor="dateOfBirthYear">Fecha de Nacimiento:</label>
         <select
@@ -211,22 +211,21 @@ const Register: React.FC = () => {
           ))}
         </select>
       </div>
-      {/* Fin de la sección de Fecha de Nacimiento */}
 
-      <div>
+      <div className={styles.formGroup}>
         <label htmlFor="phoneNumber">Número de Teléfono:</label>
         <input type="text" id="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} required />
       </div>
-      <div>
+      <div className={styles.formGroup}>
         <label htmlFor="email">Correo Electrónico:</label>
         <input type="email" id="email" value={email} onChange={handleEmailChange} onBlur={handleEmailChange} required />
         {emailError && <p>{emailError}</p>}
       </div>
-      <div>
+      <div className={styles.formGroup}>
         <label htmlFor="address">Dirección:</label>
         <input type="text" id="address" value={address} onChange={handleAddressChange} required />
       </div>
-      <div>
+      <div className={styles.formGroup}>
         <label htmlFor="city">Ciudad:</label>
         <input type="text" id="city" value={city} onChange={handleCityChange} required />
       </div>
