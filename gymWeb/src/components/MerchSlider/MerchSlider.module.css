@@ -1,0 +1,45 @@
+.slidercontainer {
+    display: inline-flex;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 7%;
+
+}
+
+.sliderimage {
+    background-color: black;
+    border-radius: 4px;
+    width: 300px;
+    height: 300px;
+    min-width: 300px;
+    min-height: 300px;
+    padding: 2%;
+    margin-left: 3%;
+}
+
+.h2 {
+    font-size: 35px;
+    color: greenyellow;
+    padding: 2%;
+
+}
+
+.text {
+    padding: 3%;
+    font-size: 25px;
+    text-align: justify;
+    color: aliceblue;
+}
+@media (max-width: 920px) {
+    .slidercontainer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .h2{
+        padding: 0;
+    }
+}
