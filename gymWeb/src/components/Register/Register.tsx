@@ -19,6 +19,7 @@ const Register: React.FC = () => {
     month: '',
     year: '',
   });
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [dniError, setDNIError] = useState('');
@@ -92,6 +93,10 @@ const Register: React.FC = () => {
     }));
   };
 
+  const handlePhoneNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumber(event.target.value);
+  };
+
   const handleAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
     setAddress(event.target.value);
   };
@@ -114,6 +119,7 @@ const Register: React.FC = () => {
       month: '',
       year: '',
     });
+    setPhoneNumber(''); 
     setAddress('');
     setCity('');
     setDNIError('');
@@ -200,6 +206,10 @@ const Register: React.FC = () => {
             </option>
           ))}
         </select>
+      </div>
+      <div>
+        <label htmlFor="phoneNumber">Teléfono:</label>
+        <input type="text" id="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} required />
       </div>
       <div>
         <label htmlFor="email">Correo Electrónico:</label>
