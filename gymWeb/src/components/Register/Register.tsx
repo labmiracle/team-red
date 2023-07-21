@@ -115,7 +115,6 @@ const Register: React.FC = () => {
       month: '',
       year: '',
     });
-
     setPhoneNumber('');
 
     setAddress('');
