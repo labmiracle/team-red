@@ -24,25 +24,27 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
     };
 
     const filteredUsers = filterTerm
-        ? users.filter(user => user.name.toUpperCase().startsWith(filterTerm))
+        ? users.filter(user =>
+              user.lastname.toUpperCase().startsWith(filterTerm)
+          )
         : users;
     return (
         <>
             <div className={styles.filter}>
-                Filtrar por nombre:{' '}
+                Filtrar por apellido:{' '}
                 <input
                     className={styles.filterinput}
                     type='text'
-                    placeholder='Filtrar por nombre'
+                    placeholder='Filtrar por apellido'
                     value={filterTerm}
                     onChange={handleFilterChange}
                 />
             </div>
 
             <table className={styles.usertable}>
-                <thead>
+                <thead className={styles.thead}>
                     <tr>
-                        <th>Nombre</th>
+                        <th>Apellido y Nombre</th>
                         <th>DNI</th>
                         <th>Fecha de Nac.</th>
                         <th>Teléfono</th>
@@ -54,7 +56,7 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                     {filteredUsers.map(user => (
                         <tr key={user.id}>
                             <td>
-                                {user.name} {user.lastname}
+                                {user.lastname}, {user.name}
                             </td>
                             <td>{user.dni}</td>
                             <td>{user.dateofbirth}</td>
@@ -62,11 +64,11 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                             <td>{user.email}</td>
                             <td>{user.status}</td>
                             <td>
-                                <button className={styles.buttondelete}>
-                                    Eliminar
-                                </button>{' '}
                                 <button className={styles.buttonedit}>
                                     Editar
+                                </button>{' '}
+                                <button className={styles.buttondelete}>
+                                    Eliminar
                                 </button>
                             </td>
                         </tr>
