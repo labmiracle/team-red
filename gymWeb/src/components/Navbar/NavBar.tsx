@@ -45,6 +45,12 @@ export default function NavBar() {
         <nav className={styles.navBar}>
             <div>
                 <img src={logoImage} alt='GymWebLogo' className={styles.logo} />
+                    <img
+                        src={logoImage}
+                        alt='GymWebLogo'
+                        className={styles.logo}
+                    />
+                </Link>
             </div>
 
             <button
