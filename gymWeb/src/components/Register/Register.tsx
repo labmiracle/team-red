@@ -1,4 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import styles from './Register.module.css';
 
 interface DateOfBirth {
   day: string;
@@ -16,9 +17,11 @@ const Register: React.FC = () => {
     month: '',
     year: '',
   });
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [dniError, setDNIError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [isDateValid, setIsDateValid] = useState(true);
 
   const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -31,16 +34,35 @@ const Register: React.FC = () => {
 
   const handleDNIChange = (event: ChangeEvent<HTMLInputElement>) => {
     const dniValue = event.target.value;
+
     if (dniValue.length <= 8) {
       setDNI(dniValue);
-      setDNIError('');
-    } else {
-      setDNIError('Por favor, ingrese 8 dígitos para su DNI sin puntos');
+
+      if (dniValue.length === 8) {
+        if (/^\d{8}$/.test(dniValue)) {
+          setDNIError('');
+        } else {
+          setDNIError('Ingrese los 8 números de su D.N.I. sin puntos');
+        }
+      } else {
+        setDNIError('');
+      }
     }
   };
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
+    const emailValue = event.target.value;
+    setEmail(emailValue);
+
+    if (emailValue.length > 0) {
+      if (/\S+@\S+\.\S+/.test(emailValue)) {
+        setEmailError('');
+      } else {
+        setEmailError('Ingrese una dirección de correo electrónico válida');
+      }
+    } else {
+      setEmailError('');
+    }
   };
 
   const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -67,6 +89,10 @@ const Register: React.FC = () => {
     }));
   };
 
+  const handlePhoneNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumber(event.target.value);
+  };
+
   const handleAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
     setAddress(event.target.value);
   };
@@ -89,9 +115,12 @@ const Register: React.FC = () => {
       month: '',
       year: '',
     });
+    setPhoneNumber('');
+
     setAddress('');
     setCity('');
     setDNIError('');
+    setEmailError('');
     setIsDateValid(true);
   };
 
@@ -122,23 +151,31 @@ const Register: React.FC = () => {
   ) : [];
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form className={styles.registerContainer} onSubmit={handleSubmit}>
+      <h2>Formulario de Registro</h2>
+      <div className={styles.formGroup}>
         <label htmlFor="firstName">Nombre:</label>
         <input type="text" id="firstName" value={firstName} onChange={handleFirstNameChange} required />
       </div>
-      <div>
+      <div className={styles.formGroup}>
         <label htmlFor="lastName">Apellido:</label>
         <input type="text" id="lastName" value={lastName} onChange={handleLastNameChange} required />
       </div>
-      <div>
-        <label htmlFor="dni">DNI:</label>
+      <div className={styles.formGroup}>
+        <label htmlFor="dni">D.N.I.:</label>
         <input type="text" id="dni" value={dni} onChange={handleDNIChange} required />
         {dniError && <p>{dniError}</p>}
       </div>
-      <div>
-        <label htmlFor="dateOfBirthYear">Año de Nacimiento:</label>
-        <select id="dateOfBirthYear" name="year" value={dateOfBirth.year} onChange={handleYearChange} required>
+
+      <div className={styles.dobContainer}>
+        <label htmlFor="dateOfBirthYear">Fecha de Nacimiento:</label>
+        <select
+          id="dateOfBirthYear"
+          name="year"
+          value={dateOfBirth.year}
+          onChange={handleYearChange}
+          required
+        >
           <option value="">Año</option>
           {years.map((year) => (
             <option key={year} value={year}>
@@ -146,10 +183,13 @@ const Register: React.FC = () => {
             </option>
           ))}
         </select>
-      </div>
-      <div>
-        <label htmlFor="dateOfBirthMonth">Mes de Nacimiento:</label>
-        <select id="dateOfBirthMonth" name="month" value={dateOfBirth.month} onChange={handleMonthChange} required>
+        <select
+          id="dateOfBirthMonth"
+          name="month"
+          value={dateOfBirth.month}
+          onChange={handleMonthChange}
+          required
+        >
           <option value="">Mes</option>
           {months.map((month, index) => (
             <option key={index} value={month}>
@@ -157,35 +197,38 @@ const Register: React.FC = () => {
             </option>
           ))}
         </select>
+        <select
+          id="dateOfBirthDay"
+          name="day"
+          value={dateOfBirth.day}
+          onChange={handleDateOfBirthChange}
+          required
+        >
+          <option value="">Día</option>
+          {days.map((day) => (
+            <option key={day} value={day}>
+              {day}
+            </option>
+          ))}
+        </select>
       </div>
-      {dateOfBirth.month && dateOfBirth.year && (
-        <div>
-          <label htmlFor="dateOfBirthDay">Día de Nacimiento:</label>
-          <select
-            id="dateOfBirthDay"
-            name="day"
-            value={dateOfBirth.day}
-            onChange={handleDateOfBirthChange}
-            required
-          >
-            <option value="">Día</option>
-            {days.map((day) => (
-              <option key={day} value={day}>
-                {day}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-      <div>
+
+
+      <div className={styles.formGroup}>
+        <label htmlFor="phoneNumber">Número de Teléfono:</label>
+        <input type="text" id="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} required />
+      </div>
+      <div className={styles.formGroup}>
+
         <label htmlFor="email">Correo Electrónico:</label>
-        <input type="email" id="email" value={email} onChange={handleEmailChange} required />
+        <input type="email" id="email" value={email} onChange={handleEmailChange} onBlur={handleEmailChange} required />
+        {emailError && <p>{emailError}</p>}
       </div>
-      <div>
+      <div className={styles.formGroup}>
         <label htmlFor="address">Dirección:</label>
         <input type="text" id="address" value={address} onChange={handleAddressChange} required />
       </div>
-      <div>
+      <div className={styles.formGroup}>
         <label htmlFor="city">Ciudad:</label>
         <input type="text" id="city" value={city} onChange={handleCityChange} required />
       </div>
