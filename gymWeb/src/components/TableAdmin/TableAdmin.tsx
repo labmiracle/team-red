@@ -5,11 +5,7 @@ interface User {
     id: number;
     name: string;
     lastname: string;
-    dni: number;
-    dateofbirth: string;
-    phonenumber: number;
-    email: string;
-    status: string;
+    state: number;
 }
 
 interface TableProps {
@@ -45,10 +41,7 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                 <thead className={styles.thead}>
                     <tr>
                         <th>Apellido y Nombre</th>
-                        <th>DNI</th>
-                        <th>Fecha de Nac.</th>
-                        <th>Teléfono</th>
-                        <th>Email</th>
+
                         <th>Estado de Cuota</th>
                     </tr>
                 </thead>
@@ -58,11 +51,8 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                             <td>
                                 {user.lastname}, {user.name}
                             </td>
-                            <td>{user.dni}</td>
-                            <td>{user.dateofbirth}</td>
-                            <td>{user.phonenumber}</td>
-                            <td>{user.email}</td>
-                            <td>{user.status}</td>
+
+                            <td>{user.state}</td>
                             <td>
                                 <button className={styles.buttonedit}>
                                     Editar
