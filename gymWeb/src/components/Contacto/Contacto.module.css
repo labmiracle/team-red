@@ -1,0 +1,95 @@
+.contactForm {
+    width: 90%; /* Ancho relativo */
+    max-width: 400px;
+    margin: 5% auto; /* Margen relativo */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrado vertical */
+    align-items: center; /* Centrado horizontal */
+  }
+  
+  /* Estilos para el encabezado "Contacto" */
+  .contactForm h2 {
+    color: #000000; /* Color de texto negro */
+  }
+  
+  .contactForm form {
+    margin-top: 20px;
+  }
+  
+  .contactForm form div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  /* Estilos para las etiquetas "Nombre", "Correo electrónico" y "Mensaje" */
+  .contactForm form label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #000000; /* Color de texto negro */
+  }
+  
+  .contactForm form input[type="text"],
+  .contactForm form input[type="email"],
+  .contactForm form textarea {
+    padding: 8px 10px;
+    font-size: 14px;
+    color: #000000; /* Color de texto negro */
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+  }
+  
+  .contactForm form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #97FB57;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .contactForm form button[type="submit"]:hover {
+    background-color: #85d93c;
+  }
+  
+  .contactForm form p {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .contactForm form p a {
+    color: #ff0000;
+    text-decoration: none;
+  }
+  
+  .contactForm form p a:hover {
+    text-decoration: underline;
+  }
+  
+  .contactForm .footer {
+    margin-top: 5%; /* Espacio relativo con el navbar */
+    margin-bottom: 5%; /* Espacio relativo con el navbar */
+  }
+  
+  .contactForm .navBar {
+    margin-bottom: 5%; /* Espacio relativo con el footer */
+  }
+  
+  @media (max-width: 480px) {
+    .contactForm {
+      width: 90%; /* Ancho relativo en dispositivos móviles */
+    }
+  }
