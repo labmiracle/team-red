@@ -2,49 +2,62 @@
     width: 100%;
     border-collapse: collapse;
     color: #ffffff;
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
-    margin-top: 3%;
+    margin-top: 20px;
 }
 
 .usertable th,
 .usertable td {
     border: 1px solid #97FB57;
-    padding: 8px;
+    padding: 10px;
+
 }
 
 .usertable th {
     background-color: #100e0e;
+    color: #ffffff;
 }
 
 .usertable tr:hover {
     background-color: rgba(255, 255, 255, 0.2);
-
 }
 
 .thead {
     color: rgba(255, 255, 255, 0.461);
 }
 
-
-
 .buttonedit {
     background-color: aqua;
-    padding: 5px;
-    font-size: 15px;
+    padding: 5px 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
 
+.buttonedit:hover {
+    background-color: rgb(21, 106, 106);
 }
 
 .buttonregister {
     color: #100e0e;
     background-color: #97FB57;
-    margin: 2%;
+    border-color: rgb(16, 122, 50);
+    border-width: 1px;
+    margin: 10px;
     font-size: 16px;
-    padding: 2%;
+    padding: 8px 15px;
+    cursor: pointer;
 }
 
+.buttonregister:hover {
+    color: #100e0e;
+    background-color: rgb(16, 122, 50);
+}
+
+;
+
 .filter {
-    font-size: 23px;
+    font-size: 20px;
 }
 
 .filterinput[type='text'] {
@@ -52,5 +65,7 @@
     background-color: white;
     padding: 10px;
     color: black;
-    font-size: 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }

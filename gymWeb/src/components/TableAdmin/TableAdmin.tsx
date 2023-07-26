@@ -7,6 +7,12 @@ interface User {
     id: number;
     name: string;
     lastname: string;
+    dni: number;
+    dateofbirth: string;
+    phone: string;
+    email: string;
+    address: string;
+    city: string;
     state: number;
 }
 
@@ -50,6 +56,13 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         : users;
     return (
         <>
+            {' '}
+            <button className={styles.buttonregister}>
+                {' '}
+                <Link className={styles.buttonregister} to='/register'>
+                    Crear nuevo usuario
+                </Link>
+            </button>
             <div className={styles.filter}>
                 Filtrar por apellido:{' '}
                 <input
@@ -60,21 +73,17 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                     onChange={handleFilterChange}
                 />
             </div>
-
             <table className={styles.usertable}>
                 <thead className={styles.thead}>
                     <tr>
-                        <th>Apellido y Nombre</th>
-                        <th>Estado de Cuota</th>
-                        <button className={styles.buttonregister}>
-                            {' '}
-                            <Link
-                                className={styles.buttonregister}
-                                to='/register'
-                            >
-                                Nuevo Usuario
-                            </Link>
-                        </button>
+                        <th>Apellido y nombre</th>
+                        <th>DNI</th>
+                        <th>Fecha de nac.</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Domicilio</th>
+                        <th>Ciudad</th>
+                        <th>Estado de cuota</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,7 +92,12 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                             <td>
                                 {user.lastname}, {user.name}
                             </td>
-
+                            <td>{user.dni}</td>
+                            <td>{user.dateofbirth}</td>
+                            <td>{user.phone}</td>
+                            <td>{user.email}</td>
+                            <td>{user.address}</td>
+                            <td>{user.city}</td>
                             <td>{user.state}</td>
                             <td>
                                 <button className={styles.buttonedit}>
