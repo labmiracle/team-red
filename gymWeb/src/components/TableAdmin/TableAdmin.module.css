@@ -17,8 +17,6 @@
     background-color: #100e0e;
 }
 
-
-
 .usertable tr:hover {
     background-color: rgba(255, 255, 255, 0.2);
 
@@ -28,12 +26,7 @@
     color: rgba(255, 255, 255, 0.461);
 }
 
-.buttondelete {
-    background-color: red;
-    padding: 5px;
-    font-size: 15px;
 
-}
 
 .buttonedit {
     background-color: aqua;
@@ -42,9 +35,12 @@
 
 }
 
-.button:hover {
+.buttonregister {
+    color: #100e0e;
     background-color: #97FB57;
-
+    margin: 2%;
+    font-size: 16px;
+    padding: 2%;
 }
 
 .filter {
@@ -53,7 +49,7 @@
 
 .filterinput[type='text'] {
     margin: 10px;
-    background-color: #97FB57;
+    background-color: white;
     padding: 10px;
     color: black;
     font-size: 15px;

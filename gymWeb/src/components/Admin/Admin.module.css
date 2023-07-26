@@ -1,7 +1,13 @@
 .admin {
     font-size: 30px;
-    color: white;
+    color: rgba(255, 255, 255, 0.461);
     padding: 20px;
     margin: 20px;
 
+}
+
+
+
+.register:hover {
+    color: rgba(20, 53, 25, 0.037);
 }

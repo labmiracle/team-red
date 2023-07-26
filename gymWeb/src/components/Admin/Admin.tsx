@@ -22,19 +22,21 @@ const Admin: React.FC = () => {
     const fetchUsers = async () => {
         try {
             const response = await axios.get<User[]>(
-                'http://localhost:5000/api/users'
+                'http://localhost:5000/api/users/state/1'
             );
-            setUsers(response.data); // Actualizamos el estado con los datos obtenidos desde la API
+            setUsers(response.data);
         } catch (error) {
             console.error('Error al obtener los datos:', error);
         }
     };
 
     return (
-        <div className={styles.admin}>
-            Bienvenido: {loggeduser}
-            <TableAdmin users={users} />
-        </div>
+        <>
+            <div className={styles.admin}>
+                Bienvenido: {loggeduser}
+                <TableAdmin users={users} />
+            </div>
+        </>
     );
 };
 
