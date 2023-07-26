@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './Login.module.css';
 
 const Login: React.FC = () => {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -25,8 +26,10 @@ const Login: React.FC = () => {
                         id='username'
                         aria-label='Username'
                         required
+
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+
                     />
                 </div>
                 <div>
@@ -36,8 +39,10 @@ const Login: React.FC = () => {
                         id='password'
                         aria-label='Password'
                         required
+
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+
                     />
                 </div>
                 <button type='submit'>Login</button>
@@ -51,3 +56,4 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+

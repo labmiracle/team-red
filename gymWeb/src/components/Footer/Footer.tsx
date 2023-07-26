@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faFacebook,
@@ -12,6 +14,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Footer() {
+    const handleClick = () => {
+        window.scrollTo({
+            top: 1300,
+            behavior: 'smooth',
+        });
+    };
+
     return (
         <footer className={styles.footer}>
             <div className={styles.container}>
@@ -20,52 +29,45 @@ export default function Footer() {
                         <h4 className={styles.h4}>Menu</h4>
                         <ul className={styles.ul}>
                             <li>
-                                <a className={styles.a} href='#'>
-                                    Home
+                                <a className={styles.a}>
+                                    <Link to='/'> Home</Link>
                                 </a>
                             </li>
                             <li>
-                                <a className={styles.a} href='#'>
-                                    About us
+                                <a onClick={handleClick} className={styles.a}>
+                                    <Link to='/register'> Registrate</Link>
                                 </a>
                             </li>
                             <li>
-                                <a className={styles.a} href='#'>
-                                    Register
-                                </a>
-                            </li>
-                            <li>
-                                <a className={styles.a} href='#'>
-                                    Privacy Policy
+                                <a className={styles.a}>
+                                    Política de privacidad
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div className={styles.footercol}>
-                        <h4 className={styles.h4}>Get help</h4>
+                        <h4 className={styles.h4}>Ayuda</h4>
                         <ul className={styles.ul}>
                             <li>
-                                <a className={styles.a} href='#'>
-                                    FAQ
-                                </a>
+                                <a className={styles.a}>FAQ</a>
                             </li>
                             <li>
                                 <a
                                     className={styles.a}
                                     href='https://autogestion.produccion.gob.ar/consumidores'
                                 >
-                                    Consumer Protection
+                                    Protección al consumidor
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div className={styles.footercol}>
-                        <h4 className={styles.h4}>Contact us</h4>
+                        <h4 className={styles.h4}>Contactanos</h4>
                         <ul className={styles.ul}>
                             <li>
                                 <a className={styles.a}>
                                     <FontAwesomeIcon icon={faEnvelope} /> {'  '}
-                                    info@gym.com
+                                    info@gymweb.com
                                 </a>
                             </li>
                             <li>
@@ -85,7 +87,7 @@ export default function Footer() {
                         </ul>
                     </div>
                     <div className={styles.footercol}>
-                        <h4 className={styles.h4}>Follow us</h4>
+                        <h4 className={styles.h4}>Seguinos</h4>
 
                         <a
                             className={styles.sociallinks}

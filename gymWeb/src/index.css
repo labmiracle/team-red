@@ -1,6 +1,6 @@
 :root {
 
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -22,12 +22,11 @@ a {
 }
 
 a:hover {
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.395);
 }
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -51,9 +50,6 @@ button {
   transition: border-color 0.25s;
 }
 
-button:hover {
-  border-color: #646cff;
-}
 
 button:focus,
 button:focus-visible {
@@ -63,12 +59,10 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #121212;
   }
 
-  a:hover {
-    color: #747bff;
-  }
+
 
   button {
     background-color: #f9f9f9;

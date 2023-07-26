@@ -1,0 +1,60 @@
+.usertable {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 3%;
+}
+
+.usertable th,
+.usertable td {
+    border: 1px solid #97FB57;
+    padding: 8px;
+}
+
+.usertable th {
+    background-color: #100e0e;
+}
+
+
+
+.usertable tr:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+
+}
+
+.thead {
+    color: rgba(255, 255, 255, 0.461);
+}
+
+.buttondelete {
+    background-color: red;
+    padding: 5px;
+    font-size: 15px;
+
+}
+
+.buttonedit {
+    background-color: aqua;
+    padding: 5px;
+    font-size: 15px;
+
+}
+
+.button:hover {
+    background-color: #97FB57;
+
+}
+
+.filter {
+    font-size: 23px;
+}
+
+.filterinput[type='text'] {
+    margin: 10px;
+    background-color: #97FB57;
+    padding: 10px;
+    color: black;
+    font-size: 15px;
+}
