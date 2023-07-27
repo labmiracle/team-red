@@ -28,7 +28,7 @@
 .registerContainer input,
 .registerContainer select {
   width: 100%;
-  max-width: 200px; /* Establecemos un ancho máximo para evitar desbordamientos */
+  max-width: 400px; /* Establecemos un ancho máximo para evitar desbordamientos */
   padding: 8px 10px;
   font-size: 14px;
   border-radius: 3px;
