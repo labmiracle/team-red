@@ -20,6 +20,7 @@ const Register: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
+  const [password, setPassword] = useState('');
   const [dniError, setDNIError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [isDateValid, setIsDateValid] = useState(true);
@@ -101,11 +102,28 @@ const Register: React.FC = () => {
     setCity(event.target.value);
   };
 
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Agregar la lógica para enviar los datos del formulario al servidor
-    // Podemos hacer una llamada a una API para registrar al usuario.
 
+    // Agregar la lógica para enviar los datos del formulario al servidor
+    const userData = {
+      firstName,
+      lastName,
+      dni,
+      email,
+      dateOfBirth,
+      phoneNumber,
+      address,
+      city,
+      password, 
+    };
+
+    // enviar la info de userDaa al backend
+  
     setFirstName('');
     setLastName('');
     setDNI('');
@@ -118,6 +136,7 @@ const Register: React.FC = () => {
     setPhoneNumber('');
     setAddress('');
     setCity('');
+    setPassword('');
     setDNIError('');
     setEmailError('');
     setIsDateValid(true);
@@ -228,6 +247,10 @@ const Register: React.FC = () => {
       <div className={styles.formGroup}>
         <label htmlFor="city">Ciudad:</label>
         <input type="text" id="city" value={city} onChange={handleCityChange} required />
+      </div>
+      <div className={styles.formGroup}>
+        <label htmlFor="password">Contraseña:</label>
+        <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
       </div>
       <button type="submit" disabled={!isDateValid}>
         Registrarse
