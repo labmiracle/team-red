@@ -4,6 +4,7 @@
     color: #ffffff;
     font-size: 20px;
     text-align: center;
+    margin-top: 3%;
 }
 
 .usertable th,
@@ -23,14 +24,22 @@
 
 }
 
+.thead {
+    color: rgba(255, 255, 255, 0.461);
+}
+
 .buttondelete {
     background-color: red;
-    padding: 7px;
+    padding: 5px;
+    font-size: 15px;
+
 }
 
 .buttonedit {
     background-color: aqua;
-    padding: 7px;
+    padding: 5px;
+    font-size: 15px;
+
 }
 
 .button:hover {

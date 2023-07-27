@@ -6,44 +6,42 @@
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
 }
 
-.registerContainer label {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 5px;
-  text-align: right;
-  width: auto;
+.registerContainer h2 {
+  margin-bottom: 20px;
+}
+
+.dobContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dobContainer select {
+  flex: 1;
 }
 
 .registerContainer input,
 .registerContainer select {
   width: 100%;
+  max-width: 200px; /* Establecemos un ancho máximo para evitar desbordamientos */
   padding: 8px 10px;
   font-size: 14px;
   border-radius: 3px;
   border: 1px solid #ddd;
   box-sizing: border-box;
-  margin-bottom: 10px;
-}
-
-.registerContainer p {
-  font-size: 14px;
-  margin-top: 5px;
-  color: red;
-  text-align: left;
-  width: 100%;
+  white-space: nowrap; /* Para que los labels y los input/labels ocupen un solo renglón */
+  overflow: hidden; /* Ocultamos cualquier contenido que desborde el contenedor */
+  text-overflow: ellipsis; /* Mostramos puntos suspensivos si el contenido es demasiado largo */
 }
 
 .registerContainer button[type='submit'] {
   width: 100%;
-  max-width: 400px; /* Ajusta el ancho máximo del botón según tus necesidades */
+  max-width: 400px;
   padding: 10px;
   font-size: 16px;
   font-weight: 600;
@@ -64,15 +62,22 @@
   cursor: not-allowed;
 }
 
-.registerContainer > div {
+.formGroup {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  margin-bottom: 10px;
 }
 
-@media (max-width: 480px) {
-  .registerContainer {
-    width: 90%;
-  }
+.formGroup label {
+  text-align: left; /* Alineación del texto a la izquierda */
+  flex: 1;
+  min-width: 100px;
+  margin-right: 10px;
+}
+
+/* Alineación de la etiqueta "Fecha de Nacimiento" a la izquierda */
+.dobContainer label {
+  text-align: left;
+  flex: 1;
+  min-width: 100px;
 }
