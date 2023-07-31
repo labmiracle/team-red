@@ -3,7 +3,7 @@ import styles from '../DeleteButton/DeleteButton.module.css';
 
 interface DeleteButtonProps {
     onClick: (userId: number) => void;
-    userId: number; // Assuming userId is of type number
+    userId: number;
 }
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ onClick, userId }) => {
