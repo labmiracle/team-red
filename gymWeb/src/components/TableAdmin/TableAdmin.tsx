@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './TableAdmin.module.css';
+import DeleteButton from '../DeleteButton/DeleteButton';
 
 interface User {
     id: number;
@@ -7,9 +9,11 @@ interface User {
     lastname: string;
     dni: number;
     dateofbirth: string;
-    phonenumber: number;
+    phone: string;
     email: string;
-    status: string;
+    address: string;
+    city: string;
+    state: number;
 }
 
 interface TableProps {
@@ -18,6 +22,28 @@ interface TableProps {
 
 const TableAdmin: React.FC<TableProps> = ({ users }) => {
     const [filterTerm, setFilterTerm] = useState('');
+
+    const handleDelete = async (userId: number) => {
+        try {
+            const response = await fetch(
+                `http://localhost:5000/api/users/${userId}`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            if (response.ok) {
+                console.log('Elemento eliminado exitosamente.');
+            } else {
+                console.error('Error al eliminar el elemento.');
+            }
+        } catch (error) {
+            console.error('Error de red:', error);
+        }
+    };
 
     const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFilterTerm(event.target.value.toUpperCase());
@@ -30,6 +56,13 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         : users;
     return (
         <>
+            {' '}
+            <button className={styles.buttonregister}>
+                {' '}
+                <Link className={styles.buttonregister} to='/register'>
+                    Crear nuevo usuario
+                </Link>
+            </button>
             <div className={styles.filter}>
                 Filtrar por apellido:{' '}
                 <input
@@ -40,16 +73,17 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                     onChange={handleFilterChange}
                 />
             </div>
-
             <table className={styles.usertable}>
                 <thead className={styles.thead}>
                     <tr>
-                        <th>Apellido y Nombre</th>
+                        <th>Apellido y nombre</th>
                         <th>DNI</th>
-                        <th>Fecha de Nac.</th>
+                        <th>Fecha de nac.</th>
                         <th>Teléfono</th>
                         <th>Email</th>
-                        <th>Estado de Cuota</th>
+                        <th>Domicilio</th>
+                        <th>Ciudad</th>
+                        <th>Estado de cuota</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,16 +94,19 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                             </td>
                             <td>{user.dni}</td>
                             <td>{user.dateofbirth}</td>
-                            <td>{user.phonenumber}</td>
+                            <td>{user.phone}</td>
                             <td>{user.email}</td>
-                            <td>{user.status}</td>
+                            <td>{user.address}</td>
+                            <td>{user.city}</td>
+                            <td>{user.state}</td>
                             <td>
                                 <button className={styles.buttonedit}>
                                     Editar
                                 </button>{' '}
-                                <button className={styles.buttondelete}>
-                                    Eliminar
-                                </button>
+                                <DeleteButton
+                                    onClick={handleDelete}
+                                    userId={user.id}
+                                />
                             </td>
                         </tr>
                     ))}

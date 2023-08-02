@@ -1,0 +1,19 @@
+.schedule {
+    font-size: 20px;
+    color: white;
+    margin: 5%;
+
+}
+
+.scheduletable th,
+.scheduletable td {
+    border: 1px solid #97FB57;
+    padding: 10px;
+    background-color: #100e0e;
+
+}
+
+.scheduletable th {
+    background-color: #100e0e;
+    color: #ffffff;
+}

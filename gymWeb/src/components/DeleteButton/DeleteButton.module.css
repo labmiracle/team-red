@@ -1,0 +1,10 @@
+.buttondelete {
+    background-color: red;
+    padding: 5px;
+    font-size: 15px;
+
+}
+
+.buttondelete:hover {
+    background-color: rgb(141, 29, 29);
+}
