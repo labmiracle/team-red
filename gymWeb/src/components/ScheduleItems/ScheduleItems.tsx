@@ -25,22 +25,25 @@ const ScheduleItem: React.FC<ScheduleItemProps> = props => {
     }
     return (
         <>
-            {' '}
-            <div>
-                {title}
-                {time}
-                {trainer}{' '}
-                <button
-                    style={{
-                        backgroundColor: buttonStyle,
-                        padding: '3px',
-                        cursor: 'pointer',
-                    }}
-                    onClick={handleClick}
-                >
-                    {action}
-                </button>
-            </div>
+            <tr>
+                <td>{title}</td>
+                <td>{time}</td>
+                <td>{trainer}</td>
+                <td>
+                    {' '}
+                    <button
+                        style={{
+                            backgroundColor: buttonStyle,
+                            fontSize: '17px',
+                            padding: '3px',
+                            cursor: 'pointer',
+                        }}
+                        onClick={handleClick}
+                    >
+                        {action}
+                    </button>
+                </td>
+            </tr>
         </>
     );
 };

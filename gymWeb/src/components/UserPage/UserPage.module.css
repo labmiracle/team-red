@@ -1,7 +1,50 @@
-.body {
-
+.background {
     background-image: url('src/images/slider_images/backgroundImageFixed.jpg');
-    background-size: cover;
+    background-size: 100%;
     background-repeat: no-repeat;
+}
 
+.user {
+    margin: 20px;
+}
+
+.greeting {
+    font-size: 10px;
+    -webkit-text-stroke: 1px #242424;
+    color: #97FB57;
+}
+
+.usertable {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.usertable th,
+.usertable td {
+    border: 1px solid #97FB57;
+    padding: 10px;
+
+}
+
+.usertable th {
+    background-color: #100e0e;
+    color: #ffffff;
+}
+
+.usertable tr:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.thead {
+    color: rgba(255, 255, 255, 0.461);
+}
+
+
+.schedule {
+    font-size: 15px;
+    color: white
 }

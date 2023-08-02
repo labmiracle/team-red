@@ -2,6 +2,7 @@
 import React from 'react';
 import { useState } from 'react';
 import ScheduleItem from '../ScheduleItems/ScheduleItems';
+import styles from './Schedule.module.css';
 
 interface ScheduleProps {
     events: Event[];
@@ -30,27 +31,29 @@ const Schedule: React.FC<ScheduleProps> = ({ events }) => {
 
     return (
         <>
-            <div className='schedule'>
-                {events.map(event => (
-                    <ScheduleItem
-                        id={event.id}
-                        title={event.title}
-                        time={event.time}
-                        trainer={event.trainer}
-                        onClick={onClick}
-                    />
-                ))}
+            <div className={styles.schedule}>
+                <table className={styles.scheduletable}>
+                    <tr>
+                        <th>Actividad</th>
+                        <th>Horario</th>
+                        <th>Instructor</th>
+                    </tr>
+
+                    {events.map(event => (
+                        <ScheduleItem
+                            id={event.id}
+                            title={event.title}
+                            time={event.time}
+                            trainer={event.trainer}
+                            onClick={onClick}
+                        />
+                    ))}
+                </table>
             </div>
             <p>
                 <div>
-                    <h1>Tu lista de clases reservadas para este mes:</h1>
-                    <h2
-                        style={{
-                            backgroundColor: 'white',
-                        }}
-                    >
-                        {activities.join(', ')}
-                    </h2>
+                    <h1>Tus clases reservadas para este mes:</h1>
+                    <h2>{activities.join(', ')}</h2>
                 </div>
             </p>
         </>
