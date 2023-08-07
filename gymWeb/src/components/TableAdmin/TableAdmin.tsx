@@ -22,6 +22,7 @@ interface TableProps {
 
 const TableAdmin: React.FC<TableProps> = ({ users }) => {
     const [filterTerm, setFilterTerm] = useState('');
+    const [filterState, setFilterState] = useState('');
 
     const handleDelete = async (userId: number) => {
         try {
@@ -49,11 +50,18 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         setFilterTerm(event.target.value.toUpperCase());
     };
 
-    const filteredUsers = filterTerm
-        ? users.filter(user =>
-              user.lastname.toUpperCase().startsWith(filterTerm)
-          )
-        : users;
+    const handleStateFilterChange = (
+        event: React.ChangeEvent<HTMLSelectElement>
+    ) => {
+        setFilterState(event.target.value);
+    };
+
+    const filteredUsers = users.filter(
+        user =>
+            user.lastname.toUpperCase().startsWith(filterTerm) &&
+            (filterState === '' || user.state.toString() === filterState)
+    );
+
     return (
         <>
             {' '}
@@ -83,7 +91,19 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                         <th>Email</th>
                         <th>Domicilio</th>
                         <th>Ciudad</th>
-                        <th>Estado de cuota</th>
+                        <th>
+                            {' '}
+                            Estado en el Gym{' '}
+                            <select
+                                className={styles.select}
+                                value={filterState}
+                                onChange={handleStateFilterChange}
+                            >
+                                <option value=''>Todos</option>
+                                <option value='1'>Activos</option>
+                                <option value='0'>Inactivos</option>
+                            </select>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -98,7 +118,7 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                             <td>{user.email}</td>
                             <td>{user.address}</td>
                             <td>{user.city}</td>
-                            <td>{user.state}</td>
+                            <td>{user.state === 1 ? 'ACTIVO' : 'INACTIVO'}</td>
                             <td>
                                 <button className={styles.buttonedit}>
                                     Editar

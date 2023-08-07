@@ -10,13 +10,15 @@
 .usertable th,
 .usertable td {
     border: 1px solid #97FB57;
-    padding: 10px;
+    padding: 5px;
+
 
 }
 
 .usertable th {
     background-color: #100e0e;
     color: #ffffff;
+
 }
 
 .usertable tr:hover {
@@ -68,4 +70,9 @@
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.select {
+    color: black;
+    font-size: 14px;
 }
