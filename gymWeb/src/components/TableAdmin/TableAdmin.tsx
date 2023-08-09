@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styles from './TableAdmin.module.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
+import NewUserForm from '../NewUserButton/NewUserForm';
+import DeactivateButton from '../DeactivateButton/DeactivateButton';
 
 interface User {
     id: number;
@@ -23,18 +24,23 @@ interface TableProps {
 const TableAdmin: React.FC<TableProps> = ({ users }) => {
     const [filterTerm, setFilterTerm] = useState('');
     const [filterState, setFilterState] = useState('');
+    const [editMode, setEditMode] = useState<{ [userId: number]: boolean }>({});
+    const [editedValues, setEditedValues] = useState<{
+        [userId: number]: Partial<User>;
+    }>({});
+
+    const apiHost = import.meta.env.VITE_API_HOST as string;
+    const apiPort = import.meta.env.VITE_API_PORT as string;
+    const apiUrlUsers = `http://${apiHost}:${apiPort}/api/users`;
 
     const handleDelete = async (userId: number) => {
         try {
-            const response = await fetch(
-                `http://localhost:5000/api/users/${userId}`,
-                {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
+            const response = await fetch(`${apiUrlUsers}/${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
             if (response.ok) {
                 console.log('Elemento eliminado exitosamente.');
@@ -44,6 +50,81 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         } catch (error) {
             console.error('Error de red:', error);
         }
+    };
+
+    const handleDeactivate = async (userId: number) => {
+        try {
+            const response = await fetch(`${apiUrlUsers}/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                console.log('Elemento modificado exitosamente.');
+            } else {
+                console.error('Error al modificar el elemento.');
+            }
+        } catch (error) {
+            console.error('Error de red:', error);
+        }
+    };
+    const toggleEditMode = (userId: number) => {
+        setEditMode(prevEditMode => ({
+            ...prevEditMode,
+            [userId]: !prevEditMode[userId],
+        }));
+    };
+    const handleEditChange = (
+        userId: number,
+        field: keyof User,
+        value: string
+    ) => {
+        setEditedValues(prevEditedValues => ({
+            ...prevEditedValues,
+            [userId]: {
+                ...prevEditedValues[userId],
+                [field]: value,
+            },
+        }));
+    };
+    const saveEdit = async (userId: number) => {
+        try {
+            const response = await fetch(`${apiUrlUsers}/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                console.log('Elemento modificado exitosamente.');
+            } else {
+                console.error('Error al modificar el elemento.');
+            }
+        } catch (error) {
+            console.error('Error de red:', error);
+        }
+        setEditMode(prevEditMode => ({
+            ...prevEditMode,
+            [userId]: false,
+        }));
+        setEditedValues(prevEditedValues => ({
+            ...prevEditedValues,
+            [userId]: {},
+        }));
+    };
+
+    const cancelEdit = (userId: number) => {
+        setEditMode(prevEditMode => ({
+            ...prevEditMode,
+            [userId]: false,
+        }));
+        setEditedValues(prevEditedValues => ({
+            ...prevEditedValues,
+            [userId]: {},
+        }));
     };
 
     const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,13 +145,10 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
 
     return (
         <>
-            {' '}
-            <button className={styles.buttonregister}>
+            <div>
                 {' '}
-                <Link className={styles.buttonregister} to='/register'>
-                    Crear nuevo usuario
-                </Link>
-            </button>
+                <NewUserForm />{' '}
+            </div>{' '}
             <div className={styles.filter}>
                 Filtrar por apellido:{' '}
                 <input
@@ -104,13 +182,34 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                                 <option value='0'>Inactivos</option>
                             </select>
                         </th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {filteredUsers.map(user => (
                         <tr key={user.id}>
                             <td>
-                                {user.lastname}, {user.name}
+                                {editMode[user.id] ? (
+                                    <>
+                                        <input
+                                            type='text'
+                                            value={
+                                                editedValues[user.id]?.name ??
+                                                user.name
+                                            }
+                                            onChange={e =>
+                                                handleEditChange(
+                                                    user.id,
+                                                    'name',
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                        {/* Add similar input fields for other editable fields */}
+                                    </>
+                                ) : (
+                                    `${user.lastname}, ${user.name}`
+                                )}
                             </td>
                             <td>{user.dni}</td>
                             <td>{user.dateofbirth}</td>
@@ -120,11 +219,35 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                             <td>{user.city}</td>
                             <td>{user.state === 1 ? 'ACTIVO' : 'INACTIVO'}</td>
                             <td>
-                                <button className={styles.buttonedit}>
-                                    Editar
-                                </button>{' '}
+                                {editMode[user.id] ? (
+                                    <>
+                                        <button
+                                            onClick={() => saveEdit(user.id)}
+                                        >
+                                            Save
+                                        </button>
+                                        <button
+                                            onClick={() => cancelEdit(user.id)}
+                                        >
+                                            Cancel
+                                        </button>
+                                    </>
+                                ) : (
+                                    <button
+                                        className={styles.buttonedit}
+                                        onClick={() => toggleEditMode(user.id)}
+                                    >
+                                        Editar
+                                    </button>
+                                )}
+                                {/* ... */}
+
                                 <DeleteButton
                                     onClick={handleDelete}
+                                    userId={user.id}
+                                />
+                                <DeactivateButton
+                                    onClick={handleDeactivate}
                                     userId={user.id}
                                 />
                             </td>

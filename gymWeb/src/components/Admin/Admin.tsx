@@ -21,15 +21,17 @@ interface User {
 const Admin: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
 
+    const apiHost = import.meta.env.VITE_API_HOST as string;
+    const apiPort = import.meta.env.VITE_API_PORT as string;
+    const apiUrlUsers = `http://${apiHost}:${apiPort}/api/users`;
+
     useEffect(() => {
         fetchUsers();
     }, []);
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get<User[]>(
-                'http://localhost:5000/api/users'
-            );
+            const response = await axios.get<User[]>(apiUrlUsers);
             setUsers(response.data);
             console.log(response.data);
         } catch (error) {

@@ -1,8 +1,8 @@
 .usertable {
     width: 100%;
     border-collapse: collapse;
-    color: #ffffff;
-    font-size: 16px;
+
+    font-size: 18px;
     text-align: center;
     margin-top: 20px;
 }
@@ -10,7 +10,7 @@
 .usertable th,
 .usertable td {
     border: 1px solid #97FB57;
-    padding: 5px;
+    padding: 3px;
 
 
 }
@@ -41,22 +41,17 @@
 }
 
 .buttonregister {
-    color: #100e0e;
-    background-color: #97FB57;
-    border-color: rgb(16, 122, 50);
-    border-width: 1px;
-    margin: 10px;
-    font-size: 16px;
-    padding: 8px 15px;
+    background-color: #97fb57;
+    color: black;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
-.buttonregister:hover {
-    color: #100e0e;
-    background-color: rgb(16, 122, 50);
-}
 
-;
+
+
 
 .filter {
     font-size: 20px;

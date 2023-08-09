@@ -1,0 +1,30 @@
+.formContainer {
+    width: 100%;
+    max-width: 400px;
+    margin: 2px;
+    padding: 20px;
+    background-color: gray;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+}
+
+
+
+.formButton {
+    background-color: #97fb57;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.userInput {
+
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
