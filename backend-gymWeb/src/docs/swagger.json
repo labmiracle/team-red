@@ -1,5 +1,128 @@
 {
-	"definitions": {},
+	"definitions": {
+		"IUser": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"lastname": {
+					"type": "string",
+					"description": ""
+				},
+				"dni": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"dateofbirth": {
+					"type": "string",
+					"description": ""
+				},
+				"phone": {
+					"type": "string",
+					"description": ""
+				},
+				"email": {
+					"type": "string",
+					"description": ""
+				},
+				"address": {
+					"type": "string",
+					"description": ""
+				},
+				"city": {
+					"type": "string",
+					"description": ""
+				},
+				"state": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"name",
+				"lastname",
+				"dni",
+				"dateofbirth",
+				"phone",
+				"email",
+				"address",
+				"city",
+				"state"
+			]
+		},
+		"User": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"lastname": {
+					"type": "string",
+					"description": ""
+				},
+				"dni": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"dateofbirth": {
+					"type": "string",
+					"description": ""
+				},
+				"phone": {
+					"type": "string",
+					"description": ""
+				},
+				"email": {
+					"type": "string",
+					"description": ""
+				},
+				"address": {
+					"type": "string",
+					"description": ""
+				},
+				"city": {
+					"type": "string",
+					"description": ""
+				},
+				"state": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"name",
+				"lastname",
+				"dni",
+				"dateofbirth",
+				"phone",
+				"email",
+				"address",
+				"city",
+				"state"
+			]
+		}
+	},
 	"info": {
 		"description": "Paradigm API.",
 		"license": {
@@ -8,7 +131,156 @@
 		"title": "paradigm-api",
 		"version": "1.0.0"
 	},
-	"paths": {},
+	"paths": {
+		"/api/users": {
+			"get": {
+				"operationId": "UserGetAll",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/IUser"
+							}
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Users"
+				],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "UserNewUser",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Users"
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "user",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					}
+				]
+			}
+		},
+		"/api/users/{id}": {
+			"get": {
+				"operationId": "UserGetById",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/IUser"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Users"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					}
+				]
+			},
+			"delete": {
+				"operationId": "UserDelete",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Users"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					}
+				]
+			}
+		},
+		"/api/users/edit": {
+			"put": {
+				"operationId": "UserUpdate",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Users"
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "user",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/User"
+						}
+					}
+				]
+			}
+		}
+	},
 	"swagger": "2.0",
 	"securityDefinitions": {
 		"client secret": {

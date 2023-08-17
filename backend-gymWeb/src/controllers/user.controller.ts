@@ -4,13 +4,18 @@ import { User } from "../models/user";
 import { UserRepository } from "../repositories/user.repository";
 import { IUser } from "../models/user.interface";
 import { InsertionResult } from "../core/repositories/commands/db.command";
+import { DELETE, GET, POST, PUT, Path, PathParam } from "typescript-rest";
+import { Tags } from "typescript-rest-swagger";
 
+@Path("/api/users")
 @Controller({ route: "/api/users" })
+@Tags("Users")
 export class UserController extends ApiController {
     constructor(private repo: UserRepository) {
         super();
     }
 
+    @GET
     @Action({ route: "/" })
     async getAll(): Promise<IUser[]> {
         try {
@@ -21,18 +26,10 @@ export class UserController extends ApiController {
         }
     }
 
-    @Action({ route: "/state/:state" })
-    async getAllByStatus(state: number): Promise<IUser[]> {
-        try {
-            return await this.repo.find("state = ?", [state]);
-        } catch (error) {
-            this.httpContext.response.sendStatus(500);
-            return;
-        }
-    }
-
+    @GET
+    @Path(":id")
     @Action({ route: "/:id" })
-    async getById(id: number): Promise<IUser> {
+    async getById(@PathParam("id") id: number): Promise<IUser> {
         try {
             return await this.repo.getById(id);
         } catch (error) {
@@ -40,7 +37,7 @@ export class UserController extends ApiController {
             return;
         }
     }
-
+    @POST
     @Action({ route: "/", method: HttpMethod.POST, fromBody: true })
     async newUser(user: User): Promise<User> {
         try {
@@ -49,17 +46,32 @@ export class UserController extends ApiController {
             this.httpContext.response.status(201).send(user);
             return user;
         } catch (error) {
+            console.log("newUser:", error);
             this.httpContext.response.sendStatus(500);
             return;
         }
     }
-
-    @Action({ route: "/:id" })
-    async delete(id: number): Promise<User> {
+    @DELETE
+    @Path(":id")
+    @Action({ route: "/:id", method: HttpMethod.DELETE })
+    async delete(@PathParam("id") id: number): Promise<User> {
         try {
             const user = await this.repo.getById(id);
-            user.state = 0;
+            await this.repo.delete(id);
+            return user;
+        } catch (error) {
+            this.httpContext.response.sendStatus(500);
+            return;
+        }
+    }
+    @PUT
+    @Path("/edit")
+    @Action({ route: "/edit", method: HttpMethod.PUT, fromBody: true })
+    async update(user: User): Promise<User> {
+        try {
+            const user = this.httpContext.request.body.user;
             await this.repo.update(user);
+            this.httpContext.response.status(200).send(user);
             return user;
         } catch (error) {
             this.httpContext.response.sendStatus(500);
