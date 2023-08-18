@@ -33,7 +33,6 @@ const Admin: React.FC = () => {
         try {
             const response = await axios.get<User[]>(apiUrlUsers);
             setUsers(response.data);
-            console.log(response.data);
         } catch (error) {
             console.error('Error al obtener los datos:', error);
         }

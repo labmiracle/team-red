@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styles from './TableAdmin.module.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
-import NewUserForm from '../NewUserButton/NewUserForm';
-import DeactivateButton from '../DeactivateButton/DeactivateButton';
+import NewUserForm from '../NewUserForm/NewUserForm';
 
 interface User {
     id: number;
@@ -52,24 +51,6 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         }
     };
 
-    const handleDeactivate = async (userId: number) => {
-        try {
-            const response = await fetch(`${apiUrlUsers}/${userId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (response.ok) {
-                console.log('Elemento modificado exitosamente.');
-            } else {
-                console.error('Error al modificar el elemento.');
-            }
-        } catch (error) {
-            console.error('Error de red:', error);
-        }
-    };
     const toggleEditMode = (userId: number) => {
         setEditMode(prevEditMode => ({
             ...prevEditMode,
@@ -89,13 +70,21 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
             },
         }));
     };
+
     const saveEdit = async (userId: number) => {
         try {
-            const response = await fetch(`${apiUrlUsers}/${userId}`, {
-                method: 'POST',
+            const editedUser = {
+                id: userId,
+                ...editedValues[userId],
+            };
+            console.log(editedUser);
+
+            const response = await fetch(`${apiUrlUsers}/edit`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({ user: editedUser }),
             });
 
             if (response.ok) {
@@ -205,31 +194,202 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                                                 )
                                             }
                                         />
-                                        {/* Add similar input fields for other editable fields */}
+                                        <input
+                                            type='text'
+                                            value={
+                                                editedValues[user.id]
+                                                    ?.lastname ?? user.lastname
+                                            }
+                                            onChange={e =>
+                                                handleEditChange(
+                                                    user.id,
+                                                    'lastname',
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
                                     </>
                                 ) : (
                                     `${user.lastname}, ${user.name}`
                                 )}
                             </td>
-                            <td>{user.dni}</td>
-                            <td>{user.dateofbirth}</td>
-                            <td>{user.phone}</td>
-                            <td>{user.email}</td>
-                            <td>{user.address}</td>
-                            <td>{user.city}</td>
-                            <td>{user.state === 1 ? 'ACTIVO' : 'INACTIVO'}</td>
+                            <td>
+                                {' '}
+                                {editMode[user.id] ? (
+                                    <>
+                                        <input
+                                            type='number'
+                                            value={
+                                                editedValues[user.id]?.dni ??
+                                                user.dni
+                                            }
+                                            onChange={e =>
+                                                handleEditChange(
+                                                    user.id,
+                                                    'dni',
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                    </>
+                                ) : (
+                                    `${user.dni}`
+                                )}
+                            </td>
+                            <td>
+                                {' '}
+                                {editMode[user.id] ? (
+                                    <>
+                                        <input
+                                            type='text'
+                                            value={
+                                                editedValues[user.id]
+                                                    ?.dateofbirth ??
+                                                user.dateofbirth
+                                            }
+                                            onChange={e =>
+                                                handleEditChange(
+                                                    user.id,
+                                                    'dateofbirth',
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                    </>
+                                ) : (
+                                    `${user.dateofbirth}`
+                                )}
+                            </td>
+                            <td>
+                                {' '}
+                                {editMode[user.id] ? (
+                                    <>
+                                        <input
+                                            type='text'
+                                            value={
+                                                editedValues[user.id]?.phone ??
+                                                user.phone
+                                            }
+                                            onChange={e =>
+                                                handleEditChange(
+                                                    user.id,
+                                                    'phone',
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                    </>
+                                ) : (
+                                    `${user.phone}`
+                                )}
+                            </td>
+                            <td>
+                                {' '}
+                                {editMode[user.id] ? (
+                                    <>
+                                        <input
+                                            type='text'
+                                            value={
+                                                editedValues[user.id]?.email ??
+                                                user.email
+                                            }
+                                            onChange={e =>
+                                                handleEditChange(
+                                                    user.id,
+                                                    'email',
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                    </>
+                                ) : (
+                                    `${user.email}`
+                                )}
+                            </td>
+                            <td>
+                                {' '}
+                                {editMode[user.id] ? (
+                                    <>
+                                        <input
+                                            type='text'
+                                            value={
+                                                editedValues[user.id]
+                                                    ?.address ?? user.address
+                                            }
+                                            onChange={e =>
+                                                handleEditChange(
+                                                    user.id,
+                                                    'address',
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                    </>
+                                ) : (
+                                    `${user.address}`
+                                )}
+                            </td>
+                            <td>
+                                {' '}
+                                {editMode[user.id] ? (
+                                    <>
+                                        <input
+                                            type='text'
+                                            value={
+                                                editedValues[user.id]?.city ??
+                                                user.city
+                                            }
+                                            onChange={e =>
+                                                handleEditChange(
+                                                    user.id,
+                                                    'city',
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                    </>
+                                ) : (
+                                    `${user.city}`
+                                )}
+                            </td>
+                            <td>
+                                {' '}
+                                {editMode[user.id] ? (
+                                    <>
+                                        <input
+                                            type='integer'
+                                            value={
+                                                editedValues[user.id]?.state ??
+                                                user.state
+                                            }
+                                            onChange={e =>
+                                                handleEditChange(
+                                                    user.id,
+                                                    'state',
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                    </>
+                                ) : user.state === 1 ? (
+                                    'ACTIVO'
+                                ) : (
+                                    'INACTIVO'
+                                )}
+                            </td>
+
                             <td>
                                 {editMode[user.id] ? (
                                     <>
                                         <button
                                             onClick={() => saveEdit(user.id)}
                                         >
-                                            Save
+                                            Guardar
                                         </button>
                                         <button
                                             onClick={() => cancelEdit(user.id)}
                                         >
-                                            Cancel
+                                            Cancelar
                                         </button>
                                     </>
                                 ) : (
@@ -240,14 +400,9 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                                         Editar
                                     </button>
                                 )}
-                                {/* ... */}
 
                                 <DeleteButton
                                     onClick={handleDelete}
-                                    userId={user.id}
-                                />
-                                <DeactivateButton
-                                    onClick={handleDeactivate}
                                     userId={user.id}
                                 />
                             </td>

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import styles from './NewUserForm.module.css';
 
+const apiHost = import.meta.env.VITE_API_HOST as string;
+const apiPort = import.meta.env.VITE_API_PORT as string;
+const apiUrlUsers = `http://${apiHost}:${apiPort}/api/users`;
+
 interface User {
     id: number;
     name: string;
@@ -31,7 +35,7 @@ const NewUserForm: React.FC = () => {
 
     const handleNewUser = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/users`, {
+            const response = await fetch(apiUrlUsers, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

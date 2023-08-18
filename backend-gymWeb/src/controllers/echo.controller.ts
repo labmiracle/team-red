@@ -12,9 +12,6 @@ export class EchoController extends ApiController {
     @Action({ route: "/:message" })
     get(message: string): string {
         try {
-            //console.log("Estoy en el ECHO controller.");
-            //const msn = this.httpContext.request.body.message;
-            //this.httpContext.response.send(message);
             return message;
         } catch {
             this.httpContext.response.sendStatus(500);
@@ -29,9 +26,7 @@ export class EchoController extends ApiController {
             if (user.id !== 1) {
                 throw Error("No es id 1");
             }
-            //console.log("Estoy en el ECHO controller.");
-            //const msn = this.httpContext.request.body.message;
-            //this.httpContext.response.send(message);
+
             return user;
         } catch {
             this.httpContext.response.sendStatus(500);
