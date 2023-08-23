@@ -17,7 +17,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ onClick, userId }) => {
             type='button'
             onClick={handleDeleteClick}
         >
-            Borrar
+            Delete
         </button>
     );
 };
