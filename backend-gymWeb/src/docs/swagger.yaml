@@ -1,5 +1,18 @@
 basePath: null
 definitions:
+    AuthUser:
+        description: ""
+        properties:
+            username:
+                type: string
+                description: ""
+            password:
+                type: string
+                description: ""
+        type: object
+        required:
+            - username
+            - password
     IUser:
         description: ""
         properties:
@@ -103,6 +116,29 @@ info:
     title: paradigm-api
     version: 1.0.0
 paths:
+    /api/login:
+        post:
+            operationId: LoginPost
+            produces:
+                - text/html
+            responses:
+                '200':
+                    description: Ok
+                    schema:
+                        type: string
+            description: ""
+            tags:
+                - 'User login'
+            consumes:
+                - application/json
+            parameters:
+                -
+                    description: ""
+                    in: body
+                    name: authUser
+                    required: true
+                    schema:
+                        $ref: '#/definitions/AuthUser'
     /api/users:
         get:
             operationId: UserGetAll
@@ -117,7 +153,11 @@ paths:
                             $ref: '#/definitions/IUser'
             description: ""
             tags:
-                - Users
+                - User
+            security:
+                -
+                    default:
+                        - x-auth
             parameters: []
         post:
             operationId: UserNewUser
@@ -130,7 +170,11 @@ paths:
                         $ref: '#/definitions/User'
             description: ""
             tags:
-                - Users
+                - User
+            security:
+                -
+                    default:
+                        - x-auth
             consumes:
                 - application/json
             parameters:
@@ -153,7 +197,11 @@ paths:
                         $ref: '#/definitions/IUser'
             description: ""
             tags:
-                - Users
+                - User
+            security:
+                -
+                    default:
+                        - x-auth
             parameters:
                 -
                     description: ""
@@ -173,7 +221,11 @@ paths:
                         $ref: '#/definitions/User'
             description: ""
             tags:
-                - Users
+                - User
+            security:
+                -
+                    default:
+                        - x-auth
             parameters:
                 -
                     description: ""
@@ -194,7 +246,11 @@ paths:
                         $ref: '#/definitions/User'
             description: ""
             tags:
-                - Users
+                - User
+            security:
+                -
+                    default:
+                        - x-auth
             consumes:
                 - application/json
             parameters:
@@ -207,7 +263,7 @@ paths:
                         $ref: '#/definitions/User'
 swagger: '2.0'
 securityDefinitions:
-    'client secret':
+    default:
         type: apiKey
         name: x-auth
         in: header

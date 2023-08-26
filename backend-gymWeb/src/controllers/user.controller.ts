@@ -4,12 +4,15 @@ import { User } from "../models/user";
 import { UserRepository } from "../repositories/user.repository";
 import { IUser } from "../models/user.interface";
 import { InsertionResult } from "../core/repositories/commands/db.command";
-import { DELETE, GET, POST, PUT, Path, PathParam } from "typescript-rest";
+import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-rest";
 import { Tags } from "typescript-rest-swagger";
+import { AuthFilter } from "../filters/auth.filter";
+import { IFilter, HttpContext } from "@miracledevs/paradigm-express-webapi";
 
 @Path("/api/users")
-@Controller({ route: "/api/users" })
-@Tags("Users")
+@Security("x-auth")
+@Controller({ route: "/api/users", filters: [AuthFilter] })
+@Tags("User")
 export class UserController extends ApiController {
     constructor(private repo: UserRepository) {
         super();
