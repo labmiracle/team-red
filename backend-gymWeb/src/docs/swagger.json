@@ -18,67 +18,6 @@
 				"password"
 			]
 		},
-		"IUser": {
-			"description": "",
-			"properties": {
-				"id": {
-					"type": "number",
-					"format": "double",
-					"description": ""
-				},
-				"name": {
-					"type": "string",
-					"description": ""
-				},
-				"lastname": {
-					"type": "string",
-					"description": ""
-				},
-				"dni": {
-					"type": "number",
-					"format": "double",
-					"description": ""
-				},
-				"dateofbirth": {
-					"type": "string",
-					"description": ""
-				},
-				"phone": {
-					"type": "string",
-					"description": ""
-				},
-				"email": {
-					"type": "string",
-					"description": ""
-				},
-				"address": {
-					"type": "string",
-					"description": ""
-				},
-				"city": {
-					"type": "string",
-					"description": ""
-				},
-				"state": {
-					"type": "number",
-					"format": "double",
-					"description": ""
-				}
-			},
-			"type": "object",
-			"required": [
-				"id",
-				"name",
-				"lastname",
-				"dni",
-				"dateofbirth",
-				"phone",
-				"email",
-				"address",
-				"city",
-				"state"
-			]
-		},
 		"User": {
 			"description": "",
 			"properties": {
@@ -124,6 +63,14 @@
 					"type": "number",
 					"format": "double",
 					"description": ""
+				},
+				"username": {
+					"type": "string",
+					"description": ""
+				},
+				"password": {
+					"type": "string",
+					"description": ""
 				}
 			},
 			"type": "object",
@@ -137,7 +84,80 @@
 				"email",
 				"address",
 				"city",
-				"state"
+				"state",
+				"username",
+				"password"
+			]
+		},
+		"IUser": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"lastname": {
+					"type": "string",
+					"description": ""
+				},
+				"dni": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"dateofbirth": {
+					"type": "string",
+					"description": ""
+				},
+				"phone": {
+					"type": "string",
+					"description": ""
+				},
+				"email": {
+					"type": "string",
+					"description": ""
+				},
+				"address": {
+					"type": "string",
+					"description": ""
+				},
+				"city": {
+					"type": "string",
+					"description": ""
+				},
+				"state": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"username": {
+					"type": "string",
+					"description": ""
+				},
+				"password": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"name",
+				"lastname",
+				"dni",
+				"dateofbirth",
+				"phone",
+				"email",
+				"address",
+				"city",
+				"state",
+				"username",
+				"password"
 			]
 		}
 	},
@@ -150,7 +170,7 @@
 		"version": "1.0.0"
 	},
 	"paths": {
-		"/api/login": {
+		"/api/auth/login": {
 			"post": {
 				"operationId": "LoginPost",
 				"produces": [
@@ -166,7 +186,7 @@
 				},
 				"description": "",
 				"tags": [
-					"User login"
+					"Auth"
 				],
 				"consumes": [
 					"application/json"
@@ -179,6 +199,40 @@
 						"required": true,
 						"schema": {
 							"$ref": "#/definitions/AuthUser"
+						}
+					}
+				]
+			}
+		},
+		"/api/auth/register": {
+			"post": {
+				"operationId": "LoginRegister",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"tags": [
+					"Auth"
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "user",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/User"
 						}
 					}
 				]

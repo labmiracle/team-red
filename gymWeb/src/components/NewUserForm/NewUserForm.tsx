@@ -1,22 +1,10 @@
 import React, { useState } from 'react';
 import styles from './NewUserForm.module.css';
+import { User } from '../../interfaces/User.interface';
 
 const apiHost = import.meta.env.VITE_API_HOST as string;
 const apiPort = import.meta.env.VITE_API_PORT as string;
 const apiUrlUsers = `http://${apiHost}:${apiPort}/api/users`;
-
-interface User {
-    id: number;
-    name: string;
-    lastname: string;
-    dni: number;
-    dateofbirth: string;
-    phone: string;
-    email: string;
-    address: string;
-    city: string;
-    state: number;
-}
 
 const NewUserForm: React.FC = () => {
     const [user, setUser] = useState<User>({
