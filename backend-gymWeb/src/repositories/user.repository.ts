@@ -9,4 +9,9 @@ export class UserRepository extends EditRepositoryBase<User, number> {
     constructor(dependencyContainer: DependencyContainer, connection: MySqlConnection) {
         super(dependencyContainer, connection, User, "users");
     }
+
+    async findByUserName(username: string): Promise<User[]> {
+        const rows = await this.find("username = ? ", username);
+        return rows;
+    }
 }

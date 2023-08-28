@@ -13,4 +13,6 @@ export class User implements IUser {
     address: string = "";
     city: string = "";
     state: number = 1;
+    username: string = "";
+    password: string = "";
 }

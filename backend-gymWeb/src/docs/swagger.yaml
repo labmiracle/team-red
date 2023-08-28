@@ -1,53 +1,18 @@
 basePath: null
 definitions:
-    IUser:
+    AuthUser:
         description: ""
         properties:
-            id:
-                type: number
-                format: double
-                description: ""
-            name:
+            username:
                 type: string
                 description: ""
-            lastname:
+            password:
                 type: string
-                description: ""
-            dni:
-                type: number
-                format: double
-                description: ""
-            dateofbirth:
-                type: string
-                description: ""
-            phone:
-                type: string
-                description: ""
-            email:
-                type: string
-                description: ""
-            address:
-                type: string
-                description: ""
-            city:
-                type: string
-                description: ""
-            state:
-                type: number
-                format: double
                 description: ""
         type: object
         required:
-            - id
-            - name
-            - lastname
-            - dni
-            - dateofbirth
-            - phone
-            - email
-            - address
-            - city
-            - state
+            - username
+            - password
     User:
         description: ""
         properties:
@@ -84,6 +49,12 @@ definitions:
                 type: number
                 format: double
                 description: ""
+            username:
+                type: string
+                description: ""
+            password:
+                type: string
+                description: ""
         type: object
         required:
             - id
@@ -96,6 +67,64 @@ definitions:
             - address
             - city
             - state
+            - username
+            - password
+    IUser:
+        description: ""
+        properties:
+            id:
+                type: number
+                format: double
+                description: ""
+            name:
+                type: string
+                description: ""
+            lastname:
+                type: string
+                description: ""
+            dni:
+                type: number
+                format: double
+                description: ""
+            dateofbirth:
+                type: string
+                description: ""
+            phone:
+                type: string
+                description: ""
+            email:
+                type: string
+                description: ""
+            address:
+                type: string
+                description: ""
+            city:
+                type: string
+                description: ""
+            state:
+                type: number
+                format: double
+                description: ""
+            username:
+                type: string
+                description: ""
+            password:
+                type: string
+                description: ""
+        type: object
+        required:
+            - id
+            - name
+            - lastname
+            - dni
+            - dateofbirth
+            - phone
+            - email
+            - address
+            - city
+            - state
+            - username
+            - password
 info:
     description: 'Paradigm API.'
     license:
@@ -103,6 +132,52 @@ info:
     title: paradigm-api
     version: 1.0.0
 paths:
+    /api/auth/login:
+        post:
+            operationId: LoginPost
+            produces:
+                - text/html
+            responses:
+                '200':
+                    description: Ok
+                    schema:
+                        type: string
+            description: ""
+            tags:
+                - Auth
+            consumes:
+                - application/json
+            parameters:
+                -
+                    description: ""
+                    in: body
+                    name: authUser
+                    required: true
+                    schema:
+                        $ref: '#/definitions/AuthUser'
+    /api/auth/register:
+        post:
+            operationId: LoginRegister
+            produces:
+                - text/html
+            responses:
+                '200':
+                    description: Ok
+                    schema:
+                        type: string
+            description: ""
+            tags:
+                - Auth
+            consumes:
+                - application/json
+            parameters:
+                -
+                    description: ""
+                    in: body
+                    name: user
+                    required: true
+                    schema:
+                        $ref: '#/definitions/User'
     /api/users:
         get:
             operationId: UserGetAll
@@ -117,7 +192,11 @@ paths:
                             $ref: '#/definitions/IUser'
             description: ""
             tags:
-                - Users
+                - User
+            security:
+                -
+                    default:
+                        - x-auth
             parameters: []
         post:
             operationId: UserNewUser
@@ -130,7 +209,11 @@ paths:
                         $ref: '#/definitions/User'
             description: ""
             tags:
-                - Users
+                - User
+            security:
+                -
+                    default:
+                        - x-auth
             consumes:
                 - application/json
             parameters:
@@ -153,7 +236,11 @@ paths:
                         $ref: '#/definitions/IUser'
             description: ""
             tags:
-                - Users
+                - User
+            security:
+                -
+                    default:
+                        - x-auth
             parameters:
                 -
                     description: ""
@@ -173,7 +260,11 @@ paths:
                         $ref: '#/definitions/User'
             description: ""
             tags:
-                - Users
+                - User
+            security:
+                -
+                    default:
+                        - x-auth
             parameters:
                 -
                     description: ""
@@ -194,7 +285,11 @@ paths:
                         $ref: '#/definitions/User'
             description: ""
             tags:
-                - Users
+                - User
+            security:
+                -
+                    default:
+                        - x-auth
             consumes:
                 - application/json
             parameters:
@@ -207,7 +302,7 @@ paths:
                         $ref: '#/definitions/User'
 swagger: '2.0'
 securityDefinitions:
-    'client secret':
+    default:
         type: apiKey
         name: x-auth
         in: header
