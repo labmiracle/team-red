@@ -174,18 +174,23 @@ const Register: React.FC = () => {
       <h2>Formulario de Registro</h2>
       <div className={styles.formGroup}>
         <label htmlFor="firstName">Nombre:</label>
-        <input type="text" id="firstName" value={firstName} onChange={handleFirstNameChange} required />
+        <div className={styles.inputContainer}>
+          <input type="text" id="firstName" value={firstName} onChange={handleFirstNameChange} required />
+        </div>
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="lastName">Apellido:</label>
-        <input type="text" id="lastName" value={lastName} onChange={handleLastNameChange} required />
+        <div className={styles.inputContainer}>
+          <input type="text" id="lastName" value={lastName} onChange={handleLastNameChange} required />
+        </div>
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="dni">D.N.I.:</label>
-        <input type="text" id="dni" value={dni} onChange={handleDNIChange} required />
-        {dniError && <p>{dniError}</p>}
+        <div className={styles.inputContainer}>
+          <input type="text" id="dni" value={dni} onChange={handleDNIChange} required />
+        </div>
+        {dniError && <p className={styles.errorMessage}>{dniError}</p>}
       </div>
-
       <div className={styles.dobContainer}>
         <label htmlFor="dateOfBirthYear">Fecha de Nacimiento:</label>
         <select
@@ -231,35 +236,42 @@ const Register: React.FC = () => {
           ))}
         </select>
       </div>
-
-
       <div className={styles.formGroup}>
         <label htmlFor="phoneNumber">Número de Teléfono:</label>
-        <input type="text" id="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} required />
+        <div className={styles.inputContainer}>
+          <input type="text" id="phoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange} required />
+        </div>
       </div>
       <div className={styles.formGroup}>
-
         <label htmlFor="email">Correo Electrónico:</label>
-        <input type="email" id="email" value={email} onChange={handleEmailChange} onBlur={handleEmailChange} required />
-        {emailError && <p>{emailError}</p>}
+        <div className={styles.inputContainer}>
+          <input type="email" id="email" value={email} onChange={handleEmailChange} onBlur={handleEmailChange} required />
+        </div>
+        {emailError && <p className={styles.errorMessage}>{emailError}</p>}
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="address">Dirección:</label>
-        <input type="text" id="address" value={address} onChange={handleAddressChange} required />
+        <div className={styles.inputContainer}>
+          <input type="text" id="address" value={address} onChange={handleAddressChange} required />
+        </div>
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="city">Ciudad:</label>
-        <input type="text" id="city" value={city} onChange={handleCityChange} required />
+        <div className={styles.inputContainer}>
+          <input type="text" id="city" value={city} onChange={handleCityChange} required />
+        </div>
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="password">Contraseña:</label>
-        <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
+        <div className={styles.inputContainer}>
+          <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
+        </div>
       </div>
       <button type="submit" disabled={!isDateValid}>
         Registrarse
       </button>
     </form>
   );
-};
+}
 
 export default Register;
