@@ -5,17 +5,17 @@ import { AuthUser } from '../../interfaces/AuthUser.interface';
 
 const apiHost = import.meta.env.VITE_API_HOST as string;
 const apiPort = import.meta.env.VITE_API_PORT as string;
-const apiUrlUsers = `http://${apiHost}:${apiPort}/api/login`;
+const apiUrlAuth = `http://${apiHost}:${apiPort}/api/auth/login`;
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const authUser: AuthUser = { username: username, password: password };
-
+    console.log(authUser);
     const handleSubmit = async () => {
         try {
-            const response = await fetch(apiUrlUsers, {
+            const response = await fetch(apiUrlAuth, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

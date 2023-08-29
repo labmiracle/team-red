@@ -2,19 +2,7 @@ import React, { useState } from 'react';
 import styles from './TableAdmin.module.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import NewUserForm from '../NewUserForm/NewUserForm';
-
-interface User {
-    id: number;
-    name: string;
-    lastname: string;
-    dni: number;
-    dateofbirth: string;
-    phone: string;
-    email: string;
-    address: string;
-    city: string;
-    state: number;
-}
+import { User } from '../../interfaces/User.interface';
 
 interface TableProps {
     users: User[];
