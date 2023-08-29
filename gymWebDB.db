@@ -65,7 +65,7 @@ CREATE TABLE `historial` (
 
 LOCK TABLES `historial` WRITE;
 /*!40000 ALTER TABLE `historial` DISABLE KEYS */;
-INSERT INTO `historial` VALUES (1,'2023-08-23',4444),(2,'2023-07-22',4444),(3,'2023-06-27',4444),(4,'2023-05-20',4444);
+INSERT INTO `historial` VALUES (1,'2023-08-23',4444),(1,'2023-08-26',4444),(1,'2023-09-26',4444),(2,'2023-07-22',4444),(3,'2023-06-27',4444),(4,'2023-05-20',4444),(5,'2023-08-25',4444);
 /*!40000 ALTER TABLE `historial` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,8 +79,8 @@ DROP TABLE IF EXISTS `inscripcion`;
 CREATE TABLE `inscripcion` (
   `id_usuario` int NOT NULL,
   `id_clase` int NOT NULL,
-  `fecha_inscripcion` date NOT NULL,
-  PRIMARY KEY (`id_usuario`,`id_clase`,`fecha_inscripcion`),
+  `fecha_hora_inscripcion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_usuario`,`id_clase`,`fecha_hora_inscripcion`),
   KEY `id_clase_idx` (`id_clase`),
   CONSTRAINT `id_clase` FOREIGN KEY (`id_clase`) REFERENCES `clase` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -93,7 +93,7 @@ CREATE TABLE `inscripcion` (
 
 LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
-INSERT INTO `inscripcion` VALUES (1,1,'2023-06-26'),(1,1,'2023-06-27');
+INSERT INTO `inscripcion` VALUES (1,1,'2023-06-26 00:00:00'),(1,1,'2023-06-27 00:00:00');
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,11 +114,12 @@ CREATE TABLE `usuario` (
   `ciudad` varchar(70) COLLATE utf8mb3_unicode_ci NOT NULL,
   `fecha_pago` date DEFAULT NULL,
   `username` varchar(45) COLLATE utf8mb3_unicode_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `password` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `user_name_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  UNIQUE KEY `user_name_UNIQUE` (`username`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +128,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'gaston','falena','1996-12-05','gasty@gmail.com','mendoza 2000','rosario','2023-08-23','gaston1','falena'),(2,'antonela','comisso','2000-11-02','anto@gmail.com','ballesteros 2000','rosario','2023-07-22','anto1','comisso'),(3,'federico','lopumo','1997-03-12','fede@gmail.com','orono 3000','rosario','2023-06-27','fede1','lopumo'),(4,'tamara','grunseid','1996-10-10','tami@gmail.com','salta 2504','rosario','2023-05-20','tami1','grunseid');
+INSERT INTO `usuario` VALUES (1,'gaston','falena','1996-12-05','gasty@gmail.com','mendoza 2000','rosario','2023-08-23','gaston1','falena'),(2,'antonela','comisso','2000-11-02','anto@gmail.com','ballesteros 2000','rosario','2023-07-22','anto1','comisso'),(3,'federico','lopumo','1997-03-12','fede@gmail.com','orono 3000','rosario','2023-06-27','fede1','lopumo'),(4,'tamara','grunseid','1996-10-10','tami@gmail.com','salta 2504','rosario','2023-05-20','tami1','grunseid'),(5,'jorge','omar','1994-10-03','jorge@gmail.com','mendoza 300','rosario','2023-08-25','jorge1','omar');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -140,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-26 16:53:37
+-- Dump completed on 2023-08-29 18:47:24
