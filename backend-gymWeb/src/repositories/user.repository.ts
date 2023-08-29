@@ -11,7 +11,7 @@ export class UserRepository extends EditRepositoryBase<User, number> {
     }
 
     async findByUserName(username: string): Promise<User[]> {
-        const rows = await this.find("username = ? ", username);
+        const rows = await this.find("username=?", [username]);
         return rows;
     }
 }

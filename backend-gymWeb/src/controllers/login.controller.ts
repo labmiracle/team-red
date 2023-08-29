@@ -32,7 +32,8 @@ export class LoginController extends ApiController {
                 return jwt.sign({ user: authUser.username }, this.config.jwtSecret);
             }
             this.httpContext.response.sendStatus(401);
-        } catch {
+        } catch (error) {
+            console.log(error);
             this.httpContext.response.sendStatus(500);
 
             return;
