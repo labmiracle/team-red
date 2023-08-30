@@ -17,6 +17,8 @@ const NewUserForm: React.FC = () => {
         address: '',
         city: '',
         state: 1,
+        username: '',
+        password: '',
     });
 
     const [isFormVisible, setIsFormVisible] = useState(false);
@@ -144,6 +146,29 @@ const NewUserForm: React.FC = () => {
                         placeholder='Ciudad'
                         required
                     />
+
+                    <label htmlFor='username'></label>
+                    <input
+                        className={styles.userInput}
+                        type='text'
+                        name='username'
+                        value={user.username}
+                        onChange={handleChange}
+                        placeholder='Username'
+                        required
+                    />
+
+                    <label htmlFor='password'></label>
+                    <input
+                        className={styles.userInput}
+                        type='text'
+                        name='password'
+                        value={user.password}
+                        onChange={handleChange}
+                        placeholder='Password'
+                        required
+                    />
+
                     <label htmlFor='stateSelect'></label>
                     <select
                         id='state'

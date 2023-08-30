@@ -9,4 +9,6 @@ export interface User {
     address: string;
     city: string;
     state: number;
+    username: string;
+    password: string;
 }

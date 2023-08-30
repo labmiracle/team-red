@@ -8,7 +8,6 @@ import { Configuration } from "../configuration/configuration";
 import jwt from "jsonwebtoken";
 import { Tags } from "typescript-rest-swagger";
 import { UserRepository } from "../repositories/user.repository";
-import bcrypt from "bcrypt";
 import { AuthService } from "../services/auth.service";
 
 @Tags("Auth")
@@ -33,7 +32,11 @@ export class LoginController extends ApiController {
             }
             this.httpContext.response.sendStatus(401);
         } catch (error) {
+<<<<<<< HEAD
             console.log(error);
+=======
+            console.log("login error: ", error);
+>>>>>>> back/login-page
             this.httpContext.response.sendStatus(500);
 
             return;
