@@ -2,24 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './TableAdmin.module.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
-<<<<<<< HEAD
-
-interface User {
-    id: number;
-    name: string;
-    lastname: string;
-    dni: number;
-    dateofbirth: string;
-    phone: string;
-    email: string;
-    address: string;
-    city: string;
-    state: number;
-}
-=======
 import NewUserForm from '../NewUserForm/NewUserForm';
 import { User } from '../../interfaces/User.interface';
->>>>>>> back/login-page
 
 interface TableProps {
     users: User[];
