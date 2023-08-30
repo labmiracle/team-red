@@ -107,7 +107,7 @@ export default function Footer() {
                         >
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
-                        <ul>
+
                         <li className={styles.ul}>
                             {' '}
                             <img
@@ -116,7 +116,6 @@ export default function Footer() {
                                 alt='Footer Image'
                             />
                         </li>
-                        </ul>
                     </div>
                 </div>
             </div>

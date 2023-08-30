@@ -25,40 +25,18 @@
   flex: 1;
 }
 
-.registerContainer .formGroup {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
- 
-}
-
-.formGroup label {
-  text-align: left;
-  margin-bottom: 1px;
-}
-
-.registerContainer .inputContainer {
-  margin-top: 5px;
-}
-
-.registerContainer .errorMessage {
-  margin-top: 5px;
-  color: #ff0000;
-  font-size: 12px;
-}
-
 .registerContainer input,
 .registerContainer select {
   width: 100%;
-  max-width: 400px;
+  max-width: 400px; /* Establecemos un ancho máximo para evitar desbordamientos */
   padding: 8px 10px;
   font-size: 14px;
   border-radius: 3px;
   border: 1px solid #ddd;
   box-sizing: border-box;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap; /* Para que los labels y los input/labels ocupen un solo renglón */
+  overflow: hidden; /* Ocultamos cualquier contenido que desborde el contenedor */
+  text-overflow: ellipsis; /* Mostramos puntos suspensivos si el contenido es demasiado largo */
 }
 
 .registerContainer button[type='submit'] {
@@ -67,7 +45,7 @@
   padding: 10px;
   font-size: 16px;
   font-weight: 600;
-  color: #000000;
+  color: #ffffff;
   background-color: #97fb57;
   border: none;
   border-radius: 3px;
@@ -82,4 +60,24 @@
 .registerContainer button[type='submit']:disabled {
   background-color: #ddd;
   cursor: not-allowed;
+}
+
+.formGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.formGroup label {
+  text-align: left; /* Alineación del texto a la izquierda */
+  flex: 1;
+  min-width: 100px;
+  margin-right: 10px;
+}
+
+/* Alineación de la etiqueta "Fecha de Nacimiento" a la izquierda */
+.dobContainer label {
+  text-align: left;
+  flex: 1;
+  min-width: 100px;
 }

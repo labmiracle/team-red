@@ -32,11 +32,7 @@ export class LoginController extends ApiController {
             }
             this.httpContext.response.sendStatus(401);
         } catch (error) {
-<<<<<<< HEAD
-            console.log(error);
-=======
             console.log("login error: ", error);
->>>>>>> back/login-page
             this.httpContext.response.sendStatus(500);
 
             return;

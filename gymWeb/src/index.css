@@ -17,12 +17,12 @@
 
 a {
   font-weight: 500;
-  color:  #4c832a;
+  color: #97FB57;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #4c832a;
+  color: rgba(255, 255, 255, 0.395);
 }
 
 body {
