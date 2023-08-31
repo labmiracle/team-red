@@ -12,7 +12,7 @@ const Login: React.FC = () => {
     const [password, setPassword] = useState('');
 
     const authUser: AuthUser = { username: username, password: password };
-    console.log(authUser);
+
     const handleSubmit = async () => {
         try {
             const response = await fetch(apiUrlAuth, {
@@ -24,6 +24,12 @@ const Login: React.FC = () => {
             });
 
             if (response.ok) {
+                const data = await response.json();
+                const jwtToken = data.token; // Assuming the token is returned as "token"
+
+                // Store the JWT token in localStorage
+                localStorage.setItem('jwtToken', jwtToken);
+
                 console.log('Logueado exitosamente.');
             } else {
                 console.error('Error al loguearse.');
@@ -32,13 +38,6 @@ const Login: React.FC = () => {
             console.error('Error de red:', error);
         }
     };
-
-    //  const handleSubmit = (event: React.FormEvent) => {
-    // event.preventDefault();
-    // lógica inicio de sesión
-    // setUsername('');
-    // setPassword('');
-    // };
 
     return (
         <div className={styles.loginContainer}>

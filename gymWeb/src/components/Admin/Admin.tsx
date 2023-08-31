@@ -2,21 +2,9 @@ import TableAdmin from '../TableAdmin/TableAdmin';
 import styles from '../Admin/Admin.module.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { User } from '../../interfaces/User.interface';
 
 let loggeduser = 'Administrador';
-
-interface User {
-    id: number;
-    name: string;
-    lastname: string;
-    dni: number;
-    dateofbirth: string;
-    phone: string;
-    email: string;
-    address: string;
-    city: string;
-    state: number;
-}
 
 const Admin: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
