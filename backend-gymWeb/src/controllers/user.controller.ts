@@ -77,6 +77,7 @@ export class UserController extends ApiController {
             this.httpContext.response.status(200).send(user);
             return user;
         } catch (error) {
+            console.log("EDIT: ", error);
             this.httpContext.response.sendStatus(500);
             return;
         }
