@@ -16,24 +16,7 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         [userId: number]: Partial<User>;
     }>({});
 
-    const handleDelete = async (userId: number) => {
-        try {
-            const response = await fetch(`${apiUrlUsers}/${userId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (response.ok) {
-                console.log('Elemento eliminado exitosamente.');
-            } else {
-                console.error('Error al eliminar el elemento.');
-            }
-        } catch (error) {
-            console.error('Error de red:', error);
-        }
-    };
+    const handleDelete = async (userId: number) => {};
 
     const toggleEditMode = (userId: number) => {
         setEditMode(prevEditMode => ({

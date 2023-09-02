@@ -1,30 +1,21 @@
-import TableAdmin from '../TableAdmin/TableAdmin';
 import styles from '../Admin/Admin.module.css';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { User } from '../../interfaces/User.interface';
+import { IUser } from '../../interfaces/User.interface';
+import { userServiceInstance } from '../../services/http/user/UserService';
+import TableAdmin from '../TableAdmin/TableAdmin';
 
 let loggeduser = 'Administrador';
 
-const Admin: React.FC = () => {
-    const [users, setUsers] = useState<User[]>([]);
-
-    const apiHost = import.meta.env.VITE_API_HOST as string;
-    const apiPort = import.meta.env.VITE_API_PORT as string;
-    const apiUrlUsers = `http://${apiHost}:${apiPort}/api/users`;
+function Admin() {
+    const [users, setUsers] = useState<IUser[]>([]);
 
     useEffect(() => {
-        fetchUsers();
-    }, []);
-
-    const fetchUsers = async () => {
-        try {
-            const response = await axios.get<User[]>(apiUrlUsers);
-            setUsers(response.data);
-        } catch (error) {
-            console.error('Error al obtener los datos:', error);
+        async function fetchUsers() {
+            const users = await userServiceInstance.getAll();
+            setUsers(users);
         }
-    };
+        fetchUsers();
+    }, [users]);
 
     return (
         <>
@@ -34,6 +25,5 @@ const Admin: React.FC = () => {
             </div>
         </>
     );
-};
-
+}
 export default Admin;
