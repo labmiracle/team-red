@@ -16,10 +16,6 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         [userId: number]: Partial<User>;
     }>({});
 
-    const apiHost = import.meta.env.VITE_API_HOST as string;
-    const apiPort = import.meta.env.VITE_API_PORT as string;
-    const apiUrlUsers = `http://${apiHost}:${apiPort}/api/users`;
-
     const handleDelete = async (userId: number) => {
         try {
             const response = await fetch(`${apiUrlUsers}/${userId}`, {
