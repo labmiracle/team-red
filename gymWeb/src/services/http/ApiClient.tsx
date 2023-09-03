@@ -39,7 +39,7 @@ export class ApiClient {
     ): Promise<TResult> {
         return (await (
             await this.httpClient.post(
-                `${this.baseUrl}/${url}`,
+                `${this.baseUrl}${url}`,
                 queryString,
                 body
             )

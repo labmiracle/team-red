@@ -15,7 +15,7 @@ function Admin() {
             setUsers(users);
         }
         fetchUsers();
-    }, [users]);
+    }, []);
 
     return (
         <>

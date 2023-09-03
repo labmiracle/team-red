@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { UserRepository } from "../repositories/user.repository";
-import { AuthUser } from "../controllers/auth.user";
+import { AuthUser } from "../models/auth.user";
 import { User } from "../models/user";
 import { DependencyLifeTime, Injectable } from "@miracledevs/paradigm-web-di";
 
