@@ -22,7 +22,7 @@ export class UserService {
 
     async edit(user: IUser): Promise<IUser> {
         return await this.apiClient.put(
-            `'users/edit/`,
+            `users/edit/`,
             {},
             JSON.stringify(user)
         );

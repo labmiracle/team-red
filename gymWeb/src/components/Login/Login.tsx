@@ -13,7 +13,8 @@ function Login() {
     const handleSubmit = async () => {
         const token = await loginServiceInstance.login(authUser);
         // Store the JWT token in localStorage
-        localStorage.setItem('jwtToken', token);
+        localStorage.setItem('jwtToken: ', token);
+        console.log('el token devuelto es: ', token);
     };
 
     return (
