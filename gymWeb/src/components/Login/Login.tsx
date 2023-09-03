@@ -12,9 +12,10 @@ function Login() {
 
     const handleSubmit = async () => {
         const token = await loginServiceInstance.login(authUser);
+
+        console.log('el token devuelto es: ');
         // Store the JWT token in localStorage
-        localStorage.setItem('jwtToken: ', token);
-        console.log('el token devuelto es: ', token);
+        localStorage.setItem('jwtToken', token);
     };
 
     return (
@@ -45,6 +46,7 @@ function Login() {
                 </div>
                 <button type='submit'>Login</button>
             </form>
+            <div>Token : {token}</div>
             <p>
                 Si no estás registrado y quieres hacerlo, haz
                 <Link to='/register'> click aquí</Link>.

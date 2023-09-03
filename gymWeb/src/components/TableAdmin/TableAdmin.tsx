@@ -16,7 +16,9 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         [userId: number]: Partial<IUser>;
     }>({});
 
-    const handleDelete = async (userId: number) => {};
+    const handleDelete = async (userId: number) => {
+        //logica de fetch
+    };
 
     const toggleEditMode = (userId: number) => {
         setEditMode(prevEditMode => ({
@@ -38,7 +40,9 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         }));
     };
 
-    const saveEdit = async (userId: number) => {};
+    const saveEdit = async (userId: number) => {
+        //logica de fetch
+    };
 
     const cancelEdit = (userId: number) => {
         setEditMode(prevEditMode => ({
