@@ -1,8 +1,6 @@
 import { Injectable, DependencyLifeTime, DependencyContainer } from "@miracledevs/paradigm-web-di";
 import { IFilter, HttpContext } from "@miracledevs/paradigm-express-webapi";
-import { MySqlConnector } from "../core/mysql/mysql.connector";
-import { MySqlConnection } from "../core/mysql/mysql.connection";
-import { Http2ServerRequest } from "http2";
+
 import { Configuration } from "../configuration/configuration";
 import { ConfigurationBuilder } from "@miracledevs/paradigm-express-webapi";
 import jwt from "jsonwebtoken";

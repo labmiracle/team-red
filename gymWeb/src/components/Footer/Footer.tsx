@@ -112,7 +112,7 @@ export default function Footer() {
                             {' '}
                             <img
                                 className={styles.footerimg}
-                                src='./src/images/PesasLogo.PNG'
+                                src='/images/PesasLogo.jpg'
                                 alt='Footer Image'
                             />
                         </li>

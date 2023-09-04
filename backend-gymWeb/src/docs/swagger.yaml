@@ -20,7 +20,7 @@ definitions:
                 type: number
                 format: double
                 description: ""
-            name:
+            firstname:
                 type: string
                 description: ""
             lastname:
@@ -34,7 +34,8 @@ definitions:
                 type: string
                 description: ""
             phone:
-                type: string
+                type: number
+                format: double
                 description: ""
             email:
                 type: string
@@ -46,8 +47,7 @@ definitions:
                 type: string
                 description: ""
             state:
-                type: number
-                format: double
+                type: string
                 description: ""
             username:
                 type: string
@@ -55,10 +55,17 @@ definitions:
             password:
                 type: string
                 description: ""
+            pay_date:
+                type: string
+                description: ""
+            role_id:
+                type: number
+                format: double
+                description: ""
         type: object
         required:
             - id
-            - name
+            - firstname
             - lastname
             - dni
             - dateofbirth
@@ -69,6 +76,8 @@ definitions:
             - state
             - username
             - password
+            - pay_date
+            - role_id
     IUser:
         description: ""
         properties:
@@ -76,7 +85,7 @@ definitions:
                 type: number
                 format: double
                 description: ""
-            name:
+            firstname:
                 type: string
                 description: ""
             lastname:
@@ -90,7 +99,8 @@ definitions:
                 type: string
                 description: ""
             phone:
-                type: string
+                type: number
+                format: double
                 description: ""
             email:
                 type: string
@@ -102,8 +112,7 @@ definitions:
                 type: string
                 description: ""
             state:
-                type: number
-                format: double
+                type: string
                 description: ""
             username:
                 type: string
@@ -111,10 +120,17 @@ definitions:
             password:
                 type: string
                 description: ""
+            pay_date:
+                type: string
+                description: ""
+            role_id:
+                type: number
+                format: double
+                description: ""
         type: object
         required:
             - id
-            - name
+            - firstname
             - lastname
             - dni
             - dateofbirth
@@ -125,6 +141,8 @@ definitions:
             - state
             - username
             - password
+            - pay_date
+            - role_id
 info:
     description: 'Paradigm API.'
     license:

@@ -11,7 +11,10 @@ import { IFilter, HttpContext } from "@miracledevs/paradigm-express-webapi";
 
 @Path("/api/users")
 @Security("x-auth")
-@Controller({ route: "/api/users", filters: [AuthFilter] })
+@Controller({
+    route: "/api/users",
+    // filters: [AuthFilter]
+})
 @Tags("User")
 export class UserController extends ApiController {
     constructor(private repo: UserRepository) {
@@ -77,6 +80,7 @@ export class UserController extends ApiController {
             this.httpContext.response.status(200).send(user);
             return user;
         } catch (error) {
+            console.log("EDIT: ", error);
             this.httpContext.response.sendStatus(500);
             return;
         }
