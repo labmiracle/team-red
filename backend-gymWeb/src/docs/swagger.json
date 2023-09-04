@@ -26,7 +26,7 @@
 					"format": "double",
 					"description": ""
 				},
-				"name": {
+				"firstname": {
 					"type": "string",
 					"description": ""
 				},
@@ -44,7 +44,8 @@
 					"description": ""
 				},
 				"phone": {
-					"type": "string",
+					"type": "number",
+					"format": "double",
 					"description": ""
 				},
 				"email": {
@@ -60,8 +61,7 @@
 					"description": ""
 				},
 				"state": {
-					"type": "number",
-					"format": "double",
+					"type": "string",
 					"description": ""
 				},
 				"username": {
@@ -71,12 +71,21 @@
 				"password": {
 					"type": "string",
 					"description": ""
+				},
+				"pay_date": {
+					"type": "string",
+					"description": ""
+				},
+				"role_id": {
+					"type": "number",
+					"format": "double",
+					"description": ""
 				}
 			},
 			"type": "object",
 			"required": [
 				"id",
-				"name",
+				"firstname",
 				"lastname",
 				"dni",
 				"dateofbirth",
@@ -86,7 +95,9 @@
 				"city",
 				"state",
 				"username",
-				"password"
+				"password",
+				"pay_date",
+				"role_id"
 			]
 		},
 		"IUser": {
@@ -97,7 +108,7 @@
 					"format": "double",
 					"description": ""
 				},
-				"name": {
+				"firstname": {
 					"type": "string",
 					"description": ""
 				},
@@ -115,7 +126,8 @@
 					"description": ""
 				},
 				"phone": {
-					"type": "string",
+					"type": "number",
+					"format": "double",
 					"description": ""
 				},
 				"email": {
@@ -131,8 +143,7 @@
 					"description": ""
 				},
 				"state": {
-					"type": "number",
-					"format": "double",
+					"type": "string",
 					"description": ""
 				},
 				"username": {
@@ -142,12 +153,21 @@
 				"password": {
 					"type": "string",
 					"description": ""
+				},
+				"pay_date": {
+					"type": "string",
+					"description": ""
+				},
+				"role_id": {
+					"type": "number",
+					"format": "double",
+					"description": ""
 				}
 			},
 			"type": "object",
 			"required": [
 				"id",
-				"name",
+				"firstname",
 				"lastname",
 				"dni",
 				"dateofbirth",
@@ -157,7 +177,9 @@
 				"city",
 				"state",
 				"username",
-				"password"
+				"password",
+				"pay_date",
+				"role_id"
 			]
 		}
 	},

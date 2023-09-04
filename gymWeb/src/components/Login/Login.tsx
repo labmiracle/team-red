@@ -1,44 +1,22 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './Login.module.css';
-import { AuthUser } from '../../interfaces/AuthUser.interface';
+import { IAuthUser } from '../../interfaces/AuthUser.interface';
+import { loginServiceInstance } from '../../services/http/login/LoginService';
 
-const apiHost = import.meta.env.VITE_API_HOST as string;
-const apiPort = import.meta.env.VITE_API_PORT as string;
-const apiUrlAuth = `http://${apiHost}:${apiPort}/api/auth/login`;
-
-const Login: React.FC = () => {
+function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const authUser: AuthUser = { username: username, password: password };
-    console.log(authUser);
+    const authUser: IAuthUser = { username: username, password: password };
+
     const handleSubmit = async () => {
-        try {
-            const response = await fetch(apiUrlAuth, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(authUser),
-            });
+        const token = await loginServiceInstance.login(authUser);
 
-            if (response.ok) {
-                console.log('Logueado exitosamente.');
-            } else {
-                console.error('Error al loguearse.');
-            }
-        } catch (error) {
-            console.error('Error de red:', error);
-        }
+        console.log('el token devuelto es: ');
+        // Store the JWT token in localStorage
+        localStorage.setItem('jwtToken', token);
     };
-
-    //  const handleSubmit = (event: React.FormEvent) => {
-    // event.preventDefault();
-    // lógica inicio de sesión
-    // setUsername('');
-    // setPassword('');
-    // };
 
     return (
         <div className={styles.loginContainer}>
@@ -68,12 +46,13 @@ const Login: React.FC = () => {
                 </div>
                 <button type='submit'>Login</button>
             </form>
+            <div>Token : {token}</div>
             <p>
                 Si no estás registrado y quieres hacerlo, haz
                 <Link to='/register'> click aquí</Link>.
             </p>
         </div>
     );
-};
+}
 
 export default Login;

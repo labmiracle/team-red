@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link as ScrollLink } from 'react-scroll';
-import logoImage from '../../images/Logo.jpg';
 import styles from './NavBar.module.css';
 
 export default function NavBar() {
@@ -22,7 +21,7 @@ export default function NavBar() {
             <div className={styles.containerLogo}>
                 <Link to='/'>
                     <img
-                        src={logoImage}
+                        src='/images/Logo.jpg'
                         alt='GymWebLogo'
                         className={styles.logo}
                     />

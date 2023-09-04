@@ -1,9 +1,7 @@
 import { Action, ApiController, ConfigurationBuilder, Controller, HttpMethod } from "@miracledevs/paradigm-express-webapi";
-import { MySqlConnection } from "../core/mysql/mysql.connection";
 import { User } from "../models/user";
-import { error } from "console";
 import { POST, Path } from "typescript-rest";
-import { AuthUser } from "./auth.user";
+import { AuthUser } from "../models/auth.user";
 import { Configuration } from "../configuration/configuration";
 import jwt from "jsonwebtoken";
 import { Tags } from "typescript-rest-swagger";
@@ -28,7 +26,8 @@ export class LoginController extends ApiController {
         try {
             const valid = await this.auth.validateUser(authUser);
             if (valid) {
-                return jwt.sign({ user: authUser.username }, this.config.jwtSecret);
+                const token = jwt.sign({ user: authUser.username }, this.config.jwtSecret);
+                return token;
             }
             this.httpContext.response.sendStatus(401);
         } catch (error) {
