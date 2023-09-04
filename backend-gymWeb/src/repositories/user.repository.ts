@@ -7,7 +7,7 @@ import { DependencyContainer } from "@miracledevs/paradigm-web-di";
 @Injectable({ lifeTime: DependencyLifeTime.Scoped })
 export class UserRepository extends EditRepositoryBase<User, number> {
     constructor(dependencyContainer: DependencyContainer, connection: MySqlConnection) {
-        super(dependencyContainer, connection, User, "users");
+        super(dependencyContainer, connection, User, "user");
     }
 
     async findByUserName(username: string): Promise<User[]> {

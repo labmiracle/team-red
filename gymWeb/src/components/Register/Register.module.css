@@ -1,3 +1,4 @@
+
 .registerContainer {
   width: 90%;
   max-width: 400px;
@@ -9,46 +10,30 @@
   text-align: center;
 }
 
-.registerContainer h2 {
-  margin-bottom: 20px;
-}
 
-.dobContainer {
+.selectContainer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 10px;
-  margin-bottom: 20px;
 }
 
-.dobContainer select {
-  flex: 1;
-}
-
-.registerContainer .formGroup {
-  margin-bottom: 20px;
+.formGroup {
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-
 }
 
 .formGroup label {
   text-align: left;
-  margin-bottom: 1px;
+  margin-bottom: 5px;
 }
 
-.registerContainer .inputContainer {
-  margin-top: 5px;
-}
-
-.registerContainer .errorMessage {
+.errorMessage {
   margin-top: 5px;
   color: #ff0000;
-  font-size: 12px;
+  font-size: 14px;
 }
 
-.registerContainer input,
-.registerContainer select {
+input, select {
   width: 100%;
   max-width: 400px;
   padding: 8px 10px;
@@ -61,7 +46,23 @@
   text-overflow: ellipsis;
 }
 
-.registerContainer button[type='submit'] {
-  background-color: #ddd;
-  cursor: not-allowed;
+
+button[type="submit"] {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #97FB57;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+
+button[type="submit"]:hover {
+  background-color: #40651f;
+}
+
+

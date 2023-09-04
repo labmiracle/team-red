@@ -2,41 +2,22 @@ import React, { useState } from 'react';
 import styles from './TableAdmin.module.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import NewUserForm from '../NewUserForm/NewUserForm';
-import { User } from '../../interfaces/User.interface';
+import { IUser } from '../../interfaces/User.interface';
 
 interface TableProps {
-    users: User[];
+    users: IUser[];
 }
 
 const TableAdmin: React.FC<TableProps> = ({ users }) => {
     const [filterTerm, setFilterTerm] = useState('');
-    const [filterState, setFilterState] = useState('');
+
     const [editMode, setEditMode] = useState<{ [userId: number]: boolean }>({});
     const [editedValues, setEditedValues] = useState<{
-        [userId: number]: Partial<User>;
+        [userId: number]: Partial<IUser>;
     }>({});
 
-    const apiHost = import.meta.env.VITE_API_HOST as string;
-    const apiPort = import.meta.env.VITE_API_PORT as string;
-    const apiUrlUsers = `http://${apiHost}:${apiPort}/api/users`;
-
     const handleDelete = async (userId: number) => {
-        try {
-            const response = await fetch(`${apiUrlUsers}/${userId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (response.ok) {
-                console.log('Elemento eliminado exitosamente.');
-            } else {
-                console.error('Error al eliminar el elemento.');
-            }
-        } catch (error) {
-            console.error('Error de red:', error);
-        }
+        //logica de fetch
     };
 
     const toggleEditMode = (userId: number) => {
@@ -47,7 +28,7 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
     };
     const handleEditChange = (
         userId: number,
-        field: keyof User,
+        field: keyof IUser,
         value: string
     ) => {
         setEditedValues(prevEditedValues => ({
@@ -60,37 +41,7 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
     };
 
     const saveEdit = async (userId: number) => {
-        try {
-            const editedUser = {
-                id: userId,
-                ...editedValues[userId],
-            };
-            console.log(editedUser);
-
-            const response = await fetch(`${apiUrlUsers}/edit`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ user: editedUser }),
-            });
-
-            if (response.ok) {
-                console.log('Elemento modificado exitosamente.');
-            } else {
-                console.error('Error al modificar el elemento.');
-            }
-        } catch (error) {
-            console.error('Error de red:', error);
-        }
-        setEditMode(prevEditMode => ({
-            ...prevEditMode,
-            [userId]: false,
-        }));
-        setEditedValues(prevEditedValues => ({
-            ...prevEditedValues,
-            [userId]: {},
-        }));
+        //logica de fetch
     };
 
     const cancelEdit = (userId: number) => {
@@ -108,16 +59,8 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         setFilterTerm(event.target.value.toUpperCase());
     };
 
-    const handleStateFilterChange = (
-        event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
-        setFilterState(event.target.value);
-    };
-
-    const filteredUsers = users.filter(
-        user =>
-            user.lastname.toUpperCase().startsWith(filterTerm) &&
-            (filterState === '' || user.state.toString() === filterState)
+    const filteredUsers = users.filter(user =>
+        user.lastname.toUpperCase().startsWith(filterTerm)
     );
 
     return (
@@ -146,19 +89,7 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                         <th>Email</th>
                         <th>Domicilio</th>
                         <th>Ciudad</th>
-                        <th>
-                            {' '}
-                            Estado en el Gym{' '}
-                            <select
-                                className={styles.select}
-                                value={filterState}
-                                onChange={handleStateFilterChange}
-                            >
-                                <option value=''>Todos</option>
-                                <option value='1'>Activos</option>
-                                <option value='0'>Inactivos</option>
-                            </select>
-                        </th>
+
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -171,13 +102,14 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                                         <input
                                             type='text'
                                             value={
-                                                editedValues[user.id]?.name ??
-                                                user.name
+                                                editedValues[user.id]
+                                                    ?.firstname ??
+                                                user.firstname
                                             }
                                             onChange={e =>
                                                 handleEditChange(
                                                     user.id,
-                                                    'name',
+                                                    'firstname',
                                                     e.target.value
                                                 )
                                             }
@@ -198,7 +130,7 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                                         />
                                     </>
                                 ) : (
-                                    `${user.lastname}, ${user.name}`
+                                    `${user.lastname}, ${user.firstname}`
                                 )}
                             </td>
                             <td>
@@ -338,31 +270,6 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                                     </>
                                 ) : (
                                     `${user.city}`
-                                )}
-                            </td>
-                            <td>
-                                {' '}
-                                {editMode[user.id] ? (
-                                    <>
-                                        <input
-                                            type='integer'
-                                            value={
-                                                editedValues[user.id]?.state ??
-                                                user.state
-                                            }
-                                            onChange={e =>
-                                                handleEditChange(
-                                                    user.id,
-                                                    'state',
-                                                    e.target.value
-                                                )
-                                            }
-                                        />
-                                    </>
-                                ) : user.state === 1 ? (
-                                    'ACTIVO'
-                                ) : (
-                                    'INACTIVO'
                                 )}
                             </td>
 

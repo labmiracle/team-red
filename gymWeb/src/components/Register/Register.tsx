@@ -191,8 +191,9 @@ const Register: React.FC = () => {
         </div>
         {dniError && <p className={styles.errorMessage}>{dniError}</p>}
       </div>
-      <div className={styles.dobContainer}>
+      <div className={styles.formGroup}>
         <label htmlFor="dateOfBirthYear">Fecha de Nacimiento:</label>
+        <div className={styles.selectContainer}>
         <select
           id="dateOfBirthYear"
           name="year"
@@ -235,6 +236,7 @@ const Register: React.FC = () => {
             </option>
           ))}
         </select>
+        </div>
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="phoneNumber">Número de Teléfono:</label>
