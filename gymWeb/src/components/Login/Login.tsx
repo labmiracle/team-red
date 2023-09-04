@@ -11,17 +11,20 @@ function Login() {
     const authUser: IAuthUser = { username: username, password: password };
 
     const handleSubmit = async () => {
-        const token = await loginServiceInstance.login(authUser);
-
-        console.log('el token devuelto es: ');
-        // Store the JWT token in localStorage
-        localStorage.setItem('jwtToken', token);
+        return await loginServiceInstance.login(authUser);
     };
 
+    const valor = localStorage.getItem('jwtoken');
+
+    if (valor !== null) {
+        console.log('Valor recuperado:', valor);
+    } else {
+        console.log('La clave no existe en el almacenamiento local.');
+    }
     return (
         <div className={styles.loginContainer}>
             <h2>Login</h2>
-            <form className={styles.loginForm} onSubmit={handleSubmit}>
+            <form className={styles.loginForm}>
                 <div>
                     <label htmlFor='username'>Usuario:</label>
                     <input
@@ -44,9 +47,11 @@ function Login() {
                         onChange={e => setPassword(e.target.value)}
                     />
                 </div>
-                <button type='submit'>Login</button>
+                <button type='submit' onClick={handleSubmit}>
+                    Login
+                </button>
             </form>
-            <div>Token : {token}</div>
+
             <p>
                 Si no estás registrado y quieres hacerlo, haz
                 <Link to='/register'> click aquí</Link>.
