@@ -61,7 +61,11 @@ export class LoginController extends ApiController {
                 this.httpContext.response.sendStatus(404).send("The dni already exists");
                 return;
             }
-
+            const fields: (string | boolean)[] = await this.auth.validateFields(user);
+            if (!fields[1]) {
+                this.httpContext.response.sendStatus(404).send(fields[0]);
+                return;
+            }
             this.auth.registerUser(user);
             this.httpContext.response.sendStatus(201);
         } catch {
