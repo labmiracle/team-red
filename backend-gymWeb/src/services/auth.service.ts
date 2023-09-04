@@ -42,4 +42,18 @@ export class AuthService {
         }
         return true;
     }
+    async validateFields(user: User): Promise<(string | boolean)[]> {
+        const dniString = user.dni.toString();
+
+        if (!/^\d{8}$/.test(dniString)) {
+            return ["The dni is invalid", false];
+        }
+        if (!/\S+@\S+\.\S+/.test(user.email)) {
+            return ["The email is invalid", false];
+        }
+        if (!(user.username.length > 7 && user.username.length < 16)) {
+            return ["The username is invalid", false];
+        }
+        return ["The fields are correct", true];
+    }
 }
