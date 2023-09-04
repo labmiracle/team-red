@@ -18,4 +18,28 @@ export class AuthService {
         user.password = await bcrypt.hash(user.password, salt);
         await this.repo.insertOne(user);
     }
+
+    async validateUsername(user: User): Promise<boolean> {
+        const username = await this.repo.findByUserName(user.username);
+        if (username.length === 0) {
+            return false;
+        }
+        return true;
+    }
+    async validateEmail(user: User): Promise<boolean> {
+        const email = await this.repo.findByEmail(user.email);
+
+        if (email.length === 0) {
+            return false;
+        }
+        return true;
+    }
+    async validateDni(user: User): Promise<boolean> {
+        const dni = await this.repo.findByDni(user.dni);
+
+        if (dni.length === 0) {
+            return false;
+        }
+        return true;
+    }
 }

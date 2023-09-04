@@ -14,4 +14,12 @@ export class UserRepository extends EditRepositoryBase<User, number> {
         const rows = await this.find("username = ? ", [username]);
         return rows;
     }
+    async findByEmail(email: string): Promise<User[]> {
+        const rows = await this.find("email = ? ", [email]);
+        return rows;
+    }
+    async findByDni(dni: number): Promise<User[]> {
+        const rows = await this.find("dni = ? ", [dni]);
+        return rows;
+    }
 }
