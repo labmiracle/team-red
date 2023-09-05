@@ -37,13 +37,11 @@ export class ApiClient {
         queryString?: QueryString,
         body?: BodyInit
     ): Promise<TResult> {
-        return (await (
-            await this.httpClient.post(
-                `${this.baseUrl}/${url}`,
-                queryString,
-                body
-            )
-        ).json()) as TResult;
+        return (await this.httpClient.post(
+            `${this.baseUrl}/${url}`,
+            queryString,
+            body
+        )) as TResult;
     }
 
     async put<TResult>(
