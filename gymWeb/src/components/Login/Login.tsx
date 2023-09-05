@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Login.module.css';
 import { IAuthUser } from '../../interfaces/AuthUser.interface';
 import { loginServiceInstance } from '../../services/http/login/LoginService';
@@ -13,14 +13,15 @@ function Login() {
     const handleSubmit = async () => {
         return await loginServiceInstance.login(authUser);
     };
+    useEffect(() => {
+        const valor = localStorage.getItem('jwtoken');
 
-    const valor = localStorage.getItem('jwtoken');
-
-    if (valor !== null) {
-        console.log('Valor recuperado:', valor);
-    } else {
-        console.log('La clave no existe en el almacenamiento local.');
-    }
+        if (valor !== null) {
+            console.log('Valor recuperado:', valor);
+        } else {
+            console.log('La clave no existe en el almacenamiento local.');
+        }
+    }, []);
     return (
         <div className={styles.loginContainer}>
             <h2>Login</h2>
