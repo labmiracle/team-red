@@ -18,4 +18,42 @@ export class AuthService {
         user.password = await bcrypt.hash(user.password, salt);
         await this.repo.insertOne(user);
     }
+
+    async validateUsername(user: User): Promise<boolean> {
+        const username = await this.repo.findByUserName(user.username);
+        if (username.length === 0) {
+            return false;
+        }
+        return true;
+    }
+    async validateEmail(user: User): Promise<boolean> {
+        const email = await this.repo.findByEmail(user.email);
+
+        if (email.length === 0) {
+            return false;
+        }
+        return true;
+    }
+    async validateDni(user: User): Promise<boolean> {
+        const dni = await this.repo.findByDni(user.dni);
+
+        if (dni.length === 0) {
+            return false;
+        }
+        return true;
+    }
+    async validateFields(user: User): Promise<(string | boolean)[]> {
+        const dniString = user.dni.toString();
+
+        if (!/^\d{8}$/.test(dniString)) {
+            return ["The dni is invalid", false];
+        }
+        if (!/\S+@\S+\.\S+/.test(user.email)) {
+            return ["The email is invalid", false];
+        }
+        if (!(user.username.length > 7 && user.username.length < 16)) {
+            return ["The username is invalid", false];
+        }
+        return ["The fields are correct", true];
+    }
 }
