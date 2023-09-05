@@ -10,9 +10,9 @@ import jwt from "jsonwebtoken";
  */
 @Injectable({ lifeTime: DependencyLifeTime.Scoped })
 export class AuthFilter implements IFilter {
-    config: Configuration;
-    constructor(config: ConfigurationBuilder) {
-        this.config = config.build(Configuration);
+    private config: Configuration;
+    constructor(private readonly configurationBuilder: ConfigurationBuilder) {
+        this.config = configurationBuilder.build(Configuration);
     }
 
     async beforeExecute(httpContext: HttpContext): Promise<void> {
@@ -20,6 +20,7 @@ export class AuthFilter implements IFilter {
             const token = httpContext.request.headers["x-auth"] as string;
             if (!token || !jwt.verify(token, this.config.jwtSecret)) {
                 httpContext.response.sendStatus(401);
+                return;
             }
         } catch {
             httpContext.response.sendStatus(500);

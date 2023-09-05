@@ -25,10 +25,14 @@ export class LoginController extends ApiController {
     async post(authUser: AuthUser): Promise<string> {
         try {
             const valid = await this.auth.validateUser(authUser);
+
             if (valid) {
                 const token = jwt.sign({ user: authUser.username }, this.config.jwtSecret);
-                return token;
+                console.log(token);
+                this.httpContext.response.status(200).send(token as string);
+                return token; //?
             }
+
             this.httpContext.response.sendStatus(401);
         } catch (error) {
             console.log("login error: ", error);

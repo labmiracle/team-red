@@ -7,7 +7,6 @@ import { InsertionResult } from "../core/repositories/commands/db.command";
 import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-rest";
 import { Tags } from "typescript-rest-swagger";
 import { AuthFilter } from "../filters/auth.filter";
-import { IFilter, HttpContext } from "@miracledevs/paradigm-express-webapi";
 
 @Path("/api/users")
 @Security("x-auth")
