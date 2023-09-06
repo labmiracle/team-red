@@ -26,11 +26,17 @@ const Register: React.FC = () => {
   const [isDateValid, setIsDateValid] = useState(true);
 
   const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setFirstName(event.target.value);
+    const value = event.target.value;
+    if (value.length <= 45) {
+      setFirstName(value);
+    }
   };
 
   const handleLastNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setLastName(event.target.value);
+    const value = event.target.value;
+    if (value.length <= 45) {
+      setLastName(value);
+    }
   };
 
   const handleDNIChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +59,9 @@ const Register: React.FC = () => {
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     const emailValue = event.target.value;
-    setEmail(emailValue);
+    if (emailValue.length <= 100) {
+      setEmail(emailValue);
+    }
 
     if (emailValue.length > 0) {
       if (/\S+@\S+\.\S+/.test(emailValue)) {
@@ -91,19 +99,30 @@ const Register: React.FC = () => {
   };
 
   const handlePhoneNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(event.target.value);
+    const value = event.target.value;
+    if (/^\d{0,10}$/.test(value)) {
+      setPhoneNumber(value);
+    }
   };
 
   const handleAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddress(event.target.value);
+    const value = event.target.value;
+    if (value.length <= 70) {
+      setAddress(value);
+    }
   };
-
   const handleCityChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setCity(event.target.value);
+    const value = event.target.value;
+    if (value.length <= 70) {
+      setCity(value);
+    }
   };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
+    const value = event.target.value;
+    if (value.length >= 8 && value.length <= 15) {
+      setPassword(value);
+    }
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
