@@ -13,7 +13,7 @@ export class UserService {
     }
 
     async newUser(user: IUser): Promise<IUser> {
-        return await this.apiClient.post('users', {}, JSON.stringify(user));
+        return await this.apiClient.post('users', {}, JSON.stringify({ user }));
     }
 
     async delete(id: number): Promise<void> {

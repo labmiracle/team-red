@@ -299,7 +299,7 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"$ref": "#/definitions/User"
+							"$ref": "#/definitions/IUser"
 						}
 					}
 				},
@@ -324,7 +324,7 @@
 						"name": "user",
 						"required": true,
 						"schema": {
-							"$ref": "#/definitions/User"
+							"$ref": "#/definitions/IUser"
 						}
 					}
 				]
@@ -437,7 +437,7 @@
 						"name": "user",
 						"required": true,
 						"schema": {
-							"$ref": "#/definitions/User"
+							"$ref": "#/definitions/IUser"
 						}
 					}
 				]

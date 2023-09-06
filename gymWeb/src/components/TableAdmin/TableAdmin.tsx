@@ -65,6 +65,17 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         }
     };
 
+    const cancelEdit = (userId: number) => {
+        setEditMode(prevEditMode => ({
+            ...prevEditMode,
+            [userId]: false,
+        }));
+        setEditedValues(prevEditedValues => ({
+            ...prevEditedValues,
+            [userId]: {},
+        }));
+    };
+
     const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFilterTerm(event.target.value.toUpperCase());
     };
