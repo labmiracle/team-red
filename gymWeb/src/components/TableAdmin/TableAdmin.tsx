@@ -3,6 +3,7 @@ import styles from './TableAdmin.module.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
 import NewUserForm from '../NewUserForm/NewUserForm';
 import { IUser } from '../../interfaces/User.interface';
+import { userServiceInstance } from '../../services/http/user/UserService';
 
 interface TableProps {
     users: IUser[];
@@ -10,15 +11,14 @@ interface TableProps {
 
 const TableAdmin: React.FC<TableProps> = ({ users }) => {
     const [filterTerm, setFilterTerm] = useState('');
-
     const [editMode, setEditMode] = useState<{ [userId: number]: boolean }>({});
     const [editedValues, setEditedValues] = useState<{
         [userId: number]: Partial<IUser>;
     }>({});
 
-    const handleDelete = async (userId: number) => {
-        //logica de fetch
-    };
+    async function handleDelete(userId: number) {
+        return await userServiceInstance.delete(userId);
+    }
 
     const toggleEditMode = (userId: number) => {
         setEditMode(prevEditMode => ({
@@ -41,18 +41,28 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
     };
 
     const saveEdit = async (userId: number) => {
-        //logica de fetch
-    };
+        try {
+            const editedUser = {
+                id: userId,
+                ...editedValues[userId],
+            };
 
-    const cancelEdit = (userId: number) => {
-        setEditMode(prevEditMode => ({
-            ...prevEditMode,
-            [userId]: false,
-        }));
-        setEditedValues(prevEditedValues => ({
-            ...prevEditedValues,
-            [userId]: {},
-        }));
+            console.log(editedUser);
+
+            await userServiceInstance.edit(editedUser);
+
+            setEditMode(prevEditMode => ({
+                ...prevEditMode,
+                [userId]: false,
+            }));
+
+            setEditedValues(prevEditedValues => ({
+                ...prevEditedValues,
+                [userId]: {},
+            }));
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {

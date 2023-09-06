@@ -1,5 +1,5 @@
 import { ApiClient, apiClientInstance } from '../ApiClient';
-import { IUser } from '../../../interfaces/User.interface';
+import { IUser, IEditedUser } from '../../../interfaces/User.interface';
 
 export class UserService {
     constructor(private readonly apiClient: ApiClient) {}
@@ -17,14 +17,15 @@ export class UserService {
     }
 
     async delete(id: number): Promise<void> {
-        await this.apiClient.delete('users', { id });
+        const url = `users/${id}`;
+        return await this.apiClient.delete(url);
     }
 
-    async edit(user: IUser): Promise<IUser> {
+    async edit(user: IEditedUser): Promise<IEditedUser> {
         return await this.apiClient.put(
             `users/edit/`,
             {},
-            JSON.stringify(user)
+            JSON.stringify({ user })
         );
     }
 }

@@ -15,6 +15,7 @@ export class ApiClient {
         this.httpClient.registerInterceptor(
             new AddHeaderInterceptor('content-type', 'application/json')
         );
+        // acá se puede agregar la redirección si vuelve un statucode 401 (redirect /login)
     }
 
     authorize(token: string): void {
@@ -37,11 +38,13 @@ export class ApiClient {
         queryString?: QueryString,
         body?: BodyInit
     ): Promise<TResult> {
-        return (await this.httpClient.post(
-            `${this.baseUrl}/${url}`,
-            queryString,
-            body
-        )) as TResult;
+        return (await (
+            await this.httpClient.post(
+                `${this.baseUrl}/${url}`,
+                queryString,
+                body
+            )
+        ).json()) as TResult;
     }
 
     async put<TResult>(

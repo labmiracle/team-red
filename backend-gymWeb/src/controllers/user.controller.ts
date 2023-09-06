@@ -65,6 +65,7 @@ export class UserController extends ApiController {
             await this.repo.delete(id);
             return user;
         } catch (error) {
+            console.log(error);
             this.httpContext.response.sendStatus(500);
             return;
         }

@@ -1,6 +1,5 @@
 import { ApiClient, apiClientInstance } from '../ApiClient';
-import { IAuthUser } from '../../../interfaces/AuthUser.interface';
-import { IUser } from '../../../interfaces/User.interface';
+import { IUser, IAuthUser } from '../../../interfaces/User.interface';
 import { HttpResponse } from '@miracledevs/paradigm-web-fetch';
 
 export class LoginService {
