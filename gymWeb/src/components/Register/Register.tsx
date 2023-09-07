@@ -11,7 +11,9 @@ const Register: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dni, setDNI] = useState('');
+  const [dniError, setDNIError] = useState('');
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState<DateOfBirth>({
     day: '',
     month: '',
@@ -24,10 +26,8 @@ const Register: React.FC = () => {
   const [passwordError, setPasswordError] = useState('');
   const [userName, setUserName] = useState('');
   const [userNameError, setUserNameError] = useState('');
-  const [dniError, setDNIError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [isDateValid, setIsDateValid] = useState(true);
-
+  
+  
   const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     if (value.length <= 45) {
@@ -44,19 +44,16 @@ const Register: React.FC = () => {
 
   const handleDNIChange = (event: ChangeEvent<HTMLInputElement>) => {
     const dniValue = event.target.value;
-
-    if (dniValue.length <= 8) {
-      setDNI(dniValue);
-
-      if (dniValue.length === 8) {
-        if (/^\d{8}$/.test(dniValue)) {
-          setDNIError('');
-        } else {
-          setDNIError('Ingrese los 8 números de su D.N.I. sin puntos');
-        }
-      } else {
+    setDNI(dniValue);
+  
+    if (dniValue.length === 8) {
+      if (/^\d{8}$/.test(dniValue)) {
         setDNIError('');
+      } else {
+        setDNIError('Ingrese los 8 números de su D.N.I. sin puntos');
       }
+    } else {
+      setDNIError('');
     }
   };
 
@@ -183,7 +180,7 @@ const Register: React.FC = () => {
     setPassword('');
     setDNIError('');
     setEmailError('');
-    setIsDateValid(true);
+  
   };
 
   const daysInMonth = (month: number, year: number) => {
