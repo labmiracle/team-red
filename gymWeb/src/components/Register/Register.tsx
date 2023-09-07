@@ -59,12 +59,10 @@ const Register: React.FC = () => {
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     const emailValue = event.target.value;
-    if (emailValue.length <= 100) {
-      setEmail(emailValue);
-    }
-
+    setEmail(emailValue);
+    
     if (emailValue.length > 0) {
-      if (/\S+@\S+\.\S+/.test(emailValue)) {
+      if (/^\S+@\S+\.\S+$/.test(emailValue)) {
         setEmailError('');
       } else {
         setEmailError('Ingrese una dirección de correo electrónico válida');
@@ -73,6 +71,7 @@ const Register: React.FC = () => {
       setEmailError('');
     }
   };
+  
 
   const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
@@ -320,7 +319,7 @@ const Register: React.FC = () => {
         {passwordError && <p className={styles.errorMessage}>{passwordError}</p>}
       </div>
       
-      <button type="submit" disabled={!isDateValid}>
+      <button type="submit">
         Registrarse
       </button>
     </form>
