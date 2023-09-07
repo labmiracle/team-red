@@ -1,6 +1,6 @@
 import {
     HttpClient,
-    //ContentTypeInterceptor,
+    ContentTypeInterceptor,
     AuthorizationInterceptor,
     QueryString,
     AddHeaderInterceptor,
@@ -14,6 +14,9 @@ export class ApiClient {
         this.httpClient = new HttpClient();
         this.httpClient.registerInterceptor(
             new AddHeaderInterceptor('content-type', 'application/json')
+        );
+        this.httpClient.registerInterceptor(
+            new ContentTypeInterceptor('application/json')
         );
         // acá se puede agregar la redirección si vuelve un statucode 401 (redirect /login)
     }

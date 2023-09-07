@@ -24,6 +24,7 @@ export class LoginService {
         const decodedPayload = atob(payload);
         const parsedPayload = JSON.parse(decodedPayload);
         localStorage.setItem('jwtToken', jwtToken);
+        this.apiClient.authorize(jwtToken);
         return parsedPayload;
     }
 
