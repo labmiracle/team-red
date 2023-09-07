@@ -20,6 +20,7 @@ const Register: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [dniError, setDNIError] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -122,6 +123,13 @@ const Register: React.FC = () => {
     const value = event.target.value;
     if (value.length >= 8 && value.length <= 15) {
       setPassword(value);
+    }
+  };
+
+  const handleUserNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    if (value.length >= 5 && value.length <= 15) {
+      setUserName(value);
     }
   };
 
@@ -283,6 +291,12 @@ const Register: React.FC = () => {
         </div>
       </div>
       <div className={styles.formGroup}>
+        <label htmlFor="userName">Nombre de Usuario:</label>
+        <div className={styles.inputContainer}>
+          <input type="text" id="userName" value={userName} onChange={handleUserNameChange} required />
+        </div>
+      </div>
+            <div className={styles.formGroup}>
         <label htmlFor="password">Contraseña:</label>
         <div className={styles.inputContainer}>
           <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
