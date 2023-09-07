@@ -11,10 +11,11 @@ export class LoginService {
             {},
             JSON.stringify(authUser)
         );
-        if (response.status === 200) {
-            const token = (await response.text()) as string;
-            localStorage.setItem('jwtoken', token);
-        }
+
+        const token = (await response.text()) as string;
+        localStorage.setItem('jwtoken', token);
+        console.log('HOLA: ', token);
+
         return response;
     }
 

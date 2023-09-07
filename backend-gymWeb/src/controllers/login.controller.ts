@@ -27,9 +27,10 @@ export class LoginController extends ApiController {
             const valid = await this.auth.validateUser(authUser);
 
             if (valid) {
-                const token = jwt.sign({ user: authUser.username }, this.config.jwtSecret);
-                console.log(token);
+                const token = jwt.sign({ user: [authUser.username, authUser.role_id] }, this.config.jwtSecret);
+
                 this.httpContext.response.status(200).send(token as string);
+                console.log(token);
                 return token; //?
             }
 

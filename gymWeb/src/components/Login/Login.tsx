@@ -7,10 +7,13 @@ import { loginServiceInstance } from '../../services/http/login/LoginService';
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [token, setToken] = useState('');
 
     const authUser: IAuthUser = { username: username, password: password };
 
     const handleSubmit = async () => {
+        //const token_provisional = await loginServiceInstance.login(authUser);
+        // setToken(token_provisional);
         return await loginServiceInstance.login(authUser);
     };
     useEffect(() => {
