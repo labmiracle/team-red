@@ -44,7 +44,7 @@ export class UserController extends ApiController {
     }
     @POST
     @Action({ route: "/", method: HttpMethod.POST, fromBody: true })
-    async newUser(user: User): Promise<User> {
+    async newUser(user: IUser): Promise<IUser> {
         try {
             const metadata: InsertionResult<number> = await this.repo.insertOne(user);
             user.id = metadata.insertId;
@@ -65,6 +65,7 @@ export class UserController extends ApiController {
             await this.repo.delete(id);
             return user;
         } catch (error) {
+            console.log(error);
             this.httpContext.response.sendStatus(500);
             return;
         }
@@ -72,7 +73,7 @@ export class UserController extends ApiController {
     @PUT
     @Path("/edit")
     @Action({ route: "/edit", method: HttpMethod.PUT, fromBody: true })
-    async update(user: User): Promise<User> {
+    async update(user: IUser): Promise<User> {
         try {
             const user = this.httpContext.request.body.user;
             await this.repo.update(user);

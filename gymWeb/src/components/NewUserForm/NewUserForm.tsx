@@ -1,43 +1,32 @@
 import React, { useState } from 'react';
 import styles from './NewUserForm.module.css';
-import { User } from '../../interfaces/User.interface';
-
-const apiHost = import.meta.env.VITE_API_HOST as string;
-const apiPort = import.meta.env.VITE_API_PORT as string;
-const apiUrlUsers = `http://${apiHost}:${apiPort}/api/users`;
+import { userServiceInstance } from '../../services/http/user/UserService';
+import { IUser } from '../../interfaces/User.interface';
 
 const NewUserForm: React.FC = () => {
-    const [user, setUser] = useState<User>({
-        name: '',
-        lastname: '',
-        dni: '',
-        dateofbirth: '',
-        phone: '',
-        email: '',
-        address: '',
-        city: '',
-        state: 1,
-        username: '',
-        password: '',
+    const [user, setUser] = useState<IUser>({
+        id: 0,
+        firstname: 'Nombre',
+        lastname: 'Apellido',
+        dni: 0,
+        dateofbirth: '1990-01-01',
+        phone: 0,
+        email: 'email',
+        address: 'Domicilio',
+        city: 'Ciudad',
+        state: 'Provincia',
+        username: 'username',
+        password: 'password',
+        pay_date: '1990-01-01',
+        role_id: 2,
     });
 
     const [isFormVisible, setIsFormVisible] = useState(false);
 
     const handleNewUser = async () => {
         try {
-            const response = await fetch(apiUrlUsers, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(user),
-            });
-
-            if (response.ok) {
-                console.log('Elemento creado exitosamente.');
-            } else {
-                console.error('Error al crear el elemento.');
-            }
+            console.log(user);
+            return await userServiceInstance.newUser(user);
         } catch (error) {
             console.error('Error de red:', error);
         }
@@ -71,7 +60,7 @@ const NewUserForm: React.FC = () => {
                         className={styles.userInput}
                         type='text'
                         name='name'
-                        value={user.name}
+                        value={user.firstname}
                         onChange={handleChange}
                         placeholder='Nombre'
                         required
@@ -103,7 +92,7 @@ const NewUserForm: React.FC = () => {
                         name='dateofbirth'
                         value={user.dateofbirth}
                         onChange={handleChange}
-                        placeholder='DD/MM/AAAA'
+                        placeholder='AAAA-MM-DD'
                         required
                     />
                     <label htmlFor='phone'></label>
@@ -147,6 +136,16 @@ const NewUserForm: React.FC = () => {
                         required
                     />
 
+                    <label htmlFor='state'></label>
+                    <input
+                        id='state'
+                        name='state'
+                        value={user.state}
+                        placeholder='Provincia'
+                        onChange={handleChange}
+                        required
+                    />
+
                     <label htmlFor='username'></label>
                     <input
                         className={styles.userInput}
@@ -169,19 +168,16 @@ const NewUserForm: React.FC = () => {
                         required
                     />
 
-                    <label htmlFor='stateSelect'></label>
-                    <select
-                        id='state'
-                        name='state'
-                        value={user.state}
-                        onChange={e =>
-                            setUser({ ...user, state: Number(e.target.value) })
-                        }
+                    <label htmlFor='pay_date'></label>
+                    <input
+                        id='pay_date'
+                        name='pay_date'
+                        value={user.pay_date}
+                        placeholder='AAAA-MM-DD'
+                        onChange={handleChange}
                         required
-                    >
-                        <option value={0}>INACTIVO</option>
-                        <option value={1}>ACTIVO</option>
-                    </select>
+                    />
+
                     <div>
                         <button className={styles.formButton} type='submit'>
                             Submit

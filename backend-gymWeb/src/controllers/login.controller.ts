@@ -27,15 +27,15 @@ export class LoginController extends ApiController {
             const valid = await this.auth.validateUser(authUser);
 
             if (valid) {
-                const token = jwt.sign({ user: authUser.username }, this.config.jwtSecret);
-                console.log(token);
-                this.httpContext.response.status(200).send(token as string);
-                return token; //?
-            }
+                const user = await this.repo.findByUserName(authUser.username);
+                const payload = { username: user[0].username, role_id: user[0].role_id };
+                const token = jwt.sign(payload, this.config.jwtSecret);
 
+                return token;
+            }
             this.httpContext.response.sendStatus(401);
         } catch (error) {
-            console.log("login error: ", error);
+            console.log("Login error: ", error);
             this.httpContext.response.sendStatus(500);
 
             return;

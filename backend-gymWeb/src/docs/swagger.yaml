@@ -224,7 +224,7 @@ paths:
                 '200':
                     description: Ok
                     schema:
-                        $ref: '#/definitions/User'
+                        $ref: '#/definitions/IUser'
             description: ""
             tags:
                 - User
@@ -241,7 +241,7 @@ paths:
                     name: user
                     required: true
                     schema:
-                        $ref: '#/definitions/User'
+                        $ref: '#/definitions/IUser'
     '/api/users/{id}':
         get:
             operationId: UserGetById
@@ -317,7 +317,7 @@ paths:
                     name: user
                     required: true
                     schema:
-                        $ref: '#/definitions/User'
+                        $ref: '#/definitions/IUser'
 swagger: '2.0'
 securityDefinitions:
     default:
