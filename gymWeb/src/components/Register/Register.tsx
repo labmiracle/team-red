@@ -20,8 +20,10 @@ const Register: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
-  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userNameError, setUserNameError] = useState('');
   const [dniError, setDNIError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [isDateValid, setIsDateValid] = useState(true);
@@ -121,17 +123,31 @@ const Register: React.FC = () => {
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    if (value.length >= 8 && value.length <= 15) {
-      setPassword(value);
+    if (value.length <= 15) {
+    setPassword(value)};
+
+  
+    if (value.length < 8 || value.length > 15) {
+      setPasswordError('La contraseña debe tener entre 8 y 15 caracteres');
+    } else {
+      setPasswordError('');
     }
   };
 
   const handleUserNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    if (value.length >= 5 && value.length <= 15) {
-      setUserName(value);
+    if (value.length <= 15) {
+    setUserName(value)};
+
+  
+    if (value.length < 8 || value.length > 15) {
+      setUserNameError('El usuario debe tener entre 5 y 15 caracteres');
+    } else {
+      setUserNameError('');
     }
   };
+
+
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -290,18 +306,23 @@ const Register: React.FC = () => {
           <input type="text" id="city" value={city} onChange={handleCityChange} required />
         </div>
       </div>
+      
       <div className={styles.formGroup}>
         <label htmlFor="userName">Nombre de Usuario:</label>
         <div className={styles.inputContainer}>
-          <input type="text" id="userName" value={userName} onChange={handleUserNameChange} required />
+          <input type="text" id="userName" value={userName} onChange={handleUserNameChange} required/>
         </div>
+        {userNameError && <p className={styles.errorMessage}>{userNameError}</p>}
       </div>
-            <div className={styles.formGroup}>
+
+      <div className={styles.formGroup}>
         <label htmlFor="password">Contraseña:</label>
         <div className={styles.inputContainer}>
-          <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
+          <input type="password" id="password" value={password} onChange={handlePasswordChange} required/>
         </div>
+        {passwordError && <p className={styles.errorMessage}>{passwordError}</p>}
       </div>
+      
       <button type="submit" disabled={!isDateValid}>
         Registrarse
       </button>
