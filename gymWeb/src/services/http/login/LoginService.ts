@@ -23,7 +23,7 @@ export class LoginService {
         const payload = jwtToken.split('.')[1];
         const decodedPayload = atob(payload);
         const parsedPayload = JSON.parse(decodedPayload);
-
+        localStorage.setItem('jwtToken', jwtToken);
         return parsedPayload;
     }
 
