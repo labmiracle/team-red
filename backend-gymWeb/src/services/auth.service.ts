@@ -8,11 +8,20 @@ import { DependencyLifeTime, Injectable } from "@miracledevs/paradigm-web-di";
 export class AuthService {
     constructor(private repo: UserRepository) {}
 
-    async validateUser(authUser: AuthUser): Promise<boolean> {
+    async validateAuthPassword(authUser: AuthUser): Promise<boolean> {
         const users = await this.repo.findByUserName(authUser.username);
-        return await bcrypt.compare(authUser.password, users[0].password);
+        if (users.length > 0) {
+            return await bcrypt.compare(authUser.password, users[0].password);
+        }
     }
 
+    async validateAuthUsername(authUser: AuthUser): Promise<boolean> {
+        const username = await this.repo.findByUserName(authUser.username);
+        if (username.length === 0) {
+            return false;
+        }
+        return true;
+    }
     async registerUser(user: User) {
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(user.password, salt);
