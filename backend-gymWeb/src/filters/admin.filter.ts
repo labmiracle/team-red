@@ -6,7 +6,7 @@ import { ConfigurationBuilder } from "@miracledevs/paradigm-express-webapi";
 import jwt from "jsonwebtoken";
 
 @Injectable({ lifeTime: DependencyLifeTime.Scoped })
-export class AuthFilter implements IFilter {
+export class AdminFilter implements IFilter {
     private config: Configuration;
     constructor(private readonly configurationBuilder: ConfigurationBuilder) {
         this.config = configurationBuilder.build(Configuration);
@@ -15,6 +15,11 @@ export class AuthFilter implements IFilter {
     async beforeExecute(httpContext: HttpContext): Promise<void> {
         try {
             const token = httpContext.request.headers["x-auth"] as string;
+            const payload = token.split(".")[1];
+            const decodedPayload = atob(payload);
+            const parsedPayload = JSON.parse(decodedPayload);
+            const role_id_request = parsedPayload.role_id;
+
             if (!token || !jwt.verify(token, this.config.jwtSecret)) {
                 httpContext.response.sendStatus(401);
                 return;
