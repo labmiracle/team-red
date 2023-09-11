@@ -1,6 +1,6 @@
 import {
     HttpClient,
-    //ContentTypeInterceptor,
+    ContentTypeInterceptor,
     AuthorizationInterceptor,
     QueryString,
     AddHeaderInterceptor,
@@ -13,14 +13,18 @@ export class ApiClient {
         this.baseUrl = import.meta.env.VITE_API_URL_BASE as string;
         this.httpClient = new HttpClient();
         this.httpClient.registerInterceptor(
-            new AddHeaderInterceptor('content-type', 'application/json')
+            new ContentTypeInterceptor('application/json')
         );
+        this.httpClient.registerInterceptor(
+            new AuthorizationInterceptor('x-auth')
+        );
+
         // acá se puede agregar la redirección si vuelve un statucode 401 (redirect /login)
     }
 
     authorize(token: string): void {
         this.httpClient.registerInterceptor(
-            new AuthorizationInterceptor('x-auth', token)
+            new AuthorizationInterceptor(token)
         );
     }
 

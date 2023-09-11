@@ -12,7 +12,7 @@ import { AuthFilter } from "../filters/auth.filter";
 @Security("x-auth")
 @Controller({
     route: "/api/users",
-    // filters: [AuthFilter]
+    filters: [AuthFilter],
 })
 @Tags("User")
 export class UserController extends ApiController {
