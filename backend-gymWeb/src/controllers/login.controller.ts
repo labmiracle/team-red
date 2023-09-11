@@ -48,29 +48,30 @@ export class LoginController extends ApiController {
     @Action({ route: "/register", fromBody: true, method: HttpMethod.POST })
     async register(user: User): Promise<string> {
         try {
-            //falta lógica de validación de campos requeridos //
-            // que se llamaría desde services -> auth.services.ts //
             const usernameValid = await this.auth.validateUsername(user);
             const emailValid = await this.auth.validateEmail(user);
             const dniValid = await this.auth.validateDni(user);
-            if (!usernameValid) {
+            if (usernameValid) {
+                console.log(usernameValid);
                 this.httpContext.response.status(404).send("The user already exists");
                 return;
             }
-            if (!emailValid) {
+            if (emailValid) {
                 this.httpContext.response.status(404).send("The email already exists");
                 return;
             }
-            if (!dniValid) {
+            if (dniValid) {
                 this.httpContext.response.status(404).send("The dni already exists");
                 return;
             }
             const fields: (string | boolean)[] = await this.auth.validateFields(user);
-            if (!fields[1]) {
+            if (fields[1]) {
                 this.httpContext.response.status(404).send(fields[0]);
                 return;
             }
+
             this.auth.registerUser(user);
+
             this.httpContext.response.sendStatus(201);
         } catch {
             this.httpContext.response.sendStatus(500);
