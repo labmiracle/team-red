@@ -31,7 +31,7 @@ export class LoginController extends ApiController {
                 const user = await this.repo.findByUserName(authUser.username);
                 const payload = { id: user[0].id, username: user[0].username, role_id: user[0].role_id };
                 const token = jwt.sign(payload, this.config.jwtSecret);
-                console.log(token);
+
                 return token;
             }
             this.httpContext.response.sendStatus(401);

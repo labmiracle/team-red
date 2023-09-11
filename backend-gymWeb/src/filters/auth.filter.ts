@@ -15,6 +15,7 @@ export class AuthFilter implements IFilter {
     async beforeExecute(httpContext: HttpContext): Promise<void> {
         try {
             const token = httpContext.request.headers["x-auth"] as string;
+
             if (!token || !jwt.verify(token, this.config.jwtSecret)) {
                 httpContext.response.sendStatus(401);
                 return;
