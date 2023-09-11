@@ -11,7 +11,9 @@ const Register: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dni, setDNI] = useState('');
+  const [dniError, setDNIError] = useState('');
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState<DateOfBirth>({
     day: '',
     month: '',
@@ -21,42 +23,46 @@ const Register: React.FC = () => {
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [password, setPassword] = useState('');
-  const [dniError, setDNIError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [isDateValid, setIsDateValid] = useState(true);
-
+  const [passwordError, setPasswordError] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userNameError, setUserNameError] = useState('');
+  
+  
   const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setFirstName(event.target.value);
+    const value = event.target.value;
+    if (value.length <= 45) {
+      setFirstName(value);
+    }
   };
 
   const handleLastNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setLastName(event.target.value);
+    const value = event.target.value;
+    if (value.length <= 45) {
+      setLastName(value);
+    }
   };
 
   const handleDNIChange = (event: ChangeEvent<HTMLInputElement>) => {
     const dniValue = event.target.value;
-
-    if (dniValue.length <= 8) {
-      setDNI(dniValue);
-
-      if (dniValue.length === 8) {
-        if (/^\d{8}$/.test(dniValue)) {
-          setDNIError('');
-        } else {
-          setDNIError('Ingrese los 8 números de su D.N.I. sin puntos');
-        }
-      } else {
+    setDNI(dniValue);
+  
+    if (dniValue.length === 8) {
+      if (/^\d{8}$/.test(dniValue)) {
         setDNIError('');
+      } else {
+        setDNIError('Ingrese los 8 números de su D.N.I. sin puntos');
       }
+    } else {
+      setDNIError('');
     }
   };
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     const emailValue = event.target.value;
     setEmail(emailValue);
-
+    
     if (emailValue.length > 0) {
-      if (/\S+@\S+\.\S+/.test(emailValue)) {
+      if (/^\S+@\S+\.\S+$/.test(emailValue)) {
         setEmailError('');
       } else {
         setEmailError('Ingrese una dirección de correo electrónico válida');
@@ -65,6 +71,7 @@ const Register: React.FC = () => {
       setEmailError('');
     }
   };
+  
 
   const handleYearChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
@@ -91,20 +98,52 @@ const Register: React.FC = () => {
   };
 
   const handlePhoneNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(event.target.value);
+    const value = event.target.value;
+    if (/^\d{0,10}$/.test(value)) {
+      setPhoneNumber(value);
+    }
   };
 
   const handleAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddress(event.target.value);
+    const value = event.target.value;
+    if (value.length <= 70) {
+      setAddress(value);
+    }
   };
-
   const handleCityChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setCity(event.target.value);
+    const value = event.target.value;
+    if (value.length <= 70) {
+      setCity(value);
+    }
   };
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
+    const value = event.target.value;
+    if (value.length <= 15) {
+    setPassword(value)};
+
+  
+    if (value.length < 8 || value.length > 15) {
+      setPasswordError('La contraseña debe tener entre 8 y 15 caracteres');
+    } else {
+      setPasswordError('');
+    }
   };
+
+  const handleUserNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    if (value.length <= 15) {
+    setUserName(value)};
+
+  
+    if (value.length < 8 || value.length > 15) {
+      setUserNameError('El usuario debe tener entre 5 y 15 caracteres');
+    } else {
+      setUserNameError('');
+    }
+  };
+
+
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -140,7 +179,7 @@ const Register: React.FC = () => {
     setPassword('');
     setDNIError('');
     setEmailError('');
-    setIsDateValid(true);
+  
   };
 
   const daysInMonth = (month: number, year: number) => {
@@ -263,13 +302,24 @@ const Register: React.FC = () => {
           <input type="text" id="city" value={city} onChange={handleCityChange} required />
         </div>
       </div>
+      
+      <div className={styles.formGroup}>
+        <label htmlFor="userName">Nombre de Usuario:</label>
+        <div className={styles.inputContainer}>
+          <input type="text" id="userName" value={userName} onChange={handleUserNameChange} required/>
+        </div>
+        {userNameError && <p className={styles.errorMessage}>{userNameError}</p>}
+      </div>
+
       <div className={styles.formGroup}>
         <label htmlFor="password">Contraseña:</label>
         <div className={styles.inputContainer}>
-          <input type="password" id="password" value={password} onChange={handlePasswordChange} required />
+          <input type="password" id="password" value={password} onChange={handlePasswordChange} required/>
         </div>
+        {passwordError && <p className={styles.errorMessage}>{passwordError}</p>}
       </div>
-      <button type="submit" disabled={!isDateValid}>
+      
+      <button type="submit">
         Registrarse
       </button>
     </form>
