@@ -55,11 +55,11 @@ const NewUserForm: React.FC = () => {
             </button>
             {isFormVisible && (
                 <form className={styles.formContainer} onSubmit={handleSubmit}>
-                    <label htmlFor='name'></label>
+                    <label htmlFor='firstname'></label>
                     <input
                         className={styles.userInput}
                         type='text'
-                        name='name'
+                        name='firstname'
                         value={user.firstname}
                         onChange={handleChange}
                         placeholder='Nombre'

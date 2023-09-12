@@ -44,7 +44,7 @@ export class UserController extends ApiController {
         }
     }
     @POST
-    @Action({ route: "/", method: HttpMethod.POST, fromBody: true , filters: [AdminFilter]})
+    @Action({ route: "/", method: HttpMethod.POST, fromBody: true, filters: [AdminFilter] })
     async newUser(user: IUser): Promise<IUser> {
         try {
             const metadata: InsertionResult<number> = await this.repo.insertOne(user);
@@ -59,7 +59,7 @@ export class UserController extends ApiController {
     }
     @DELETE
     @Path(":id")
-    @Action({ route: "/:id", method: HttpMethod.DELETE , , filters: [AdminFilter]})
+    @Action({ route: "/:id", method: HttpMethod.DELETE, filters: [AdminFilter] })
     async delete(@PathParam("id") id: number): Promise<User> {
         try {
             const user = await this.repo.getById(id);
@@ -73,7 +73,7 @@ export class UserController extends ApiController {
     }
     @PUT
     @Path("/edit")
-    @Action({ route: "/edit", method: HttpMethod.PUT, fromBody: true ,, filters: [AdminFilter]})
+    @Action({ route: "/edit", method: HttpMethod.PUT, fromBody: true, filters: [AdminFilter] })
     async update(user: IUser): Promise<User> {
         try {
             const user = this.httpContext.request.body.user;
