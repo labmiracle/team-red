@@ -7,6 +7,7 @@ import Register from './components/Register/Register';
 import Footer from './components/Footer/Footer';
 import Admin from './components/Admin/Admin';
 import UserLogged from './components/UserPage/UserPage';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
     return (
@@ -18,7 +19,9 @@ function App() {
                     <Route path='/login' element={<Login />} />
                     <Route path='/contacto' element={<Contacto />} />
                     <Route path='/register' element={<Register />} />
-                    <Route path='/admin' element={<Admin />} />
+                    <ProtectedRoute path='/admin' 
+                    element= {< Admin />}
+                    </ProtectedRoute>
                     <Route path='/user' element={<UserLogged />} />
                 </Routes>
                 <Footer />
