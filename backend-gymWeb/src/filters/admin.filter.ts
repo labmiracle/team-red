@@ -2,27 +2,28 @@ import { Injectable, DependencyLifeTime, DependencyContainer } from "@miracledev
 import { IFilter, HttpContext } from "@miracledevs/paradigm-express-webapi";
 import { Configuration } from "../configuration/configuration";
 import { ConfigurationBuilder } from "@miracledevs/paradigm-express-webapi";
-import jwt from "jsonwebtoken";
+import { UserRepository } from "../repositories/user.repository";
 
 @Injectable({ lifeTime: DependencyLifeTime.Scoped })
 export class AdminFilter implements IFilter {
     private config: Configuration;
-    constructor(private readonly configurationBuilder: ConfigurationBuilder) {
+    constructor(private readonly configurationBuilder: ConfigurationBuilder, private repo: UserRepository) {
         this.config = configurationBuilder.build(Configuration);
     }
 
     async beforeExecute(httpContext: HttpContext): Promise<void> {
         try {
             const token = httpContext.request.headers["x-auth"] as string;
-            if (!token || !jwt.verify(token, this.config.jwtSecret)) {
-                httpContext.response.sendStatus(401);
-                return;
-            }
             const payload = token.split(".")[1];
             const decodedPayload = atob(payload);
             const parsedPayload = JSON.parse(decodedPayload);
-            const role_id_request = parsedPayload.role_id;
-            return role_id_request;
+            const username = parsedPayload.username;
+            const user = await this.repo.findByUserName(username);
+            if (user[0].role_id != 1) {
+                httpContext.response.sendStatus(401);
+                return;
+            }
+            return;
         } catch {
             httpContext.response.sendStatus(500);
         }
