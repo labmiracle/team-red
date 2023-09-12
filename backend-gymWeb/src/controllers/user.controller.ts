@@ -8,6 +8,9 @@ import { DELETE, GET, POST, PUT, Path, PathParam, Security } from "typescript-re
 import { Tags } from "typescript-rest-swagger";
 import { AuthFilter } from "../filters/auth.filter";
 import { AdminFilter } from "../filters/admin.filter";
+import { AuthService } from "../services/auth.service";
+
+import bcrypt from "bcrypt";
 
 @Path("/api/users")
 @Security("x-auth")
@@ -17,7 +20,7 @@ import { AdminFilter } from "../filters/admin.filter";
 })
 @Tags("User")
 export class UserController extends ApiController {
-    constructor(private repo: UserRepository) {
+    constructor(private repo: UserRepository, private auth: AuthService) {
         super();
     }
 
@@ -47,8 +50,11 @@ export class UserController extends ApiController {
     @Action({ route: "/", method: HttpMethod.POST, fromBody: true, filters: [AdminFilter] })
     async newUser(user: IUser): Promise<IUser> {
         try {
-            const metadata: InsertionResult<number> = await this.repo.insertOne(user);
-            user.id = metadata.insertId;
+            // const salt = await bcrypt.genSalt(10);
+            // user.password = await bcrypt.hash(user.password, salt);
+            // const metadata: InsertionResult<number> = await this.repo.insertOne(user);
+            // user.id = metadata.insertId;
+            this.auth.registerUser(user);
             this.httpContext.response.status(201).send(user);
             return user;
         } catch (error) {
