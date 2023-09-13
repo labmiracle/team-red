@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './Login.module.css';
 import { IAuthUser } from '../../interfaces/User.interface';
@@ -11,7 +11,10 @@ function Login() {
     const authUser: IAuthUser = { username: username, password: password };
 
     const handleSubmit = async () => {
-        return await loginServiceInstance.login(authUser);
+        await loginServiceInstance.login(authUser);
+        const navigate = useNavigate();
+        navigate('/user');
+        return;
     };
 
     return (
@@ -40,9 +43,10 @@ function Login() {
                         onChange={e => setPassword(e.target.value)}
                     />
                 </div>
-                <button type='button' onClick={handleSubmit}>
-                    Login
-                </button>
+
+                <Link to='/user'>
+                    <p onClick={handleSubmit}>Login</p>
+                </Link>
             </form>
 
             <p>

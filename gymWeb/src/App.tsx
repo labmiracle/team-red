@@ -11,6 +11,7 @@ import { loginServiceInstance } from './services/http/login/LoginService';
 
 function App() {
     const userStatus = loginServiceInstance.isAuthenticated();
+    const userPermission = loginServiceInstance.isAuthorizedTo();
 
     return (
         <>
@@ -22,9 +23,12 @@ function App() {
                     <Route path='/register' element={<Register />} />
                     <Route path='/contacto' element={<Contacto />} />
 
-                    {userStatus ? (
+                    {userStatus && userPermission?.role_id === 1 ? (
                         <>
                             <Route path='/admin' element={<Admin />} />
+                        </>
+                    ) : userStatus && userPermission?.role_id === 2 ? (
+                        <>
                             <Route path='/user' element={<UserPage />} />
                         </>
                     ) : (
