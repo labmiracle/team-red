@@ -3,8 +3,10 @@ import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link as ScrollLink } from 'react-scroll';
 import styles from './NavBar.module.css';
+import { loginServiceInstance } from '../../services/http/login/LoginService';
 
 export default function NavBar() {
+    const userStatus = loginServiceInstance.isAuthenticated();
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
     const handleToggleMenu = () => {
@@ -14,6 +16,10 @@ export default function NavBar() {
         } else {
             setItemLeft('-200%');
         }
+    };
+
+    const handleLogOut = () => {
+        loginServiceInstance.logout();
     };
 
     return (
@@ -54,9 +60,17 @@ export default function NavBar() {
                     <div className={styles.item} style={{ left: itemLeft }}>
                         <Link to='/contacto'>Contacto</Link>
                     </div>
-                    <div className={styles.item} style={{ left: itemLeft }}>
-                        <Link to='/login'>Login</Link>
-                    </div>
+                    {!userStatus ? (
+                        <div className={styles.item} style={{ left: itemLeft }}>
+                            <Link to='/login'>Login</Link>
+                        </div>
+                    ) : (
+                        <div className={styles.item} style={{ left: itemLeft }}>
+                            <p style={{ color: 'red' }} onClick={handleLogOut}>
+                                LogOut
+                            </p>
+                        </div>
+                    )}
                 </div>
             </div>
         </nav>
