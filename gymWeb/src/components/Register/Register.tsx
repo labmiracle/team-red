@@ -7,7 +7,11 @@ interface DateOfBirth {
   year: string;
 }
 
-const Register: React.FC = () => {
+interface RegisterProps {
+  isForAdmin: boolean;
+}
+
+  const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dni, setDNI] = useState('');
@@ -147,46 +151,6 @@ const Register: React.FC = () => {
     }
   };
 
- 
-
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    // Agregar la lógica para enviar los datos del formulario al servidor
-    const userData = {
-      firstName,
-      lastName,
-      dni,
-      email,
-      dateOfBirth,
-      phoneNumber,
-      address,
-      city,
-      password, 
-    };
-
-    // enviar la info de userDaa al backend
-  
-    setFirstName('');
-    setLastName('');
-    setDNI('');
-    setEmail('');
-    setDateOfBirth({
-      day: '',
-      month: '',
-      year: '',
-    });
-    setPhoneNumber('');
-
-    setAddress('');
-    setCity('');
-    setPassword('');
-    setDNIError('');
-    setEmailError('');
-  
-  };
-
   const daysInMonth = (month: number, year: number) => {
     return new Date(year, month, 0).getDate();
   };
@@ -212,6 +176,35 @@ const Register: React.FC = () => {
     { length: daysInMonth(months.indexOf(dateOfBirth.month) + 1, parseInt(dateOfBirth.year, 10)) },
     (_, index) => index + 1
   ) : [];
+
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const userData = {
+      firstName,
+      lastName,
+      dni,
+      email,
+      dateOfBirth,
+      phoneNumber,
+      address,
+      city,
+      password,
+    };
+
+    // Ejecutar la lógica correspondiente según la página
+    if (isForAdmin) {
+      // Lógica para administradores (por ejemplo, enviar a una API privada)
+    } else {
+      // Lógica para usuarios públicos (por ejemplo, enviar a una API pública)
+    }
+
+    // Restablecer los valores del formulario
+    // ...
+  };
+
+  // Resto del componente
 
   return (
     <form className={styles.registerContainer} onSubmit={handleSubmit}>
