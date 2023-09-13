@@ -140,7 +140,7 @@ const Register: React.FC = () => {
     setPassword(value)};
 
   
-    if (value.length < 8 || value.length > 15) {
+    if (value.length < 8) {
       setPasswordError('La contraseña debe tener entre 8 y 15 caracteres');
     } else {
       setPasswordError('');
