@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link as ScrollLink } from 'react-scroll';
@@ -6,7 +6,8 @@ import styles from './NavBar.module.css';
 import { loginServiceInstance } from '../../services/http/login/LoginService';
 
 export default function NavBar() {
-    const userStatus = loginServiceInstance.isAuthenticated();
+    const actualUserStatus = loginServiceInstance.isAuthenticated();
+    const [userStatus, setUserStatus] = useState(actualUserStatus);
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
     const handleToggleMenu = () => {
@@ -20,6 +21,9 @@ export default function NavBar() {
 
     const handleLogOut = () => {
         loginServiceInstance.logout();
+        setUserStatus(!userStatus);
+        const navigate = useNavigate();
+        navigate('/home');
     };
 
     return (
@@ -66,9 +70,14 @@ export default function NavBar() {
                         </div>
                     ) : (
                         <div className={styles.item} style={{ left: itemLeft }}>
-                            <p style={{ color: 'red' }} onClick={handleLogOut}>
-                                LogOut
-                            </p>
+                            <Link to='/'>
+                                <p
+                                    style={{ color: 'red' }}
+                                    onClick={handleLogOut}
+                                >
+                                    LogOut
+                                </p>
+                            </Link>
                         </div>
                     )}
                 </div>
