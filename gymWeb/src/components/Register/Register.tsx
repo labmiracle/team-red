@@ -44,16 +44,19 @@ const Register: React.FC = () => {
 
   const handleDNIChange = (event: ChangeEvent<HTMLInputElement>) => {
     const dniValue = event.target.value;
-    setDNI(dniValue);
-  
-    if (dniValue.length === 8) {
-      if (/^\d{8}$/.test(dniValue)) {
-        setDNIError('');
+
+    if (dniValue.length <= 8) {
+      setDNI(dniValue);
+
+      if (dniValue.length === 8) {
+        if (/^\d{8}$/.test(dniValue)) {
+          setDNIError('');
+        } else {
+          setDNIError('Ingrese los 8 números de su D.N.I. sin puntos');
+        }
       } else {
-        setDNIError('Ingrese los 8 números de su D.N.I. sin puntos');
+        setDNIError('');
       }
-    } else {
-      setDNIError('');
     }
   };
 
