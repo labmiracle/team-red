@@ -36,6 +36,15 @@ export class LoginService {
             JSON.stringify(user)
         );
     }
+
+    logout = (): void => {
+        localStorage.removeItem('jwtToken');
+    };
+
+    isAuthenticated = (): boolean => {
+        const token = localStorage.getItem('jwtToken');
+        return !!token;
+    };
 }
 
 export const loginServiceInstance = new LoginService(apiClientInstance);
