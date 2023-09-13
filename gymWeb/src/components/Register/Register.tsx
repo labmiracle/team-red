@@ -120,6 +120,20 @@ const Register: React.FC = () => {
     }
   };
 
+  const handleUserNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    if (value.length <= 15) {
+    setUserName(value)};
+
+  
+    if (value.length < 8) {
+      setUserNameError('El usuario debe tener entre 5 y 15 caracteres');
+    } else {
+      setUserNameError('');
+    }
+  };
+
+
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     if (value.length <= 15) {
@@ -133,19 +147,7 @@ const Register: React.FC = () => {
     }
   };
 
-  const handleUserNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    if (value.length <= 15) {
-    setUserName(value)};
-
-  
-    if (value.length < 8 || value.length > 15) {
-      setUserNameError('El usuario debe tener entre 5 y 15 caracteres');
-    } else {
-      setUserNameError('');
-    }
-  };
-
+ 
 
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
