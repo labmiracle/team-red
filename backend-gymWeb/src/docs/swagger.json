@@ -10,12 +10,18 @@
 				"password": {
 					"type": "string",
 					"description": ""
+				},
+				"role_id": {
+					"type": "number",
+					"format": "double",
+					"description": ""
 				}
 			},
 			"type": "object",
 			"required": [
 				"username",
-				"password"
+				"password",
+				"role_id"
 			]
 		},
 		"User": {
@@ -299,7 +305,7 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"$ref": "#/definitions/User"
+							"$ref": "#/definitions/IUser"
 						}
 					}
 				},
@@ -324,7 +330,7 @@
 						"name": "user",
 						"required": true,
 						"schema": {
-							"$ref": "#/definitions/User"
+							"$ref": "#/definitions/IUser"
 						}
 					}
 				]
@@ -437,7 +443,7 @@
 						"name": "user",
 						"required": true,
 						"schema": {
-							"$ref": "#/definitions/User"
+							"$ref": "#/definitions/IUser"
 						}
 					}
 				]

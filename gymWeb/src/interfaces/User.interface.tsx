@@ -1,5 +1,5 @@
 export interface IUser {
-    id: number;
+    id?: number | undefined;
     firstname: string;
     lastname: string;
     dni: number;
@@ -11,6 +11,28 @@ export interface IUser {
     state: string;
     username: string;
     password: string;
-    pay_date: string;
-    role_id: number;
+    pay_date?: string | undefined;
+    role_id?: number | undefined;
+}
+
+export interface IEditedUser {
+    id: number;
+    firstname?: string | undefined;
+    lastname?: string | undefined;
+    dni?: number | undefined;
+    dateofbirth?: string | undefined;
+    phone?: number | undefined;
+    email?: string | undefined;
+    address?: string | undefined;
+    city?: string | undefined;
+    state?: string | undefined;
+    username?: string | undefined;
+    password?: string | undefined;
+    pay_date?: string | undefined;
+    role_id?: number | undefined;
+}
+
+export interface IAuthUser {
+    username: string;
+    password: string;
 }

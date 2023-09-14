@@ -3,10 +3,16 @@ import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link as ScrollLink } from 'react-scroll';
 import styles from './NavBar.module.css';
+//import { loginServiceInstance } from '../../services/http/login/LoginService';
+import { useUser } from '../../context/userContext';
+import { loginServiceInstance } from '../../services/http/login/LoginService';
 
 export default function NavBar() {
+    const { userStatus, logout } = useUser();
+
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
+
     const handleToggleMenu = () => {
         setMenuOpen(!menuOpen);
         if (menuOpen) {
@@ -14,6 +20,11 @@ export default function NavBar() {
         } else {
             setItemLeft('-200%');
         }
+    };
+
+    const handleLogOut = () => {
+        loginServiceInstance.logout();
+        logout();
     };
 
     return (
@@ -54,9 +65,22 @@ export default function NavBar() {
                     <div className={styles.item} style={{ left: itemLeft }}>
                         <Link to='/contacto'>Contacto</Link>
                     </div>
-                    <div className={styles.item} style={{ left: itemLeft }}>
-                        <Link to='/login'>Login</Link>
-                    </div>
+                    {userStatus === false ? (
+                        <div className={styles.item} style={{ left: itemLeft }}>
+                            <Link to='/login'>Login</Link>
+                        </div>
+                    ) : (
+                        <div className={styles.item} style={{ left: itemLeft }}>
+                            <Link to='/'>
+                                <p
+                                    style={{ color: 'red' }}
+                                    onClick={handleLogOut}
+                                >
+                                    LogOut
+                                </p>
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </div>
         </nav>

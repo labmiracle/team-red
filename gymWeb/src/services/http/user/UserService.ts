@@ -1,10 +1,13 @@
 import { ApiClient, apiClientInstance } from '../ApiClient';
-import { IUser } from '../../../interfaces/User.interface';
+import { IUser, IEditedUser } from '../../../interfaces/User.interface';
 
 export class UserService {
     constructor(private readonly apiClient: ApiClient) {}
 
     async getAll(): Promise<IUser[]> {
+        const token = localStorage.getItem('jwtToken') as string;
+        console.log('estoy acá: ', token);
+        this.apiClient.authorize(token);
         return await this.apiClient.get('users');
     }
 
@@ -17,14 +20,15 @@ export class UserService {
     }
 
     async delete(id: number): Promise<void> {
-        await this.apiClient.delete('users', { id });
+        const url = `users/${id}`;
+        return await this.apiClient.delete(url);
     }
 
-    async edit(user: IUser): Promise<IUser> {
+    async edit(user: IEditedUser): Promise<IEditedUser> {
         return await this.apiClient.put(
             `users/edit/`,
             {},
-            JSON.stringify(user)
+            JSON.stringify({ user })
         );
     }
 }

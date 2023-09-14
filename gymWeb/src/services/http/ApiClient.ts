@@ -1,9 +1,9 @@
 import {
     HttpClient,
-    //ContentTypeInterceptor,
+    ContentTypeInterceptor,
     AuthorizationInterceptor,
     QueryString,
-    AddHeaderInterceptor,
+    //AddHeaderInterceptor,
 } from '@miracledevs/paradigm-web-fetch';
 
 export class ApiClient {
@@ -13,13 +13,18 @@ export class ApiClient {
         this.baseUrl = import.meta.env.VITE_API_URL_BASE as string;
         this.httpClient = new HttpClient();
         this.httpClient.registerInterceptor(
-            new AddHeaderInterceptor('content-type', 'application/json')
+            new ContentTypeInterceptor('application/json')
         );
+        this.httpClient.registerInterceptor(
+            new AuthorizationInterceptor('x-auth')
+        );
+
+        // acá se puede agregar la redirección si vuelve un statucode 401 (redirect /login)
     }
 
     authorize(token: string): void {
         this.httpClient.registerInterceptor(
-            new AuthorizationInterceptor('x-auth', token)
+            new AuthorizationInterceptor(token)
         );
     }
 
@@ -37,11 +42,13 @@ export class ApiClient {
         queryString?: QueryString,
         body?: BodyInit
     ): Promise<TResult> {
-        return (await this.httpClient.post(
-            `${this.baseUrl}/${url}`,
-            queryString,
-            body
-        )) as TResult;
+        return (await (
+            await this.httpClient.post(
+                `${this.baseUrl}/${url}`,
+                queryString,
+                body
+            )
+        ).json()) as TResult;
     }
 
     async put<TResult>(

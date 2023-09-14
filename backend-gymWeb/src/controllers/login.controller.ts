@@ -24,18 +24,19 @@ export class LoginController extends ApiController {
     @Action({ route: "/login", fromBody: true })
     async post(authUser: AuthUser): Promise<string> {
         try {
-            const valid = await this.auth.validateUser(authUser);
+            const validUsername = await this.auth.validateAuthUsername(authUser);
+            const validPassword = await this.auth.validateAuthPassword(authUser);
 
-            if (valid) {
-                const token = jwt.sign({ user: authUser.username }, this.config.jwtSecret);
-                console.log(token);
-                this.httpContext.response.status(200).send(token as string);
-                return token; //?
+            if (validUsername && validPassword) {
+                const user = await this.repo.findByUserName(authUser.username);
+                const payload = { id: user[0].id, username: user[0].username, role_id: user[0].role_id };
+                const token = jwt.sign(payload, this.config.jwtSecret);
+
+                return token;
             }
-
             this.httpContext.response.sendStatus(401);
         } catch (error) {
-            console.log("login error: ", error);
+            console.log("Login error: ", error);
             this.httpContext.response.sendStatus(500);
 
             return;
@@ -47,29 +48,30 @@ export class LoginController extends ApiController {
     @Action({ route: "/register", fromBody: true, method: HttpMethod.POST })
     async register(user: User): Promise<string> {
         try {
-            //falta lógica de validación de campos requeridos //
-            // que se llamaría desde services -> auth.services.ts //
             const usernameValid = await this.auth.validateUsername(user);
             const emailValid = await this.auth.validateEmail(user);
             const dniValid = await this.auth.validateDni(user);
-            if (!usernameValid) {
-                this.httpContext.response.sendStatus(404).send("The user already exists");
+            if (usernameValid) {
+                console.log(usernameValid);
+                this.httpContext.response.status(404).send("The user already exists");
                 return;
             }
-            if (!emailValid) {
-                this.httpContext.response.sendStatus(404).send("The email already exists");
+            if (emailValid) {
+                this.httpContext.response.status(404).send("The email already exists");
                 return;
             }
-            if (!dniValid) {
-                this.httpContext.response.sendStatus(404).send("The dni already exists");
+            if (dniValid) {
+                this.httpContext.response.status(404).send("The dni already exists");
                 return;
             }
             const fields: (string | boolean)[] = await this.auth.validateFields(user);
-            if (!fields[1]) {
-                this.httpContext.response.sendStatus(404).send(fields[0]);
+            if (fields[1]) {
+                this.httpContext.response.status(404).send(fields[0]);
                 return;
             }
+
             this.auth.registerUser(user);
+
             this.httpContext.response.sendStatus(201);
         } catch {
             this.httpContext.response.sendStatus(500);
