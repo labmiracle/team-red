@@ -1,5 +1,5 @@
 export interface IUser {
-    id: number;
+    id?: number | undefined;
     firstname: string;
     lastname: string;
     dni: number;
@@ -11,8 +11,8 @@ export interface IUser {
     state: string;
     username: string;
     password: string;
-    pay_date: string;
-    role_id: number;
+    pay_date?: string | undefined;
+    role_id?: number | undefined;
 }
 
 export interface IEditedUser {
