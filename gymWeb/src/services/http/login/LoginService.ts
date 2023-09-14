@@ -4,7 +4,7 @@ import { IUser, IAuthUser } from '../../../interfaces/User.interface';
 export class LoginService {
     constructor(private readonly apiClient: ApiClient) {}
     baseUrl = import.meta.env.VITE_API_URL_BASE as string;
-    async login(authUser: IAuthUser): Promise<string> {
+    async login(authUser: IAuthUser): Promise<void> {
         //     return await this.apiClient.post(
         //         'auth/login',
         //         {},
@@ -20,13 +20,13 @@ export class LoginService {
         });
 
         const jwtToken = await response.text();
-        const payload = jwtToken.split('.')[1];
-        const decodedPayload = atob(payload);
-        const parsedPayload = JSON.parse(decodedPayload);
+        //const payload = jwtToken.split('.')[1];
+        // const decodedPayload = atob(payload);
+        // const parsedPayload = JSON.parse(decodedPayload);
         localStorage.setItem('jwtToken', jwtToken);
         const token = localStorage.getItem('jwtToken') as string;
         this.apiClient.authorize(token);
-        return parsedPayload;
+        return;
     }
 
     async register(user: IUser): Promise<string> {
@@ -36,6 +36,42 @@ export class LoginService {
             JSON.stringify(user)
         );
     }
+
+    logout = (): void => {
+        localStorage.removeItem('jwtToken');
+    };
+
+    isAuthenticated = (): boolean => {
+        const token = localStorage.getItem('jwtToken');
+        return !!token;
+    };
+
+    isAuthorizedTo = (): {
+        userId: number;
+        username: string;
+        role_id: number;
+    } | null => {
+        const token = localStorage.getItem('jwtToken');
+
+        if (token) {
+            try {
+                const payload = token.split('.')[1];
+                const decodedPayload = atob(payload);
+                const parsedPayload = JSON.parse(decodedPayload);
+
+                return {
+                    userId: parsedPayload.Id,
+                    username: parsedPayload.username,
+                    role_id: parsedPayload.role_id,
+                };
+            } catch (error) {
+                console.error('Error decoding or parsing JWT:', error);
+                return null;
+            }
+        } else {
+            return null;
+        }
+    };
 }
 
 export const loginServiceInstance = new LoginService(apiClientInstance);

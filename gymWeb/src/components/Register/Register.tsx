@@ -9,25 +9,28 @@ interface DateOfBirth {
     year: string;
 }
 
-const Register: React.FC = () => {
-    const [firstname, setFirstName] = useState('');
-    const [lastname, setLastName] = useState('');
+interface RegisterProps {
+    isForAdmin: boolean;
+}
+
+const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [dni, setDNI] = useState('');
     const [dniError, setDNIError] = useState('');
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
-    const [dateofbirth, setDateOfBirth] = useState<DateOfBirth>({
+    const [dateOfBirth, setDateOfBirth] = useState<DateOfBirth>({
         day: '',
         month: '',
         year: '',
     });
-    const [phone, setPhoneNumber] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
-    const [state, setState] = useState('');
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [username, setUserName] = useState('');
+    const [userName, setUserName] = useState('');
     const [userNameError, setUserNameError] = useState('');
 
     const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -46,16 +49,21 @@ const Register: React.FC = () => {
 
     const handleDNIChange = (event: ChangeEvent<HTMLInputElement>) => {
         const dniValue = event.target.value;
-        setDNI(dniValue);
 
-        if (dniValue.length === 8) {
-            if (/^\d{8}$/.test(dniValue)) {
-                setDNIError('');
+        if (dniValue.length <= 8) {
+            setDNI(dniValue);
+
+            if (dniValue.length === 8) {
+                if (/^\d{8}$/.test(dniValue)) {
+                    setDNIError('');
+                } else {
+                    setDNIError(
+                        'Ingrese los 8 números de su D.N.I. sin puntos'
+                    );
+                }
             } else {
-                setDNIError('Ingrese los 8 números de su D.N.I. sin puntos');
+                setDNIError('');
             }
-        } else {
-            setDNIError('');
         }
     };
 
