@@ -1,20 +1,20 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './Login.module.css';
 import { IAuthUser } from '../../interfaces/User.interface';
+
+import { useUser } from '../../context/userContext';
 import { loginServiceInstance } from '../../services/http/login/LoginService';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    const { login } = useUser();
     const authUser: IAuthUser = { username: username, password: password };
 
     const handleSubmit = async () => {
-        await loginServiceInstance.login(authUser);
-        const navigate = useNavigate();
-        navigate('/user');
-        return;
+        loginServiceInstance.login(authUser);
+        login();
     };
 
     return (
@@ -44,7 +44,7 @@ function Login() {
                     />
                 </div>
 
-                <Link to='/user'>
+                <Link to='/'>
                     <p onClick={handleSubmit}>Login</p>
                 </Link>
             </form>

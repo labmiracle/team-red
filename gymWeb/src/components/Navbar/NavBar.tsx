@@ -1,15 +1,18 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link as ScrollLink } from 'react-scroll';
 import styles from './NavBar.module.css';
+//import { loginServiceInstance } from '../../services/http/login/LoginService';
+import { useUser } from '../../context/userContext';
 import { loginServiceInstance } from '../../services/http/login/LoginService';
 
 export default function NavBar() {
-    const actualUserStatus = loginServiceInstance.isAuthenticated();
-    const [userStatus, setUserStatus] = useState(actualUserStatus);
+    const { userStatus, logout } = useUser();
+
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
+
     const handleToggleMenu = () => {
         setMenuOpen(!menuOpen);
         if (menuOpen) {
@@ -21,9 +24,7 @@ export default function NavBar() {
 
     const handleLogOut = () => {
         loginServiceInstance.logout();
-        setUserStatus(!userStatus);
-        const navigate = useNavigate();
-        navigate('/home');
+        logout();
     };
 
     return (
@@ -64,7 +65,7 @@ export default function NavBar() {
                     <div className={styles.item} style={{ left: itemLeft }}>
                         <Link to='/contacto'>Contacto</Link>
                     </div>
-                    {!userStatus ? (
+                    {userStatus === false ? (
                         <div className={styles.item} style={{ left: itemLeft }}>
                             <Link to='/login'>Login</Link>
                         </div>
