@@ -3,7 +3,7 @@ import {
     ContentTypeInterceptor,
     AuthorizationInterceptor,
     QueryString,
-    AddHeaderInterceptor,
+    //AddHeaderInterceptor,
 } from '@miracledevs/paradigm-web-fetch';
 
 export class ApiClient {

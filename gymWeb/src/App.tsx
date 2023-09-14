@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import NavBar from './components/Navbar/NavBar';
 import Login from './components/Login/Login';
@@ -6,9 +6,13 @@ import Contacto from './components/Contacto/Contacto';
 import Register from './components/Register/Register';
 import Footer from './components/Footer/Footer';
 import Admin from './components/Admin/Admin';
-import UserLogged from './components/UserPage/UserPage';
+import UserPage from './components/UserPage/UserPage';
+import { loginServiceInstance } from './services/http/login/LoginService';
 
 function App() {
+    const userStatus = loginServiceInstance.isAuthenticated();
+    const userPermission = loginServiceInstance.isAuthorizedTo();
+
     return (
         <>
             <BrowserRouter>
@@ -16,10 +20,31 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/login' element={<Login />} />
+
+                     <Route path='/register' element={<Register isForAdmin ={false}/>} />
                     <Route path='/contacto' element={<Contacto />} />
-                    <Route path='/register' element={<Register isForAdmin ={false}/>} />
-                    <Route path='/admin' element={<Admin />} />
-                    <Route path='/user' element={<UserLogged />} />
+
+                    {userStatus && userPermission?.role_id === 1 ? (
+                        <>
+                            <Route path='/admin' element={<Admin />} />
+                        </>
+                    ) : userStatus && userPermission?.role_id === 2 ? (
+                        <>
+                            <Route path='/user' element={<UserPage />} />
+                        </>
+                    ) : (
+                        <>
+                            <Route
+                                path='/admin'
+                                element={<Navigate to='/login' />}
+                            />
+                            <Route
+                                path='/user'
+                                element={<Navigate to='/login' />}
+                            />
+                        </>
+                    )}
+
                 </Routes>
                 <Footer />
             </BrowserRouter>
