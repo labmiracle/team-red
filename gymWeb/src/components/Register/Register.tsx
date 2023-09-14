@@ -9,28 +9,29 @@ interface DateOfBirth {
     year: string;
 }
 
-interface RegisterProps {
-    isForAdmin: boolean;
-}
+// interface RegisterProps {
+//     isForAdmin: boolean;
+// }
 
-const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+const Register: React.FC /*<RegisterProps>*/ = (/*{ isForAdmin }*/) => {
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
     const [dni, setDNI] = useState('');
     const [dniError, setDNIError] = useState('');
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
-    const [dateOfBirth, setDateOfBirth] = useState<DateOfBirth>({
+    const [dateofbirth, setDateOfBirth] = useState<DateOfBirth>({
         day: '',
         month: '',
         year: '',
     });
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [phone, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
+    const [state, setState] = useState('');
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [userName, setUserName] = useState('');
+    const [username, setUserName] = useState('');
     const [userNameError, setUserNameError] = useState('');
 
     const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -169,15 +170,20 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
             console.error('Error de red:', error);
         }
     };
-
+    const convertMonth = (monthString: string): string => {
+        const monthIndex = months.indexOf(monthString) + 1;
+        return monthIndex < 10 ? `0${monthIndex}` : `${monthIndex}`;
+    };
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        console.log('Submit button clicked');
         const dniValue = parseInt(dni, 10);
         const phoneValue = parseInt(phone, 10);
-        const dateOfBirthString = `${dateofbirth.year}-${dateofbirth.month}-${dateofbirth.day}`;
+        const dateOfBirthStringMonth = convertMonth(dateofbirth.month);
+        const dateOfBirthString = `${dateofbirth.year}-${dateOfBirthStringMonth}-${dateofbirth.day}`;
         // Agregar la lógica para enviar los datos del formulario al servidor
         const userData: IUser = {
-            id: 500,
+            id: 501,
             firstname,
             lastname,
             dni: dniValue,
@@ -193,6 +199,7 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
             role_id: 2,
         };
         handleNewUser(userData);
+        console.log(userData);
 
         // enviar la info de userDaa al backend
 
@@ -209,6 +216,7 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
 
         setAddress('');
         setCity('');
+        setState('');
         setPassword('');
         setDNIError('');
         setEmailError('');
