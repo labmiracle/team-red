@@ -7,7 +7,11 @@ interface DateOfBirth {
   year: string;
 }
 
-const Register: React.FC = () => {
+interface RegisterProps {
+  isForAdmin: boolean;
+}
+
+  const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dni, setDNI] = useState('');
@@ -44,16 +48,19 @@ const Register: React.FC = () => {
 
   const handleDNIChange = (event: ChangeEvent<HTMLInputElement>) => {
     const dniValue = event.target.value;
-    setDNI(dniValue);
-  
-    if (dniValue.length === 8) {
-      if (/^\d{8}$/.test(dniValue)) {
-        setDNIError('');
+
+    if (dniValue.length <= 8) {
+      setDNI(dniValue);
+
+      if (dniValue.length === 8) {
+        if (/^\d{8}$/.test(dniValue)) {
+          setDNIError('');
+        } else {
+          setDNIError('Ingrese los 8 números de su D.N.I. sin puntos');
+        }
       } else {
-        setDNIError('Ingrese los 8 números de su D.N.I. sin puntos');
+        setDNIError('');
       }
-    } else {
-      setDNIError('');
     }
   };
 
@@ -117,26 +124,13 @@ const Register: React.FC = () => {
     }
   };
 
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    if (value.length <= 15) {
-    setPassword(value)};
-
-  
-    if (value.length < 8 || value.length > 15) {
-      setPasswordError('La contraseña debe tener entre 8 y 15 caracteres');
-    } else {
-      setPasswordError('');
-    }
-  };
-
   const handleUserNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     if (value.length <= 15) {
     setUserName(value)};
 
   
-    if (value.length < 8 || value.length > 15) {
+    if (value.length < 8) {
       setUserNameError('El usuario debe tener entre 5 y 15 caracteres');
     } else {
       setUserNameError('');
@@ -144,42 +138,17 @@ const Register: React.FC = () => {
   };
 
 
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    if (value.length <= 15) {
+    setPassword(value)};
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    // Agregar la lógica para enviar los datos del formulario al servidor
-    const userData = {
-      firstName,
-      lastName,
-      dni,
-      email,
-      dateOfBirth,
-      phoneNumber,
-      address,
-      city,
-      password, 
-    };
-
-    // enviar la info de userDaa al backend
   
-    setFirstName('');
-    setLastName('');
-    setDNI('');
-    setEmail('');
-    setDateOfBirth({
-      day: '',
-      month: '',
-      year: '',
-    });
-    setPhoneNumber('');
-
-    setAddress('');
-    setCity('');
-    setPassword('');
-    setDNIError('');
-    setEmailError('');
-  
+    if (value.length < 8) {
+      setPasswordError('La contraseña debe tener entre 8 y 15 caracteres');
+    } else {
+      setPasswordError('');
+    }
   };
 
   const daysInMonth = (month: number, year: number) => {
@@ -207,6 +176,35 @@ const Register: React.FC = () => {
     { length: daysInMonth(months.indexOf(dateOfBirth.month) + 1, parseInt(dateOfBirth.year, 10)) },
     (_, index) => index + 1
   ) : [];
+
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const userData = {
+      firstName,
+      lastName,
+      dni,
+      email,
+      dateOfBirth,
+      phoneNumber,
+      address,
+      city,
+      password,
+    };
+
+    // Ejecutar la lógica correspondiente según la página
+    if (isForAdmin) {
+      // Lógica para administradores (por ejemplo, enviar a una API privada)
+    } else {
+      // Lógica para usuarios públicos (por ejemplo, enviar a una API pública)
+    }
+
+    // Restablecer los valores del formulario
+    // ...
+  };
+
+  // Resto del componente
 
   return (
     <form className={styles.registerContainer} onSubmit={handleSubmit}>
