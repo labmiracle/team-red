@@ -72,7 +72,10 @@ export default function NavBar() {
                     ) : (
                         <>
                             <div>
-                                <Link className={styles.miespacio} to='/'>
+                                <Link
+                                    className={styles.miespacio}
+                                    to='/miespacio'
+                                >
                                     Mi Espacio
                                 </Link>
                             </div>
