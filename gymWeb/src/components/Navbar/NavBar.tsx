@@ -70,16 +70,26 @@ export default function NavBar() {
                             <Link to='/login'>Login</Link>
                         </div>
                     ) : (
-                        <div className={styles.item} style={{ left: itemLeft }}>
-                            <Link to='/'>
-                                <p
-                                    style={{ color: 'red' }}
-                                    onClick={handleLogOut}
-                                >
-                                    LogOut
-                                </p>
-                            </Link>
-                        </div>
+                        <>
+                            <div>
+                                <Link className={styles.miespacio} to='/'>
+                                    Mi Espacio
+                                </Link>
+                            </div>
+                            <div
+                                className={styles.item}
+                                style={{ left: itemLeft }}
+                            >
+                                <Link to='/'>
+                                    <p
+                                        style={{ color: 'red' }}
+                                        onClick={handleLogOut}
+                                    >
+                                        LogOut
+                                    </p>
+                                </Link>
+                            </div>
+                        </>
                     )}
                 </div>
             </div>
