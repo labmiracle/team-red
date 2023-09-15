@@ -65,7 +65,7 @@ CREATE TABLE `history` (
 
 LOCK TABLES `history` WRITE;
 /*!40000 ALTER TABLE `history` DISABLE KEYS */;
-INSERT INTO `history` VALUES (1,'2023-06-06',4444),(1,'2023-06-07',4444),(4,'2023-04-05',4444),(4,'2023-04-07',4444),(123,'2023-05-04',4444);
+INSERT INTO `history` VALUES (1,'2023-06-06',4444),(1,'2023-06-07',4444),(4,'2023-04-05',4444),(4,'2023-04-07',4444);
 /*!40000 ALTER TABLE `history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `user` (
   `lastname` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `dni` int NOT NULL,
   `dateofbirth` date NOT NULL,
-  `phone` int NOT NULL,
+  `phone` bigint NOT NULL,
   `email` varchar(100) COLLATE utf8mb3_unicode_ci NOT NULL,
   `address` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `city` varchar(70) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -151,7 +151,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `dni_UNIQUE` (`dni`),
   KEY `role_id` (`role_id`),
   CONSTRAINT `role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=503 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'gaston','falena',55334411,'1999-12-05',1234341341,'gaston@gmail.com','mendoza 2825','rosario','santa fe','gaston','fale1234','2023-06-07',2),(2,'antonela','commisso',55555555,'1999-11-11',123132131,'anto@gmailcom','zeballos 4000','rosario','santa fe','anto','comi1234','2023-07-07',1),(3,'tamara','grunseid',341345,'1999-05-05',1231232113,'tami@gmail.com','zeballos 5000','rosario','santa fe','tami','tami1234','2023-04-09',2),(4,'federico','lopumo',3144314,'1999-07-10',341341341,'fede@gmail.,com','zeballos 200','rosario','santa fe','fede','fede1234','2023-04-07',2),(7,'string','string',0,'1999-02-05',0,'string','string','string','string','string','$2b$10$MQVePyyntOnxfNC9Z1MKE.A11BWXiyUIDI964aDiRmEjpuI9Y77mC','2023-05-02',2),(12,'hola1','string1',1234,'1995-05-05',123,'str123ing123','str123ing','stri123ng','str123ing','st23rin4g','$2b$10$U/AimJHyYB6tqY8RCvbwo.pPxv6BikNI5wmQczbZjh8QcnhaNycB.','2023-05-05',2),(34,'strin1g','st1ring',134134,'1994-04-04',13413140,'string1341@gmail.com','str13ing','str134ing','st134ring','str13i13ng','$2b$10$YzzkqHyeYRV3Nc6ggCSNke/OePFVwRZ.glIn06Ol0xgI0ErvmWZgG','2023-05-04',2),(120,'string113','string1',13413340,'1994-04-04',1340,'strin1343414g','string','string','string','admin','$2b$10$aaN5Topl1PthZ1OyAbXHqOUgPgUi.WJKsSzmncNtO8heRRaxCmaWC','2023-04-04',1),(123,'hola','string',123,'1995-05-05',123,'str123ing','str123ing','stri123ng','str123ing','st23ring','$2b$10$JDXBNg842hTF9pjbIoQuzeg.oV/JhCbEssuzTEqiCbyKoJ7R4FJMy','2023-05-04',1),(124,'Nombreasd','Apellidoasd',123123,'1990-01-01',123213,'email@asdasdas.com','asdsadasdas','asdasds','Proviasdasdncia','usernaaasdme','$2b$10$KUfjX1A.AUT9ueMp9qwHSeDCBzDtVg99W.5RkNTZ6aQqyh60gx4/a','1990-01-01',2),(127,'sadsadasd','asdsad',1231231,'1990-01-01',123213,'e2mail@a12sdasdas.com','asdsa2dasdas','asd2asds','Pro2viasdasdncia','user2naaasdasde','$2b$10$BFkAY6e5EhGQ7bh4HR5rK.TE7FhLIQ9WnN5DgrEvjU0vcNkRbUwSy','1990-01-01',2);
+INSERT INTO `user` VALUES (1,'gaston','falena',55334411,'1999-12-05',1234341341,'gaston@gmail.com','mendoza 2825','rosario','santa fe','gaston','fale1234','2023-06-07',2),(2,'antonela','commisso',55555555,'1999-11-11',123132131,'anto@gmailcom','zeballos 4000','rosario','santa fe','anto','comi1234','2023-07-07',1),(3,'tamara','grunseid',341345,'1999-05-05',1231232113,'tami@gmail.com','zeballos 5000','rosario','santa fe','tami','tami1234','2023-04-09',2),(4,'federico','lopumo',3144314,'1999-07-10',341341341,'fede@gmail.,com','zeballos 200','rosario','santa fe','fede','fede1234','2023-04-07',2),(34,'strin1g','st1ring',134134,'1994-04-04',13413140,'string1341@gmail.com','str13ing','str134ing','st134ring','str13i13ng','$2b$10$YzzkqHyeYRV3Nc6ggCSNke/OePFVwRZ.glIn06Ol0xgI0ErvmWZgG','2023-05-04',2),(120,'string113','string1',13413340,'1994-04-04',1340,'strin1343414g','string','string','string','admin','$2b$10$aaN5Topl1PthZ1OyAbXHqOUgPgUi.WJKsSzmncNtO8heRRaxCmaWC','2023-04-04',1),(124,'Nombreasd','Apellidoasd',123123,'1990-01-01',123213,'email@asdasdas.com','asdsadasdas','asdasds','Proviasdasdncia','usernaaasdme','$2b$10$KUfjX1A.AUT9ueMp9qwHSeDCBzDtVg99W.5RkNTZ6aQqyh60gx4/a','1990-01-01',2),(127,'sadsadasd','asdsad',1231231,'1990-01-01',123213,'e2mail@a12sdasdas.com','asdsa2dasdas','asd2asds','Pro2viasdasdncia','user2naaasdasde','$2b$10$BFkAY6e5EhGQ7bh4HR5rK.TE7FhLIQ9WnN5DgrEvjU0vcNkRbUwSy','1990-01-01',2),(128,'Nombre123','Apellido123',1231233,'1990-01-01',213123213,'email12123@gmail.com','123123','Ciudad123','Provincia123','usernam2131e','$2b$10$JOVlU3kLp6Cp5Cg5HOygeel/TdQnenBPxytWgLp7NkPWx23amqCZO','1990-01-01',2),(129,'Nombre123s','Apellidoasda',314131341,'1990-01-01',134134134,'email@gmail.com','Domicilioasd','Ciudadasdasd','Provinciaasdad','usernameaasd','$2b$10$e9HMJL4VSkr36lWLQpMtTOCgklZPuLY4P3i53gvHuFmIvLqrWrlbu','1990-01-01',2),(501,'asdasasdasd','asdasdasd',43131414,'2007-12-18',1231323112,'asdasd@gmail.com','jasijjasijasji','jasjdiasjdi','ijasjiasj','ijasdjasidjsi','$2b$10$wLr4Oxi./AZnzliUx.UIFu1w6WIfbMeORuSP2nxZbzREMQach0zFy','1999-05-05',2),(502,'asdadasd','hasudhasdh',23512653,'2007-09-17',1265321435,'gashasgdas@gmail.com','ijasjaisuda','jajdijiasj','jasiajsdi','jasdiajs','$2b$10$XxTbMlz/8Q0KgD4Vz/Yl7.Vdk6mtEuciMe7bL3kujNEboNO437G.6','1999-05-05',2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -173,4 +173,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-12 19:05:53
+-- Dump completed on 2023-09-15 17:22:51

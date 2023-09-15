@@ -18,6 +18,13 @@ export class UserService {
     async newUser(user: IUser): Promise<IUser> {
         return await this.apiClient.post('users', {}, JSON.stringify(user));
     }
+    async newUserRegister(user: IUser): Promise<IUser> {
+        return await this.apiClient.post(
+            'auth/register',
+            {},
+            JSON.stringify(user)
+        );
+    }
 
     async delete(id: number): Promise<void> {
         const url = `users/${id}`;
