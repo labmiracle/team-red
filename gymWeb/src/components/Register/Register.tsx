@@ -165,7 +165,7 @@ const Register: React.FC /*<RegisterProps>*/ = (/*{ isForAdmin }*/) => {
     const handleNewUser = async (user: IUser) => {
         try {
             console.log(user);
-            return await userServiceInstance.newUser(user);
+            return await userServiceInstance.newUserRegister(user);
         } catch (error) {
             console.error('Error de red:', error);
         }
@@ -183,7 +183,6 @@ const Register: React.FC /*<RegisterProps>*/ = (/*{ isForAdmin }*/) => {
         const dateOfBirthString = `${dateofbirth.year}-${dateOfBirthStringMonth}-${dateofbirth.day}`;
         // Agregar la lógica para enviar los datos del formulario al servidor
         const userData: IUser = {
-            id: 501,
             firstname,
             lastname,
             dni: dniValue,

@@ -53,27 +53,29 @@ export class LoginController extends ApiController {
             const dniValid = await this.auth.validateDni(user);
             if (usernameValid) {
                 console.log(usernameValid);
-                this.httpContext.response.status(404).send("The user already exists");
+                this.httpContext.response.status(400).send("The user already exists");
                 return;
             }
             if (emailValid) {
-                this.httpContext.response.status(404).send("The email already exists");
+                this.httpContext.response.status(400).send("The email already exists");
                 return;
             }
             if (dniValid) {
-                this.httpContext.response.status(404).send("The dni already exists");
+                this.httpContext.response.status(400).send("The dni already exists");
                 return;
             }
             const fields: (string | boolean)[] = await this.auth.validateFields(user);
-            if (fields[1]) {
-                this.httpContext.response.status(404).send(fields[0]);
+            if (!fields[1]) {
+                this.httpContext.response.status(400).send(fields[0]);
                 return;
             }
-
+            console.log(user);
             this.auth.registerUser(user);
 
             this.httpContext.response.sendStatus(201);
-        } catch {
+        } catch (error) {
+            console.log(user);
+            console.log(error);
             this.httpContext.response.sendStatus(500);
 
             return;

@@ -54,10 +54,12 @@ export class UserController extends ApiController {
             // user.password = await bcrypt.hash(user.password, salt);
             // const metadata: InsertionResult<number> = await this.repo.insertOne(user);
             // user.id = metadata.insertId;
+            console.log(user);
             this.auth.registerUser(user);
             this.httpContext.response.status(201).send(user);
             return user;
         } catch (error) {
+            console.log(user);
             console.log("newUser:", error);
             this.httpContext.response.sendStatus(500);
             return;
