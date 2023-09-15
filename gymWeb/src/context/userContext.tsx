@@ -5,7 +5,6 @@ import {
     ReactNode,
     useEffect,
 } from 'react';
-import { loginServiceInstance } from '../services/http/login/LoginService';
 
 interface UserContextType {
     userStatus: boolean;
@@ -31,8 +30,13 @@ export function UserProvider({ children }: UserProviderProps) {
     const [userStatus, setUserStatus] = useState(false);
 
     useEffect(() => {
-        setUserStatus(userStatus);
-    }, [userStatus]);
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (jwtToken) {
+            setUserStatus(true);
+        } else {
+            setUserStatus(false);
+        }
+    }, []);
 
     const login = () => {
         setUserStatus(true);
