@@ -22,18 +22,19 @@ export class LoginService {
                 if (!response.ok) {
                     throw new Error('Error en la solicitud');
                 }
+
                 return response.text();
             })
             .then(data => {
                 const jwtToken = data;
                 localStorage.setItem('jwtToken', jwtToken);
+                const token = localStorage.getItem('jwtToken') as string;
+                this.apiClient.authorize(token);
             })
             .catch(error => {
                 console.error('Error:', error);
             });
 
-        const token = localStorage.getItem('jwtToken') as string;
-        this.apiClient.authorize(token);
         return;
     }
 

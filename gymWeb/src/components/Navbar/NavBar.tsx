@@ -3,12 +3,11 @@ import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link as ScrollLink } from 'react-scroll';
 import styles from './NavBar.module.css';
-//import { loginServiceInstance } from '../../services/http/login/LoginService';
 import { useUser } from '../../context/userContext';
 import { loginServiceInstance } from '../../services/http/login/LoginService';
 
 export default function NavBar() {
-    const { userStatus } = useUser();
+    const { userStatus, logout } = useUser();
     console.log('estado en navbar', userStatus);
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
@@ -24,6 +23,7 @@ export default function NavBar() {
 
     const handleLogOut = () => {
         loginServiceInstance.logout();
+        logout();
     };
 
     return (

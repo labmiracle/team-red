@@ -5,9 +5,13 @@ import {
     ReactNode,
     useEffect,
 } from 'react';
+import { loginServiceInstance } from '../services/http/login/LoginService';
 
 interface UserContextType {
     userStatus: boolean;
+    setUserStatus: (status: boolean) => void;
+    login: () => void;
+    logout: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -28,16 +32,21 @@ export function UserProvider({ children }: UserProviderProps) {
     const [userStatus, setUserStatus] = useState(false);
 
     useEffect(() => {
-        const jwtToken = localStorage.getItem('jwtToken');
-        if (jwtToken) {
-            setUserStatus(true);
-        } else {
-            setUserStatus(false);
-        }
+        setUserStatus(loginServiceInstance.isAuthenticated());
     }, []);
 
+    const login = () => {
+        setUserStatus(!loginServiceInstance.isAuthenticated());
+    };
+
+    const logout = () => {
+        setUserStatus(loginServiceInstance.isAuthenticated());
+    };
+
     return (
-        <UserContext.Provider value={{ userStatus }}>
+        <UserContext.Provider
+            value={{ userStatus, setUserStatus, login, logout }}
+        >
             {children}
         </UserContext.Provider>
     );
