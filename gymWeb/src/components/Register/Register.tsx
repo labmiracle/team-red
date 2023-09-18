@@ -9,11 +9,11 @@ interface DateOfBirth {
     year: string;
 }
 
-// interface RegisterProps {
-//     isForAdmin: boolean;
-// }
+interface RegisterProps {
+    isForAdmin: boolean;
+}
 
-const Register: React.FC /*<RegisterProps>*/ = (/*{ isForAdmin }*/) => {
+const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
     const [dni, setDNI] = useState('');
