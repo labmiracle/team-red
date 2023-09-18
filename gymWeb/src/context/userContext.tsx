@@ -8,8 +8,6 @@ import {
 
 interface UserContextType {
     userStatus: boolean;
-    login: () => void;
-    logout: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -38,16 +36,8 @@ export function UserProvider({ children }: UserProviderProps) {
         }
     }, []);
 
-    const login = () => {
-        setUserStatus(true);
-    };
-
-    const logout = () => {
-        setUserStatus(false);
-    };
-
     return (
-        <UserContext.Provider value={{ userStatus, login, logout }}>
+        <UserContext.Provider value={{ userStatus }}>
             {children}
         </UserContext.Provider>
     );

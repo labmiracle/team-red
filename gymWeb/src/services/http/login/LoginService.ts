@@ -11,19 +11,27 @@ export class LoginService {
         //         JSON.stringify(authUser)
         //     );
 
-        const response = await fetch(`${this.baseUrl}/auth/login`, {
+        await fetch(`${this.baseUrl}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(authUser),
-        });
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la solicitud');
+                }
+                return response.text();
+            })
+            .then(data => {
+                const jwtToken = data;
+                localStorage.setItem('jwtToken', jwtToken);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
 
-        const jwtToken = await response.text();
-        //const payload = jwtToken.split('.')[1];
-        // const decodedPayload = atob(payload);
-        // const parsedPayload = JSON.parse(decodedPayload);
-        localStorage.setItem('jwtToken', jwtToken);
         const token = localStorage.getItem('jwtToken') as string;
         this.apiClient.authorize(token);
         return;

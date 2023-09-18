@@ -8,8 +8,8 @@ import { useUser } from '../../context/userContext';
 import { loginServiceInstance } from '../../services/http/login/LoginService';
 
 export default function NavBar() {
-    const { userStatus, logout } = useUser();
-
+    const { userStatus } = useUser();
+    console.log('estado en navbar', userStatus);
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
 
@@ -24,7 +24,6 @@ export default function NavBar() {
 
     const handleLogOut = () => {
         loginServiceInstance.logout();
-        logout();
     };
 
     return (
