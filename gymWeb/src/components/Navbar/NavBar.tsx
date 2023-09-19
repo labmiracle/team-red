@@ -73,14 +73,16 @@ export default function NavBar() {
                                 {loginServiceInstance.isAuthorizedTo()
                                     ?.role_id === 1 ? (
                                     <Link
-                                        className={styles.miespacio}
+                                        className={styles.itemMiespacio}
+                                        style={{ left: itemLeft }}
                                         to='/admin'
                                     >
                                         Mi Espacio
                                     </Link>
                                 ) : (
                                     <Link
-                                        className={styles.miespacio}
+                                        className={styles.itemMiespacio}
+                                        style={{ left: itemLeft }}
                                         to='/user'
                                     >
                                         Mi Espacio
