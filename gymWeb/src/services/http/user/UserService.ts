@@ -1,5 +1,9 @@
 import { ApiClient, apiClientInstance } from '../ApiClient';
-import { IUser, IEditedUser } from '../../../interfaces/User.interface';
+import {
+    IUser,
+    IEditedUser,
+    IUserRegister,
+} from '../../../interfaces/User.interface';
 
 export class UserService {
     constructor(private readonly apiClient: ApiClient) {}
@@ -12,13 +16,14 @@ export class UserService {
     }
 
     async getbyId(id: number): Promise<IUser> {
-        return await this.apiClient.get('users', { id });
+        const url = `users/${id}`;
+        return await this.apiClient.getByid(url);
     }
 
     async newUser(user: IUser): Promise<IUser> {
         return await this.apiClient.post('users', {}, JSON.stringify(user));
     }
-    async newUserRegister(user: IUser): Promise<IUser> {
+    async newUserRegister(user: IUserRegister): Promise<IUser> {
         return await this.apiClient.post(
             'auth/register',
             {},

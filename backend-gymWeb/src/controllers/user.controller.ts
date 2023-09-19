@@ -42,6 +42,7 @@ export class UserController extends ApiController {
         try {
             return await this.repo.getById(id);
         } catch (error) {
+            console.log("get by id:", error);
             this.httpContext.response.sendStatus(404);
             return;
         }
@@ -50,10 +51,6 @@ export class UserController extends ApiController {
     @Action({ route: "/", method: HttpMethod.POST, fromBody: true, filters: [AdminFilter] })
     async newUser(user: IUser): Promise<IUser> {
         try {
-            // const salt = await bcrypt.genSalt(10);
-            // user.password = await bcrypt.hash(user.password, salt);
-            // const metadata: InsertionResult<number> = await this.repo.insertOne(user);
-            // user.id = metadata.insertId;
             console.log(user);
             this.auth.registerUser(user);
             this.httpContext.response.status(201).send(user);

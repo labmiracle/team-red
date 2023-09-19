@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './Login.module.css';
 import { IAuthUser } from '../../interfaces/User.interface';
-
-import { useUser } from '../../context/userContext';
 import { loginServiceInstance } from '../../services/http/login/LoginService';
+import { useUser } from '../../context/userContext';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
     const { login } = useUser();
     const authUser: IAuthUser = { username: username, password: password };
 

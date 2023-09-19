@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import styles from './Register.module.css';
-import { IUser } from '../../interfaces/User.interface';
+import { IUserRegister } from '../../interfaces/User.interface';
 import { userServiceInstance } from '../../services/http/user/UserService';
 
 interface DateOfBirth {
@@ -9,11 +9,11 @@ interface DateOfBirth {
     year: string;
 }
 
-// interface RegisterProps {
-//     isForAdmin: boolean;
-// }
+interface RegisterProps {
+    isForAdmin: boolean;
+}
 
-const Register: React.FC /*<RegisterProps>*/ = (/*{ isForAdmin }*/) => {
+const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
     const [dni, setDNI] = useState('');
@@ -162,7 +162,7 @@ const Register: React.FC /*<RegisterProps>*/ = (/*{ isForAdmin }*/) => {
             setUserNameError('');
         }
     };
-    const handleNewUser = async (user: IUser) => {
+    const handleNewUser = async (user: IUserRegister) => {
         try {
             console.log(user);
             return await userServiceInstance.newUserRegister(user);
@@ -182,7 +182,7 @@ const Register: React.FC /*<RegisterProps>*/ = (/*{ isForAdmin }*/) => {
         const dateOfBirthStringMonth = convertMonth(dateofbirth.month);
         const dateOfBirthString = `${dateofbirth.year}-${dateOfBirthStringMonth}-${dateofbirth.day}`;
         // Agregar la lógica para enviar los datos del formulario al servidor
-        const userData: IUser = {
+        const userData: IUserRegister = {
             firstname,
             lastname,
             dni: dniValue,

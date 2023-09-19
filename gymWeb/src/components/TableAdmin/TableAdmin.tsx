@@ -83,7 +83,18 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
     const filteredUsers = users.filter(user =>
         user.lastname.toUpperCase().startsWith(filterTerm)
     );
+    const formatDate = (pay_date: string): string => {
+        const fecha = new Date(pay_date);
+        const fechaFormateada = fecha.toISOString().split('T')[0];
+        return fechaFormateada;
+    };
 
+    const isUserActive = (pay_date: string): boolean => {
+        const date = new Date(pay_date);
+        date.setMonth(date.getMonth() + 1);
+        const currentDate = new Date();
+        return date.getTime() > currentDate.getTime();
+    };
     return (
         <>
             <div>
@@ -110,6 +121,8 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                         <th>Email</th>
                         <th>Domicilio</th>
                         <th>Ciudad</th>
+                        <th>Fecha de pago</th>
+                        <th>Estado</th>
 
                         <th>Acciones</th>
                     </tr>
@@ -198,7 +211,7 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                                         />
                                     </>
                                 ) : (
-                                    `${user.dateofbirth}`
+                                    `${formatDate(user.dateofbirth)}`
                                 )}
                             </td>
                             <td>
@@ -292,6 +305,35 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
                                 ) : (
                                     `${user.city}`
                                 )}
+                            </td>
+                            <td>
+                                {' '}
+                                {editMode[user.id] ? (
+                                    <>
+                                        <input
+                                            type='text'
+                                            value={
+                                                editedValues[user.id]
+                                                    ?.pay_date ?? user.pay_date
+                                            }
+                                            onChange={e =>
+                                                handleEditChange(
+                                                    user.id,
+                                                    'pay_date',
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                    </>
+                                ) : (
+                                    `${formatDate(user.pay_date)}`
+                                )}
+                            </td>
+                            <td>
+                                {' '}
+                                {isUserActive(user.pay_date)
+                                    ? 'Activo'
+                                    : 'Inactivo'}
                             </td>
 
                             <td>

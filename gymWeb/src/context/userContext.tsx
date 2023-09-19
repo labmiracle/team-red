@@ -9,6 +9,7 @@ import { loginServiceInstance } from '../services/http/login/LoginService';
 
 interface UserContextType {
     userStatus: boolean;
+    setUserStatus: (status: boolean) => void;
     login: () => void;
     logout: () => void;
 }
@@ -31,19 +32,21 @@ export function UserProvider({ children }: UserProviderProps) {
     const [userStatus, setUserStatus] = useState(false);
 
     useEffect(() => {
-        setUserStatus(userStatus);
-    }, [userStatus]);
+        setUserStatus(loginServiceInstance.isAuthenticated());
+    }, []);
 
     const login = () => {
-        setUserStatus(true);
+        setUserStatus(!loginServiceInstance.isAuthenticated());
     };
 
     const logout = () => {
-        setUserStatus(false);
+        setUserStatus(loginServiceInstance.isAuthenticated());
     };
 
     return (
-        <UserContext.Provider value={{ userStatus, login, logout }}>
+        <UserContext.Provider
+            value={{ userStatus, setUserStatus, login, logout }}
+        >
             {children}
         </UserContext.Provider>
     );

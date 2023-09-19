@@ -21,7 +21,10 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='/login' element={<Login />} />
 
-                     <Route path='/register' element={<Register isForAdmin ={false}/>} />
+                    <Route
+                        path='/register'
+                        element={<Register isForAdmin={false} />}
+                    />
                     <Route path='/contacto' element={<Contacto />} />
 
                     {userStatus && userPermission?.role_id === 1 ? (
@@ -44,7 +47,6 @@ function App() {
                             />
                         </>
                     )}
-
                 </Routes>
                 <Footer />
             </BrowserRouter>

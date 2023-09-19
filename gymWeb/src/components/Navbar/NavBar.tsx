@@ -3,13 +3,11 @@ import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link as ScrollLink } from 'react-scroll';
 import styles from './NavBar.module.css';
-//import { loginServiceInstance } from '../../services/http/login/LoginService';
 import { useUser } from '../../context/userContext';
 import { loginServiceInstance } from '../../services/http/login/LoginService';
 
 export default function NavBar() {
     const { userStatus, logout } = useUser();
-
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
 
@@ -70,16 +68,41 @@ export default function NavBar() {
                             <Link to='/login'>Login</Link>
                         </div>
                     ) : (
-                        <div className={styles.item} style={{ left: itemLeft }}>
-                            <Link to='/'>
-                                <p
-                                    style={{ color: 'red' }}
-                                    onClick={handleLogOut}
-                                >
-                                    LogOut
-                                </p>
-                            </Link>
-                        </div>
+                        <>
+                            <div>
+                                {loginServiceInstance.isAuthorizedTo()
+                                    ?.role_id === 1 ? (
+                                    <Link
+                                        className={styles.itemMiespacio}
+                                        style={{ left: itemLeft }}
+                                        to='/admin'
+                                    >
+                                        Mi Espacio
+                                    </Link>
+                                ) : (
+                                    <Link
+                                        className={styles.itemMiespacio}
+                                        style={{ left: itemLeft }}
+                                        to='/user'
+                                    >
+                                        Mi Espacio
+                                    </Link>
+                                )}
+                            </div>
+                            <div
+                                className={styles.item}
+                                style={{ left: itemLeft }}
+                            >
+                                <Link to='/'>
+                                    <p
+                                        style={{ color: 'red' }}
+                                        onClick={handleLogOut}
+                                    >
+                                        LogOut
+                                    </p>
+                                </Link>
+                            </div>
+                        </>
                     )}
                 </div>
             </div>
