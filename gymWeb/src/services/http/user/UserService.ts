@@ -16,7 +16,8 @@ export class UserService {
     }
 
     async getbyId(id: number): Promise<IUser> {
-        return await this.apiClient.get('users', { id });
+        const url = `users/${id}`;
+        return await this.apiClient.getByid(url);
     }
 
     async newUser(user: IUser): Promise<IUser> {
