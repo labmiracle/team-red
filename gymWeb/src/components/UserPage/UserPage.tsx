@@ -2,7 +2,7 @@ import Schedule from '../Schedule/Schedule';
 import styles from './UserPage.module.css';
 
 let user = {
-    name: 'Juan',
+    name: 'JuanJuan',
     lastName: 'Perez',
     dni: 12345678,
     status: 'Cuota la día',
