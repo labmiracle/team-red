@@ -32,10 +32,11 @@
   margin-left: 100px;
   font-size: 1.3rem;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   color: black;
   background-color: rgb(242, 235, 235);
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 
 .itemMiespacio:hover {

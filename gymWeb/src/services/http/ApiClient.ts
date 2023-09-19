@@ -37,6 +37,15 @@ export class ApiClient {
         ).json()) as TResult;
     }
 
+    async getByid<TResult>(
+        url: string,
+        queryString?: QueryString
+    ): Promise<TResult> {
+        return (await (
+            await this.httpClient.get(`${this.baseUrl}/${url}`, queryString)
+        ).json()) as TResult;
+    }
+
     async post<TResult>(
         url: string,
         queryString?: QueryString,
