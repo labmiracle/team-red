@@ -8,10 +8,9 @@ import { loginServiceInstance } from '../../services/http/login/LoginService';
 
 export default function NavBar() {
     const { userStatus, logout } = useUser();
-    console.log('estado en navbar', userStatus);
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
-    const userPermission = loginServiceInstance.isAuthorizedTo();
+
     const handleToggleMenu = () => {
         setMenuOpen(!menuOpen);
         if (menuOpen) {
@@ -71,21 +70,24 @@ export default function NavBar() {
                     ) : (
                         <>
                             <div>
-                                {userPermission?.role_id === 1 ? (
+                                {loginServiceInstance.isAuthorizedTo()
+                                    ?.role_id === 1 ? (
                                     <Link
-                                        className={styles.miespacio}
+                                        className={styles.itemMiespacio}
+                                        style={{ left: itemLeft }}
                                         to='/admin'
                                     >
                                         Mi Espacio
                                     </Link>
-                                ) : userPermission?.role_id === 2 ? (
+                                ) : (
                                     <Link
-                                        className={styles.miespacio}
+                                        className={styles.itemMiespacio}
+                                        style={{ left: itemLeft }}
                                         to='/user'
                                     >
                                         Mi Espacio
                                     </Link>
-                                ) : null}
+                                )}
                             </div>
                             <div
                                 className={styles.item}
