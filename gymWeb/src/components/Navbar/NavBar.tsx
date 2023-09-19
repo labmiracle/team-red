@@ -11,7 +11,7 @@ export default function NavBar() {
     console.log('estado en navbar', userStatus);
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
-
+    const userPermission = loginServiceInstance.isAuthorizedTo();
     const handleToggleMenu = () => {
         setMenuOpen(!menuOpen);
         if (menuOpen) {
@@ -71,12 +71,21 @@ export default function NavBar() {
                     ) : (
                         <>
                             <div>
-                                <Link
-                                    className={styles.miespacio}
-                                    to='/miespacio'
-                                >
-                                    Mi Espacio
-                                </Link>
+                                {userPermission?.role_id === 1 ? (
+                                    <Link
+                                        className={styles.miespacio}
+                                        to='/admin'
+                                    >
+                                        Mi Espacio
+                                    </Link>
+                                ) : userPermission?.role_id === 2 ? (
+                                    <Link
+                                        className={styles.miespacio}
+                                        to='/user'
+                                    >
+                                        Mi Espacio
+                                    </Link>
+                                ) : null}
                             </div>
                             <div
                                 className={styles.item}
