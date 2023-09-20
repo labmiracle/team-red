@@ -23,7 +23,7 @@ export class UserService {
     async newUser(user: IUser): Promise<IUser> {
         return await this.apiClient.post('users', {}, JSON.stringify(user));
     }
-    async newUserRegister(user: IUserRegister): Promise<IUser> {
+    async newUserRegister(user: IUserRegister): Promise<IUserRegister> {
         return await this.apiClient.post(
             'auth/register',
             {},

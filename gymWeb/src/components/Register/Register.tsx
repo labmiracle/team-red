@@ -165,7 +165,9 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
     const handleNewUser = async (user: IUserRegister) => {
         try {
             console.log(user);
-            return await userServiceInstance.newUserRegister(user);
+            await userServiceInstance.newUserRegister(user);
+
+            return;
         } catch (error) {
             console.error('Error de red:', error);
         }
@@ -197,6 +199,12 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
             pay_date: '1999-05-05',
             role_id: 2,
         };
+        try {
+            const respuesta = handleNewUser(userData);
+            console.log(respuesta);
+        } catch (error) {
+            console.log;
+        }
         handleNewUser(userData);
         console.log(userData);
 
