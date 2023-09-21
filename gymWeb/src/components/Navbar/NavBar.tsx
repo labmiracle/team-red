@@ -63,7 +63,7 @@ export default function NavBar() {
                     <div className={styles.item} style={{ left: itemLeft }}>
                         <Link to='/contacto'>Contacto</Link>
                     </div>
-                    {userStatus === false ? (
+                    {loginServiceInstance.isAuthenticated() === false ? (
                         <div className={styles.item} style={{ left: itemLeft }}>
                             <Link to='/login'>Login</Link>
                         </div>
