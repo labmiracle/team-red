@@ -163,9 +163,19 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
         }
     };
     const handleNewUser = async (user: IUserRegister) => {
+        if (!isForAdmin) {
+            try {
+                console.log(user);
+                await userServiceInstance.newUserRegister(user);
+
+                return;
+            } catch (error) {
+                console.error('Error de red:', error);
+            }
+        }
         try {
             console.log(user);
-            await userServiceInstance.newUserRegister(user);
+            await userServiceInstance.newUser(user);
 
             return;
         } catch (error) {
