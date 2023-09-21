@@ -171,6 +171,7 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
                 return;
             } catch (error) {
                 console.error('Error de red:', error);
+                return;
             }
         }
         try {
@@ -180,6 +181,7 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
             return;
         } catch (error) {
             console.error('Error de red:', error);
+            return;
         }
     };
     const convertMonth = (monthString: string): string => {
@@ -211,17 +213,16 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
         };
 
         // agregar el condicional
-        if (isForAdmin!) {
-            try {
-                const respuesta = handleNewUser(userData);
-                console.log(respuesta);
-            } catch (error) {
-                console.log;
-            }
-            handleNewUser(userData);
-            console.log(userData);
-        } //agregar el else acá
-     
+
+        try {
+            const respuesta = handleNewUser(userData);
+            console.log(respuesta);
+        } catch (error) {
+            console.log;
+        }
+        handleNewUser(userData);
+        console.log(userData);
+        //agregar el else acá
 
         // pone todo en blanco
 
