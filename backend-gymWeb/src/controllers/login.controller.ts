@@ -72,7 +72,7 @@ export class LoginController extends ApiController {
             console.log(user);
             this.auth.registerUser(user);
 
-            this.httpContext.response.sendStatus(201);
+            this.httpContext.response.status(201).send("El usuario se ha registrado con exito");
         } catch (error) {
             console.log(user);
             console.log(error);
