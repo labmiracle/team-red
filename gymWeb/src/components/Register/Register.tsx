@@ -199,16 +199,21 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
             pay_date: '1999-05-05',
             role_id: 2,
         };
-        try {
-            const respuesta = handleNewUser(userData);
-            console.log(respuesta);
-        } catch (error) {
-            console.log;
-        }
-        handleNewUser(userData);
-        console.log(userData);
 
-        // enviar la info de userDaa al backend
+        // agregar el condicional
+        if (isForAdmin!) {
+            try {
+                const respuesta = handleNewUser(userData);
+                console.log(respuesta);
+            } catch (error) {
+                console.log;
+            }
+            handleNewUser(userData);
+            console.log(userData);
+        } //agregar el else acá
+     
+
+        // pone todo en blanco
 
         setFirstName('');
         setLastName('');
@@ -220,10 +225,10 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
             year: '',
         });
         setPhoneNumber('');
-
         setAddress('');
         setCity('');
         setState('');
+        setUserName('');
         setPassword('');
         setDNIError('');
         setEmailError('');
