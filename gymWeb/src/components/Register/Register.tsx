@@ -419,7 +419,7 @@ const Register: React.FC<RegisterProps> = ({ isForAdmin }) => {
                 </div>
             </div>
             <div className={styles.formGroup}>
-                <label htmlFor='state'>Estado:</label>
+                <label htmlFor='state'>Provincia:</label>
                 <div className={styles.inputContainer}>
                     <input
                         type='text'

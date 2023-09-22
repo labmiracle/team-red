@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './TableAdmin.module.css';
 import DeleteButton from '../DeleteButton/DeleteButton';
-import NewUserForm from '../NewUserForm/NewUserForm';
+import Register from '../Register/Register';
 import { IUser } from '../../interfaces/User.interface';
 import { userServiceInstance } from '../../services/http/user/UserService';
 
@@ -95,11 +95,20 @@ const TableAdmin: React.FC<TableProps> = ({ users }) => {
         const currentDate = new Date();
         return date.getTime() > currentDate.getTime();
     };
+
+    const [isRegisterVisible, setIsRegisterVisible] = useState(false);
+
+  const toggleRegister = () => {setIsRegisterVisible(!isRegisterVisible)};
+
+    
     return (
         <>
             <div>
-                {' '}
-                <NewUserForm />{' '}
+                <button type='submit' onClick={toggleRegister}>
+                {isRegisterVisible ? 'Oculta Registrar Nuevo Usuario' : 'Muestra Registrar Nuevo Usuario'}
+                </button>
+                {isRegisterVisible && <Register isForAdmin={false} />}
+                
             </div>{' '}
             <div className={styles.filter}>
                 Filtrar por apellido:{' '}

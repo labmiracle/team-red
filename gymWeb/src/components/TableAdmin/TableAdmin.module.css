@@ -13,8 +13,6 @@
     padding: 3px;
     overflow: hidden;
     text-overflow: ellipsis;
-
-
 }
 
 .usertable th {
@@ -51,10 +49,6 @@
     font-size: 16px;
 }
 
-
-
-
-
 .filter {
     font-size: 20px;
 }
@@ -73,3 +67,4 @@
     color: black;
     font-size: 14px;
 }
+
