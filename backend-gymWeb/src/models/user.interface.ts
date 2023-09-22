@@ -14,3 +14,8 @@ export interface IUser {
     pay_date: string;
     role_id: number;
 }
+export interface IUserMail{
+    name: string;
+    email: string;
+    message: string;
+}
