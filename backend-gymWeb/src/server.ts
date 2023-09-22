@@ -10,6 +10,7 @@ import { Configuration } from "./configuration/configuration";
 import { MyFilter } from "./filters/myFilter.filter";
 import { UserController } from "./controllers/user.controller";
 import { LoginController } from "./controllers/login.controller";
+import { ContactoController } from "./controllers/contacto.controller";
 import { AuthFilter } from "./filters/auth.filter";
 
 /**
@@ -34,7 +35,7 @@ export class Server extends ApiServer {
             .use(express.json())
             .listen(port, () => this.logger.debug(`Listening on: http://localhost:${port}`));
 
-        this.registerControllers([HealthController, UserController, LoginController]);
+        this.registerControllers([HealthController, UserController, LoginController, ContactoController]);
         this.routing.ignoreClosedResponseOnFilters();
         this.routing.registerGlobalFilters([MySqlConnectionFilter]);
     }

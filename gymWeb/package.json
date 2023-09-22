@@ -32,6 +32,8 @@
 
     "@miracledevs/paradigm-web-fetch": "^1.0.4",
 
+    "@sendgrid/mail": "^7.7.0",
+
     "aws-sdk": "^2.1448.0",
 
     "axios": "^1.4.0",
