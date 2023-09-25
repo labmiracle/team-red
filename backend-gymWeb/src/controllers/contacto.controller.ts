@@ -2,7 +2,7 @@ import { Action, ApiController, ConfigurationBuilder, Controller, HttpMethod } f
 import { POST, Path } from "typescript-rest";
 import { Configuration } from "../configuration/configuration";
 import { Tags } from "typescript-rest-swagger";
-import sendGrid from "@sendGrid/mail";
+import transporter from "../configuration/mailer";
 import { IUserMail } from "../models/user.interface";
 
 @Tags("Auth")
@@ -20,22 +20,15 @@ export class ContactoController extends ApiController {
     @Path("/contacto")
     @Action({ route: "/contacto", fromBody: true })
     async post(user: IUserMail) {
-        const apikey = "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";
-        sendGrid.setApiKey(apikey);
-        const msg = {
-            to: "gastonfalena4@gmail.com",
-            from: user.email,
-            subject: `Contacto desde gym web por ${user.name}`,
-            text: user.message,
-            html: "<strong>and easy to do anywhere, even with Node.js</strong>",
-        };
-        sendGrid
-            .send(msg)
-            .then(() => {
-                console.log("Email sent");
-            })
-            .catch(error => {
-                console.error(error);
+        try {
+            await transporter.sendMail({
+                from: user.email,
+                to: "gastonfalena@gmail.com",
+                subject: `GYM WEB CONTACTO`,
+                text: `${user.name} envio desde ${user.email} el siguiente mensaje de contacto:\n${user.message}`,
             });
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
