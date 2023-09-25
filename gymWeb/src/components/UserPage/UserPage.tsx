@@ -27,17 +27,15 @@ const UserPage: React.FC = () => {
         { id: 3, title: 'Funcional', time: '6:00 PM', trainer: 'Darío' },
     ];
 
-    const formatDate = (pay_date: string): string => {
-        const fecha = new Date(pay_date);
-        const fechaFormateada = fecha.toISOString().split('T')[0];
-        return fechaFormateada;
-    };
-
-    const isUserActive = (pay_date: string): boolean => {
+    const isUserActive = (pay_date: string): string => {
         const date = new Date(pay_date);
         date.setMonth(date.getMonth() + 1);
         const currentDate = new Date();
-        return date.getTime() > currentDate.getTime();
+        if (date.getTime() > currentDate.getTime()) {
+            return 'Activo';
+        } else {
+            return 'Inactivo';
+        }
     };
 
     return (
@@ -47,9 +45,7 @@ const UserPage: React.FC = () => {
                     <div className={styles.greeting}>
                         <h1>
                             Hola {user?.firstname}! tu estado en GymWeb es:{' '}
-                            {isUserActive(user?.pay_date)
-                                ? 'Activo'
-                                : 'Inactivo'}
+                            {isUserActive(user?.pay_date)}
                         </h1>
                     </div>
                     <table className={styles.usertable}>
@@ -63,7 +59,7 @@ const UserPage: React.FC = () => {
                                 <th>Email</th>
                                 <th>Domicilio</th>
                                 <th>Ciudad</th>
-                                <th>Fecha de pago</th>
+
                                 <th>Estado</th>
                             </tr>
                         </thead>
@@ -79,13 +75,8 @@ const UserPage: React.FC = () => {
                                 <td>{user?.email}</td>
                                 <td>{user?.address}</td>
                                 <td>{user?.city}</td>
-                                <td> {formatDate(user?.pay_date)}</td>
-                                <td>
-                                    {' '}
-                                    {isUserActive(user?.pay_date)
-                                        ? 'Activo'
-                                        : 'Inactivo'}
-                                </td>
+
+                                <td>{isUserActive(user?.pay_date)}</td>
                             </tr>
                         </tbody>
                     </table>
