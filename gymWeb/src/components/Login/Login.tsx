@@ -45,13 +45,19 @@ function Login() {
                 </div>
 
                 <Link to='/'>
-                    <p onClick={handleSubmit}>Login</p>
+                    <p className={styles.loginSubmit} onClick={handleSubmit}>
+                        Login
+                    </p>
                 </Link>
             </form>
 
             <p>
                 Si no estás registrado y quieres hacerlo, haz
-                <Link to='/register'> click aquí</Link>.
+                <Link className={styles.register} to='/register'>
+                    {' '}
+                    click aquí
+                </Link>
+                .
             </p>
         </div>
     );
