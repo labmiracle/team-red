@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link as ScrollLink } from 'react-scroll';
 import styles from './NavBar.module.css';
@@ -10,6 +10,18 @@ export default function NavBar() {
     const { userStatus, logout } = useUser();
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
+
+    console.log('nav user status', userStatus);
+
+    useEffect(() => {
+        if (userStatus === true) {
+            setMenuOpen(false);
+            setItemLeft('-200%');
+        } else {
+            setMenuOpen(true);
+            setItemLeft('-300%');
+        }
+    }, [userStatus]);
 
     const handleToggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -63,7 +75,7 @@ export default function NavBar() {
                     <div className={styles.item} style={{ left: itemLeft }}>
                         <Link to='/contacto'>Contacto</Link>
                     </div>
-                    {loginServiceInstance.isAuthenticated() === false ? (
+                    {userStatus === false ? (
                         <div className={styles.item} style={{ left: itemLeft }}>
                             <Link to='/login'>Login</Link>
                         </div>
