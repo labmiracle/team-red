@@ -10,7 +10,6 @@ export class UserService {
 
     async getAll(): Promise<IUser[]> {
         const token = localStorage.getItem('jwtToken') as string;
-        console.log('estoy acá: ', token);
         this.apiClient.authorize(token);
         return await this.apiClient.get('users');
     }

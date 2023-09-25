@@ -8,9 +8,10 @@ import Footer from './components/Footer/Footer';
 import Admin from './components/Admin/Admin';
 import UserPage from './components/UserPage/UserPage';
 import { loginServiceInstance } from './services/http/login/LoginService';
+import { useUser } from './context/userContext';
 
 function App() {
-    const userStatus = loginServiceInstance.isAuthenticated();
+    const { userStatus } = useUser();
     const userPermission = loginServiceInstance.isAuthorizedTo();
 
     return (
@@ -29,7 +30,10 @@ function App() {
 
                     {userStatus && userPermission?.role_id === 1 ? (
                         <>
-                            <Route path='/admin' element={<Admin />} />
+                            <Route
+                                path='/admin'
+                                element={<Admin users={[]} />}
+                            />
                         </>
                     ) : userStatus && userPermission?.role_id === 2 ? (
                         <>
