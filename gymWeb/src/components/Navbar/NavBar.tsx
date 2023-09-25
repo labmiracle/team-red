@@ -11,8 +11,6 @@ export default function NavBar() {
     const [menuOpen, setMenuOpen] = useState(true);
     const [itemLeft, setItemLeft] = useState('-300%');
 
-    console.log('nav user status', userStatus);
-
     useEffect(() => {
         if (userStatus === true) {
             setMenuOpen(false);
@@ -75,7 +73,7 @@ export default function NavBar() {
                     <div className={styles.item} style={{ left: itemLeft }}>
                         <Link to='/contacto'>Contacto</Link>
                     </div>
-                    {userStatus === false ? (
+                    {loginServiceInstance.isAuthenticated() === false ? (
                         <div className={styles.item} style={{ left: itemLeft }}>
                             <Link to='/login'>Login</Link>
                         </div>

@@ -36,7 +36,6 @@ export class LoginController extends ApiController {
             }
             this.httpContext.response.sendStatus(401);
         } catch (error) {
-            console.log("Login error: ", error);
             this.httpContext.response.sendStatus(500);
 
             return;
@@ -52,7 +51,6 @@ export class LoginController extends ApiController {
             const emailValid = await this.auth.validateEmail(user);
             const dniValid = await this.auth.validateDni(user);
             if (usernameValid) {
-                console.log(usernameValid);
                 this.httpContext.response.status(400).send("The user already exists");
                 return;
             }
@@ -74,8 +72,6 @@ export class LoginController extends ApiController {
 
             this.httpContext.response.status(201).send("El usuario se ha registrado con exito");
         } catch (error) {
-            console.log(user);
-            console.log(error);
             this.httpContext.response.sendStatus(500);
 
             return;

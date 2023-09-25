@@ -30,10 +30,7 @@ function App() {
 
                     {userStatus && userPermission?.role_id === 1 ? (
                         <>
-                            <Route
-                                path='/admin'
-                                element={<Admin users={[]} />}
-                            />
+                            <Route path='/admin' element={<Admin />} />
                         </>
                     ) : userStatus && userPermission?.role_id === 2 ? (
                         <>

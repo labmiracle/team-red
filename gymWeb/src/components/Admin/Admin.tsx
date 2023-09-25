@@ -5,11 +5,7 @@ import Register from '../Register/Register';
 import { IUser } from '../../interfaces/User.interface';
 import { userServiceInstance } from '../../services/http/user/UserService';
 
-interface TableProps {
-    users: IUser[];
-}
-
-const Admin: React.FC<TableProps> = () => {
+const Admin: React.FC = () => {
     const [filterTerm, setFilterTerm] = useState('');
     const [editMode, setEditMode] = useState<{ [userId: number]: boolean }>({});
     const [editedValues, setEditedValues] = useState<{

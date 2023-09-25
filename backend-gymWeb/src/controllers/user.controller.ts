@@ -42,7 +42,6 @@ export class UserController extends ApiController {
         try {
             return await this.repo.getById(id);
         } catch (error) {
-            console.log("get by id:", error);
             this.httpContext.response.sendStatus(404);
             return;
         }
@@ -51,13 +50,10 @@ export class UserController extends ApiController {
     @Action({ route: "/", method: HttpMethod.POST, fromBody: true, filters: [AdminFilter] })
     async newUser(user: IUser): Promise<IUser> {
         try {
-            console.log(user);
             this.auth.registerUser(user);
             this.httpContext.response.status(201).send(user);
             return user;
         } catch (error) {
-            console.log(user);
-            console.log("newUser:", error);
             this.httpContext.response.sendStatus(500);
             return;
         }
@@ -71,7 +67,6 @@ export class UserController extends ApiController {
             await this.repo.delete(id);
             return user;
         } catch (error) {
-            console.log(error);
             this.httpContext.response.sendStatus(500);
             return;
         }
@@ -86,7 +81,6 @@ export class UserController extends ApiController {
             this.httpContext.response.status(200).send(user);
             return user;
         } catch (error) {
-            console.log("EDIT: ", error);
             this.httpContext.response.sendStatus(500);
             return;
         }
