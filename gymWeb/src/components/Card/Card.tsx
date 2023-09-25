@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Card.module.css';
 
 interface CardProps {
@@ -7,13 +7,24 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ title, content }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const toggleCard = () => {
+        setIsExpanded(!isExpanded);
+    };
+
     return (
-        <div className={styles.card}>
+        <div className={styles.cardexpanded} onClick={toggleCard}>
             <div>
                 <h2>{title}</h2>
             </div>
-            <div className={styles.cardcontent}>
-                <p>{content}</p>
+            <div>
+                {' '}
+                {isExpanded && (
+                    <div className={styles.cardcontent}>
+                        <p>{content}</p>
+                    </div>
+                )}
             </div>
         </div>
     );
