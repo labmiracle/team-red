@@ -15,6 +15,8 @@ export class UserService {
     }
 
     async getbyId(id: number): Promise<IUser> {
+        const token = localStorage.getItem('jwtToken') as string;
+        this.apiClient.authorize(token);
         const url = `users/${id}`;
         return await this.apiClient.getByid(url);
     }

@@ -1,48 +1,25 @@
 import Schedule from '../Schedule/Schedule';
 import styles from './UserPage.module.css';
-import { userServiceInstance } from '../../services/http/user/UserService';
-import { loginServiceInstance } from '../../services/http/login/LoginService';
 import { useState, useEffect } from 'react';
-
 import { IUser } from '../../interfaces/User.interface';
-
-//let user = {
-//  name: 'JuanJuan',
-//  lastName: 'Perez',
-//  dni: 12345678,
-//  status: 'Cuota la día',
-//};
+import { useUser } from '../../context/userContext';
+import { authServiceInstance } from '../../services/auth/AuthService';
 
 const UserPage: React.FC = () => {
-    const [user, setUser] = useState<IUser>({
-        id: 0,
-        firstname: '',
-        lastname: '',
-        dni: 0,
-        dateofbirth: '',
-        phone: 0,
-        email: '',
-        address: '',
-        city: '',
-        state: '',
-        username: '',
-        password: '',
-        pay_date: '',
-        role_id: 2,
-    });
+    const { userStatus } = useUser();
+    const [user, setUser] = useState<IUser | null>(null);
 
     useEffect(() => {
-        async function fetchUser() {
-            const userId = loginServiceInstance.isAuthorizedTo()?.userId;
-            if (userId) {
-                const user = await userServiceInstance.getbyId(userId);
-                setUser(user);
-            } else {
-                setUser(user);
-            }
+        if (userStatus) {
+            authServiceInstance.auth().then(userData => {
+                if (userData) {
+                    setUser(userData);
+                } else {
+                    console.log('no hay user');
+                }
+            });
         }
-        fetchUser();
-    }, []);
+    }, [userStatus]);
 
     const events = [
         { id: 1, title: 'Yoga', time: '10:00 AM', trainer: 'Adrián' },
@@ -50,14 +27,29 @@ const UserPage: React.FC = () => {
         { id: 3, title: 'Funcional', time: '6:00 PM', trainer: 'Darío' },
     ];
 
+    const formatDate = (pay_date: string): string => {
+        const fecha = new Date(pay_date);
+        const fechaFormateada = fecha.toISOString().split('T')[0];
+        return fechaFormateada;
+    };
+
+    const isUserActive = (pay_date: string): boolean => {
+        const date = new Date(pay_date);
+        date.setMonth(date.getMonth() + 1);
+        const currentDate = new Date();
+        return date.getTime() > currentDate.getTime();
+    };
+
     return (
         <>
             <div className={styles.background}>
                 <div className={styles.user}>
                     <div className={styles.greeting}>
                         <h1>
-                            Hola {user.firstname}! tu estado en GymWeb es:{' '}
-                            {user.pay_date}
+                            Hola {user?.firstname}! tu estado en GymWeb es:{' '}
+                            {isUserActive(user?.pay_date)
+                                ? 'Activo'
+                                : 'Inactivo'}
                         </h1>
                     </div>
                     <table className={styles.usertable}>
@@ -66,23 +58,34 @@ const UserPage: React.FC = () => {
                                 <th>Año</th>
                                 <th>Apellido y nombre</th>
                                 <th>DNI</th>
-                                <th>Mes de cuota</th>
-                                <th>Vto. cuota</th>
-                                <th>Valor Cuota</th>
-                                <th>Pago cuota</th>
+                                <th>Fecha de nac.</th>
+                                <th>Teléfono</th>
+                                <th>Email</th>
+                                <th>Domicilio</th>
+                                <th>Ciudad</th>
+                                <th>Fecha de pago</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>2023</td>
                                 <td>
-                                    {user.lastname}, {user?.firstname}
+                                    {user?.lastname}, {user?.firstname}
                                 </td>
-                                <td>{user.dni}</td>
-                                <td>AGOSTO</td>
-                                <td>15/08/2023</td>
-                                <td>$7000</td>
-                                <td>{user.pay_date}</td>
+                                <td>{user?.dni}</td>
+                                <td>{user?.dateofbirth}</td>
+                                <td>{user?.phone}</td>
+                                <td>{user?.email}</td>
+                                <td>{user?.address}</td>
+                                <td>{user?.city}</td>
+                                <td> {formatDate(user?.pay_date)}</td>
+                                <td>
+                                    {' '}
+                                    {isUserActive(user?.pay_date)
+                                        ? 'Activo'
+                                        : 'Inactivo'}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
