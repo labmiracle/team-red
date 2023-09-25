@@ -39,6 +39,11 @@ const Contacto = () => {
             message: formData.message,
         };
         sendMail(userMail);
+        setFormData({
+            name: '',
+            email: '',
+            message: '',
+        });
     };
 
     return (
