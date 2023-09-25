@@ -1,49 +1,20 @@
 import Schedule from '../Schedule/Schedule';
 import styles from './UserPage.module.css';
-import { userServiceInstance } from '../../services/http/user/UserService';
-import { loginServiceInstance } from '../../services/http/login/LoginService';
-import { useState, useEffect } from 'react';
 
-import { IUser } from '../../interfaces/User.interface';
-
-//let user = {
-//  name: 'JuanJuan',
-//  lastName: 'Perez',
-//  dni: 12345678,
-//  status: 'Cuota la día',
-//};
+let user = {
+    firstname: 'Pato',
+    lastName: 'Donald',
+    dni: 22222222,
+    status: 'Activo',
+    dateofbirth: '1972-06-18',
+    phone: '2232232323',
+    email: 'patodonald@gmail.com',
+    address: 'rosario 2345',
+    city: 'rosario',
+    pay_date: '2023-09-25',
+};
 
 const UserPage: React.FC = () => {
-    const [user, setUser] = useState<IUser>({
-        id: 0,
-        firstname: '',
-        lastname: '',
-        dni: 0,
-        dateofbirth: '',
-        phone: 0,
-        email: '',
-        address: '',
-        city: '',
-        state: '',
-        username: '',
-        password: '',
-        pay_date: '',
-        role_id: 2,
-    });
-
-    useEffect(() => {
-        async function fetchUser() {
-            const userId = loginServiceInstance.isAuthorizedTo()?.userId;
-            if (userId) {
-                const user = await userServiceInstance.getbyId(userId);
-                setUser(user);
-            } else {
-                setUser(user);
-            }
-        }
-        fetchUser();
-    }, []);
-
     const events = [
         { id: 1, title: 'Yoga', time: '10:00 AM', trainer: 'Adrián' },
         { id: 2, title: 'Zumba', time: '2:00 PM', trainer: 'Marcela' },
@@ -57,7 +28,7 @@ const UserPage: React.FC = () => {
                     <div className={styles.greeting}>
                         <h1>
                             Hola {user.firstname}! tu estado en GymWeb es:{' '}
-                            {user.pay_date}
+                            {user.status}
                         </h1>
                     </div>
                     <table className={styles.usertable}>
@@ -66,23 +37,29 @@ const UserPage: React.FC = () => {
                                 <th>Año</th>
                                 <th>Apellido y nombre</th>
                                 <th>DNI</th>
-                                <th>Mes de cuota</th>
-                                <th>Vto. cuota</th>
-                                <th>Valor Cuota</th>
-                                <th>Pago cuota</th>
+                                <th>Fecha de nac.</th>
+                                <th>Teléfono</th>
+                                <th>Email</th>
+                                <th>Domicilio</th>
+                                <th>Ciudad</th>
+                                <th>Fecha de pago</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>2023</td>
                                 <td>
-                                    {user.lastname}, {user?.firstname}
+                                    {user.lastName}, {user.firstname}
                                 </td>
                                 <td>{user.dni}</td>
-                                <td>AGOSTO</td>
-                                <td>15/08/2023</td>
-                                <td>$7000</td>
+                                <td>{user.dateofbirth}</td>
+                                <td>{user.phone}</td>
+                                <td>{user.email}</td>
+                                <td>{user.address}</td>
+                                <td>{user.city}</td>
                                 <td>{user.pay_date}</td>
+                                <td>{user.status}</td>
                             </tr>
                         </tbody>
                     </table>
