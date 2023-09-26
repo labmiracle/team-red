@@ -1,6 +1,7 @@
 import Grid from '../Grid/Grid';
 import Slider from '../Slider/Slider';
 import MerchSlider from '../MerchSlider/MerchSlider';
+import { useEffect } from 'react';
 
 const images = [
     '/images/slider_images/image3_slider.jpg',
@@ -36,7 +37,22 @@ const items = [
             'Consutlá nuestros horarios disponibles todos los días de la semana.',
     },
 ];
-const Home = () => {
+interface HomeProps {
+    remountNavBar: () => void;
+}
+
+const Home = ({ remountNavBar }: HomeProps) => {
+    useEffect(() => {
+        const delay = 500;
+        const timerId = setTimeout(() => {
+            remountNavBar();
+        }, delay);
+
+        return () => {
+            clearTimeout(timerId);
+        };
+    }, []);
+
     return (
         <>
             <Slider images={images} />

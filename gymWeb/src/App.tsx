@@ -9,17 +9,26 @@ import Admin from './components/Admin/Admin';
 import UserPage from './components/UserPage/UserPage';
 import { loginServiceInstance } from './services/http/login/LoginService';
 import { useUser } from './context/userContext';
+import { useState } from 'react';
 
 function App() {
     const { userStatus } = useUser();
     const userPermission = loginServiceInstance.isAuthorizedTo();
+    const [navBarKey, setNavBarKey] = useState(0);
+
+    const remountNavBar = () => {
+        setNavBarKey(prevKey => prevKey + 1);
+    };
 
     return (
         <>
             <BrowserRouter>
-                <NavBar />
+                <NavBar key={navBarKey} />
                 <Routes>
-                    <Route path='/' element={<Home />} />
+                    <Route
+                        path='/'
+                        element={<Home remountNavBar={remountNavBar} />}
+                    />
                     <Route path='/login' element={<Login />} />
 
                     <Route
