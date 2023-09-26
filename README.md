@@ -22,45 +22,43 @@ Este es un proyecto pensado para aplicarse en el ingreso a un gimnasio: el admin
 
 ## Instalación y configuración
 
-1. git clone https://github.com/labmiracle/team-red.git
-2. Ejecute npm install vite --save-dev
-3. Crear archivo .env en /gymweb con el siguiente contenido: 
-VITE_API_URL_BASE = <url_api>
-(ejemplo: http://localhost:5000/api)
+1. git clone https://github.com/labmiracle/team-red.git  
+2. Ejecute npm install vite --save-dev  
+3. Crear archivo .env en /gymweb con el siguiente contenido:  
+   - VITE_API_URL_BASE = <url_api>  
+     (ejemplo: http://localhost:5000/api)
 
-4. Crear archivo .env en /backend-gymweb que contenga:
-paradigm_api__mysql__host = <nombre_del_host>
-paradigm_api__mysql__user = <usuario_mysqñ>
-paradigm_api__mysql__password = <password_usuario_mysql>
-paradigm_api__mysql__database = <nombre_base_de_datos>
-paradigm_api__mysql__port=<puerto_base_de_datos>
-paradigm_api__sendmail__key=<nodemailer_key> 
+4. Crear archivo .env en /backend-gymweb que contenga:  
+   - paradigm_api__mysql__host = <nombre_del_host>  
+   - paradigm_api__mysql__user = <usuario_mysqñ>  
+   - paradigm_api__mysql__password = <password_usuario_mysql>  
+   - paradigm_api__mysql__database = <nombre_base_de_datos>  
+   - paradigm_api__mysql__port=<puerto_base_de_datos>  
+   - paradigm_api__sendmail__key=<nodemailer_key> 
 
 5. Ejecutar el script ubicado en /team-red de nombre “gymwebDB” en la terminal de mysql para replicar la estructura de la base de datos.
  
-6. Ejecución front y back: 
-Ubíquese en /gymweb y ejecute “npm install && npm run dev”  para ejecutar la UI.
-Ubiquese en /gymweb-backend y ejecute “npm run dev” para ejecutar el servidor.
+6. Ejecución front y back:   
+   - Ubíquese en /gymweb y ejecute “npm install && npm run dev”  para ejecutar la UI.
+   - Ubiquese en /gymweb-backend y ejecute “npm run dev” para ejecutar el servidor.
 
 ## Documentación
 
-1. Documentación de Swagge
-Ejecutar en /gymweb-backend “npm run build:docs” y acceder en http://localhost:5000/docs
+1. Documentación de Swagger  
+   Ejecutar en /gymweb-backend “npm run build:docs” y acceder en http://localhost:5000/docs
 
-2. Documentación complementaria: https://drive.google.com/drive/folders/1KaPL55Uu_Uk_B_47dvS3lDBxkabWkr-Y?usp=drive_link
-
+2. Documentación complementaria: [Enlace a Google Drive](https://drive.google.com/drive/folders/1KaPL55Uu_Uk_B_47dvS3lDBxkabWkr-Y?usp=drive_link)
 
 ## Contribución
 
 Este proyecto es un ejercicio del laboratorio de Miracle Dev, por lo que no se aceptarán contribuciones externas. Sin embargo, si deseas mejorar tus habilidades en React, sentite libre de hacer bifurcaciones (fork) y experimentar con el código.
 
-
 ## Equipo
 
-Antonela Comisso {antocomisso@gmail.com}
-Gastón Falena {gastonfalena@gmail.com}
-Tamara Grunseid {tamigrun@gmail.com}
-Federico Lopumo {Lopumo65@gmail.com}
+- Antonela Comisso {antocomisso@gmail.com}
+- Gastón Falena {gastonfalena@gmail.com}
+- Tamara Grunseid {tamigrun@gmail.com}
+- Federico Lopumo {Lopumo65@gmail.com}
 
 ## Licencia
 
